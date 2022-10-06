@@ -6,10 +6,15 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    public class DanhMucController : Controller
+    public class BlogController : Controller
     {
-        // GET: DanhMuc
-        public ActionResult Index()
+        // GET: Blog
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
+        public ActionResult ChiTietBlog()
         {
             return View();
         }
