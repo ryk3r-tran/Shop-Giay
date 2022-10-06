@@ -24,7 +24,11 @@
     <div class="container">
         <div class="returning_customer">
             <div class="check_title">
-                <h2>Phản hồi khách hàng? <a href="#">Bấm vào đây để Đăng nhập</a></h2>
+                <h2>
+                    Phản hồi khách hàng?
+                    @*<a href="#">Bấm vào đây để Đăng nhập</a>*@
+                    @Html.ActionLink("Bấm vào đây để Đăng nhập", "DangNhap", "TaiKhoan")
+                </h2>
             </div>
             <p>
                 Nếu bạn đã mua sắm với chúng tôi trước đây, vui lòng nhập thông tin của bạn vào các hộp bên dưới.

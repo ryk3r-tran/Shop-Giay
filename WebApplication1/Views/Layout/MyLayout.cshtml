@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="/Content/css/ion.rangeSlider.skinFlat.css" />
     <link rel="stylesheet" href="/Content/css/magnific-popup.css">
     <link rel="stylesheet" href="/Content/css/main.css">
+    <link rel="stylesheet" href="~/Content/js/main.js">
 </head>
 
 <body>
@@ -56,35 +57,41 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                            <li class="nav-item">@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "nav-link" })</li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">Cửa hàng</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="category.html">Danh mục</a></li>
+                                    <li class="nav-item">@Html.ActionLink("Danh mục", "DanhSachSanPham", "SanPham", null, new { @class = "nav-link" })</li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="single-product.html">
-                                            Chi tiết sản
-                                            phẩm
-                                        </a>
+                                        @Html.ActionLink("Chi tiết sản phẩm", "SanPhamChiTiet", "SanPham", null, new { @class = "nav-link" })
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="checkout.html">Thanh toán</a>
+                                        @Html.ActionLink("Thanh toán", "ThanhToan", "GioHang", null, new { @class = "nav-link" })
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="cart.html">Giỏ hàng</a></li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="confirmation.html">Xác nhận</a>
+                                        @*<a class="nav-link" href="cart.html">Giỏ hàng</a>*@
+                                        @Html.ActionLink("Giỏ hàng", "GioHang", "GioHang", null, new { @class = "nav-link" })
+
+                                    </li>
+                                    <li class="nav-item">
+                                        @*<a class="nav-link" href="confirmation.html">Xác nhận</a>*@
+                                        @Html.ActionLink("Xác nhận", "XacNhanDonHang", "GioHang", null, new { @class = "nav-link" })
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a class="nav-link" href="blog.html">Blog</a>
+                                @*<a class="nav-link" href="blog.html">Blog</a>*@
+                                @Html.ActionLink("Blog", "Blog", "Blog", null, new { @class = "nav-link" })
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a href="tracking.html" class="nav-link">Kiểm tra</a>
-
+                                @*<a href="tracking.html" class="nav-link">Kiểm tra</a>*@
+                                @Html.ActionLink("Kiểm tra", "KiemTraDonHang", "KiemTraDonHang", null, new { @class = "nav-link" })
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
+                            <li class="nav-item">
+                                @*<a class="nav-link" href="contact.html">Liên hệ</a>*@
+                                @Html.ActionLink("Liên hệ", "LienHe", "LienHe", null, new { @class = "nav-link" })
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -98,7 +105,9 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-top: 0;">
                                     <button class="dropdown-item" type="button">Làm gì</button>
                                     <button class="dropdown-item" type="button">Cài đặt</button>
-                                    <button class="dropdown-item" type="button">Đăng xuất</button>
+                                    <button class="dropdown-item" type="button">
+                                   @Html.ActionLink("Đăng xuất", "DangNhap", "TaiKhoan", null, new { @class = "nav-link" })
+                                    </button>
                                 </div>
                             </div>
                         </ul>
