@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Giỏ hàng</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Giỏ hàng</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="/Content/img/cart.jpg" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>Giày thể thao Adidas Ultraboost 4.0</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>3.360.000</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                                           class="input-text qty">
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                            class="increase items-count" type="button">
+                                        <i class="lnr lnr-chevron-up"></i>
+                                    </button>
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
+                                            class="reduced items-count" type="button">
+                                        <i class="lnr lnr-chevron-down"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>3.360.000</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="/Content/img/cart.jpg" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>Dép Adidas </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>360.000</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                                           class="input-text qty">
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                            class="increase items-count" type="button">
+                                        <i class="lnr lnr-chevron-up"></i>
+                                    </button>
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
+                                            class="reduced items-count" type="button">
+                                        <i class="lnr lnr-chevron-down"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>720.000</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="/Content/img/cart.jpg" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>Tất Adidas trắng</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>36.000</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                                           class="input-text qty">
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                            class="increase items-count" type="button">
+                                        <i class="lnr lnr-chevron-up"></i>
+                                    </button>
+                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
+                                            class="reduced items-count" type="button">
+                                        <i class="lnr lnr-chevron-down"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>72.000</h5>
+                            </td>
+                        </tr>
+                        <tr class="bottom_button">
+                            <td>
+                                <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div class="cupon_text d-flex align-items-center">
+                                    <input type="text" placeholder="Coupon Code">
+                                    <a class="primary-btn" href="#" style="width: 150px;">Áp dụng</a>
+                                    <a class="gray_btn" href="#" style="width: 230px;">Đóng khuyễn mãi</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <h5>Tổng tiền</h5>
+                            </td>
+                            <td>
+                                <h5>21.600.000</h5>
+                            </td>
+                        </tr>
+                        <tr class="shipping_area">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <h5>Vận chuyển</h5>
+                            </td>
+                            <td>
+                                <div class="shipping_box">
+                                    <ul class="list">
+                                        <li><a href="#">Cố định: 5.000</a></li>
+                                        <li><a href="#">Miễn phí vận chuyển</a></li>
+                                        <li><a href="#">Cố định: 10.000</a></li>
+                                        <li class="active"><a href="#">Vận chuyển nội thành: 20.000</a></li>
+                                    </ul>
+                                    <h6>Tính toán vận chuyển <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                    <select class="shipping_select">
+                                        <option value="1">Hà Nội</option>
+                                        <option value="2"></option>
+                                        <option value="4">Bắc Ninh</option>
+                                    </select>
+                                    <select class="shipping_select">
+                                        <option value="1">Chọn Quận/ Huyện</option>
+                                        <option value="2">Chọn Quận/ Huyện</option>
+                                        <option value="4">Chọn Quận/ Huyện</option>
+                                    </select>
+                                    <input type="text" placeholder="Mã bưu điện">
+                                    <a class="gray_btn" href="#">Chi tiết</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="out_button_area">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" href="#">Tiếp tục mua hàng</a>
+                                    <a class="primary-btn" href="#">Tiến hành kiểm tra</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
