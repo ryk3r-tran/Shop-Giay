@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ThemSanPham";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item" aria-current="page">Quản lý sản phẩm</li>
+                <li class="breadcrumb-item active" aria-current="page">Thêm mới sản phẩm</li>
+            </ol>
+        </nav>
+
+    </div><!-- End Page Title -->
+    <section class="section">
+        <form action="" enctype="multipart/form-data" class="inf-basic-form">
+            <div class="row inf-basic-wrap">
+                <div class="inf-basic">Thông tin cơ bản</div>
+                <div class="img-prod">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                        <div class="col-2" style="width:50%">
+                            Hình ảnh
+                        </div>
+                        <div class="up-file-wrap">
+                            <label for="file-img-prod" class="lb_up_imgprod">Chọn ảnh</label>
+                            <input type="file" name="" id="file-img-prod" hidden>
+                        </div>
+                    </div>
+                    <div class="preview-img-wrap">
+                        <img src="/Content/Admin/img/product-3.jpg" alt="preview" class="preview-img-prod">
+                    </div>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Tên sản phẩm</div>
+                    <input type="text" name="name_prod" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Danh mục</div>
+                    <select name="category" id=""></select>
+                </div>
+
+            </div>
+            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                <div class="inf-basic">Thông tin chi tiết</div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Giá</div>
+                    <input type="text" name="price" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Mô tả</div>
+                    <textarea name="description" id="" cols="32" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="btn-sx-wrap d-flex justify-content-end">
+                <div class="d-flex justify-content-between btn-wrap">
+                    <button class="btn btn-sm btn-secondary btn-exit">Thoát</button>
+                    <button class="btn btn-sm btn-primary btn-save">Lưu</button>
+                </div>
+            </div>
+
+        </form>
+    </section>
+
+</main><!-- End #main -->
