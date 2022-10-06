@@ -374,6 +374,7 @@
     <Content Include="Content\js\nouislider.min.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\js\parallax.min.js" />
+    <Content Include="Content\js\PhanDau.js" />
     <Content Include="Content\js\vendor\bootstrap.min.js" />
     <Content Include="Content\js\vendor\jquery-2.2.4.min.js" />
     <Content Include="Content\js\vendor\popper.js" />

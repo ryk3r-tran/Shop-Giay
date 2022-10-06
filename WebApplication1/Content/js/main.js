@@ -558,11 +558,6 @@ $(document).ready(function(){
           ]
         });
       }
-
-
-  
-
  });
-
 
 // mạnh làm

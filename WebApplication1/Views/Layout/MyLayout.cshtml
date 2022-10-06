@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="/Content/css/ion.rangeSlider.skinFlat.css" />
     <link rel="stylesheet" href="/Content/css/magnific-popup.css">
     <link rel="stylesheet" href="/Content/css/main.css">
-    <link rel="stylesheet" href="~/Content/js/main.js">
+    
 </head>
 
 <body>
@@ -56,13 +56,13 @@
                     </button>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
+                        <ul class="nav navbar-nav menu_nav ml-auto" id="abc">
                             <li class="nav-item">@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = "nav-link" })</li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">Cửa hàng</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">@Html.ActionLink("Danh mục", "DanhSachSanPham", "SanPham", null, new { @class = "nav-link" })</li>
+                                    <li class="nav-item">@Html.ActionLink("Danh mục", "DanhSachSanPham", "SanPham", null, new { @class = "nav-link", @id="dmm"})</li>
                                     <li class="nav-item">
                                         @Html.ActionLink("Chi tiết sản phẩm", "SanPhamChiTiet", "SanPham", null, new { @class = "nav-link" })
                                     </li>
@@ -229,6 +229,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
     <script src="/Content/js/gmaps.min.js"></script>
     <script src="/Content/js/main.js"></script>
+    <script src="~/Content/js/PhanDau.js"></script>
 </body>
 
 </html>
