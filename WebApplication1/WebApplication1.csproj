@@ -173,6 +173,7 @@
     <Content Include="Content\Admin\img\slides-2.jpg" />
     <Content Include="Content\Admin\img\slides-3.jpg" />
     <Content Include="Content\Admin\img\user.png" />
+    <Content Include="Content\Admin\js\admin.js" />
     <Content Include="Content\Admin\js\main.js" />
     <Content Include="Content\Admin\scss\Readme.txt" />
     <Content Include="Content\Admin\vendor\apexcharts\apexcharts.min.js" />
