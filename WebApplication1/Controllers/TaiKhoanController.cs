@@ -16,6 +16,6 @@ namespace WebApplication1.Controllers
         }
 
         // [POST] TaiKhoan/verify
-        [HttpPost]
+        
     }
 }
