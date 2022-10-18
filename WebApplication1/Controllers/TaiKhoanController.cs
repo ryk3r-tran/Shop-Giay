@@ -23,18 +23,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult verify(LoginModel acc)
         {
-            var check_account = new AccountModel().Login(acc.username, acc.password);
-            if (check_account != null)
-            {
-                var accountId = check_account.accountId;
-                var customerId = new CustomerModel().getById(accountId).CustomerId;
-                SessionHelper.SetSession(new CustomerSession() { CustomerId = customerId});
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return View("DangNhap", "TaiKhoan");
-            }
+            var username = acc.username;
+            var password = acc.password;
+            return View("DieuKhien", "Admin");
             
         }
     }

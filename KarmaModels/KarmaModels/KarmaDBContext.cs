@@ -8,7 +8,7 @@ namespace KarmaModels.KarmaModels
     public partial class KarmaDBContext : DbContext
     {
         public KarmaDBContext()
-            : base("name=KarmaDBContext")
+            : base("name=KarmaDBContext1")
         {
         }
 
@@ -25,6 +25,7 @@ namespace KarmaModels.KarmaModels
         public virtual DbSet<NSX> NSXes { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
