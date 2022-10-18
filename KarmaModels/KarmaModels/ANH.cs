@@ -6,31 +6,34 @@ namespace KarmaModels.KarmaModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class customer
+    [Table("ANH")]
+    public partial class ANH
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public customer()
+        public ANH()
         {
-            Accounts = new HashSet<Account>();
+            SANPHAMs = new HashSet<SANPHAM>();
         }
 
-        [StringLength(10)]
-        public string CustomerId { get; set; }
+        [Key]
+        public int MaAnh { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string TenAnh { get; set; }
 
-        [StringLength(100)]
-        public string Address { get; set; }
-
-        [Required]
         [StringLength(50)]
-        public string Email { get; set; }
+        public string AnhChinh { get; set; }
 
-        [StringLength(10)]
-        public string Phone { get; set; }
+        [StringLength(50)]
+        public string AnhPhu1 { get; set; }
+
+        [StringLength(50)]
+        public string AnhPhu2 { get; set; }
+
+        [StringLength(50)]
+        public string AnhPhu3 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

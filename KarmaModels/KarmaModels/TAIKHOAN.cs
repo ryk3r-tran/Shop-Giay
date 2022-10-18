@@ -6,10 +6,12 @@ namespace KarmaModels.KarmaModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Account
+    [Table("TAIKHOAN")]
+    public partial class TAIKHOAN
     {
-        [StringLength(10)]
-        public string accountId { get; set; }
+        public int id { get; set; }
+
+        public int MaKH { get; set; }
 
         [StringLength(50)]
         public string username { get; set; }
@@ -17,9 +19,9 @@ namespace KarmaModels.KarmaModels
         [StringLength(50)]
         public string pass { get; set; }
 
-        [StringLength(10)]
-        public string customerId { get; set; }
+        [StringLength(50)]
+        public string Quyen { get; set; }
 
-        public virtual customer customer { get; set; }
+        public virtual KHACHHANG KHACHHANG { get; set; }
     }
 }
