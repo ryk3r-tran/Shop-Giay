@@ -1,8 +1,23 @@
-﻿
+﻿@using WebApplication1.code
+@using KarmaModels
+@using KarmaModels.KarmaModels
 @{
     Layout = null;
 }
+@{
+    var customerId = "";
+    customer customer = null;
+    if (SessionHelper.GetSession() != null)
+    {
+        customerId = SessionHelper.GetSession().CustomerId;
+        customer = new CustomerModel().getById(customerId);
+    }
+    else
+    {
 
+    }
+
+}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -35,7 +50,7 @@
     <link rel="stylesheet" href="/Content/css/ion.rangeSlider.skinFlat.css" />
     <link rel="stylesheet" href="/Content/css/magnific-popup.css">
     <link rel="stylesheet" href="/Content/css/main.css">
-    
+
 </head>
 
 <body>
@@ -62,7 +77,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">Cửa hàng</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">@Html.ActionLink("Danh mục", "DanhSachSanPham", "SanPham", null, new { @class = "nav-link", @id="dmm"})</li>
+                                    <li class="nav-item">@Html.ActionLink("Danh mục", "DanhSachSanPham", "SanPham", null, new { @class = "nav-link", @id = "dmm" })</li>
                                     <li class="nav-item">
                                         @Html.ActionLink("Chi tiết sản phẩm", "SanPhamChiTiet", "SanPham", null, new { @class = "nav-link" })
                                     </li>
@@ -104,9 +119,14 @@
                                      height="35">
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-top: 0;">
                                     <button class="dropdown-item" type="button">Làm gì</button>
-                                    <button class="dropdown-item" type="button">Cài đặt</button>
+                                    @if (customerId != null && customer != null)
+                                    {
+                                        <button class="dropdown-item" type="button">@customer.Name</button>
+                                    }
+                                    
+
                                     <button class="dropdown-item" type="button">
-                                   @Html.ActionLink("Đăng xuất", "DangNhap", "TaiKhoan", null, new { @class = "nav-link" })
+                                        @Html.ActionLink("Đăng xuất", "DangNhap", "TaiKhoan", null, new { @class = "nav-link" })
                                     </button>
                                 </div>
                             </div>
