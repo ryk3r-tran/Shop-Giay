@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KarmaModels.KarmaModels;
+using KarmaModels.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +11,7 @@ namespace WebApplication1.Controllers
 {
     public class AdminController : Controller
     {
+        KarmaDBContext _context = new KarmaDBContext();
         // GET: Admin
         
         public ActionResult DieuKhien()
@@ -17,7 +20,8 @@ namespace WebApplication1.Controllers
         }
         public ActionResult TatCaTaiKhoan()
         {
-            return View();
+            var data = _context.TAIKHOANs.Include("KHACHHANG");
+            return View(data.ToList());        
         }
 
         public ActionResult ThemTaiKhoan()
@@ -41,7 +45,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult TatCaSanPham()
         {
-            return View();
+            IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
+            var data = sanpham.GetAll();
+            return View(data);
         }
 
         public ActionResult ThemSanPham()

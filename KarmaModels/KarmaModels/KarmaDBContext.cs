@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace WebApplication1.Models
+namespace KarmaModels.KarmaModels
 {
-    public partial class Model1 : DbContext
+    public partial class KarmaDBContext : DbContext
     {
-        public Model1()
-            : base("name=MyDBContext")
+        public KarmaDBContext()
+            : base("name=KarmaDBContext")
         {
         }
 
@@ -25,14 +25,14 @@ namespace WebApplication1.Models
         public virtual DbSet<NSX> NSXes { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CHATLIEU>()
-                .Property(e => e.ChatLieu1)
-                .IsFixedLength();
+            modelBuilder.Entity<ANH>()
+                .HasMany(e => e.SANPHAMs)
+                .WithRequired(e => e.ANH)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CHATLIEU>()
                 .HasMany(e => e.CHITIETSPs)
@@ -74,10 +74,6 @@ namespace WebApplication1.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.MatKhau)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
                 .HasMany(e => e.BINHLUANSPs)
                 .WithRequired(e => e.KHACHHANG)
                 .WillCascadeOnDelete(false);
@@ -89,13 +85,8 @@ namespace WebApplication1.Models
 
             modelBuilder.Entity<KHACHHANG>()
                 .HasMany(e => e.DONHANGs)
-                .WithOptional(e => e.KHACHHANG)
-                .HasForeignKey(e => e.MaKH);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.DONHANGs1)
-                .WithOptional(e => e.KHACHHANG1)
-                .HasForeignKey(e => e.MaKH);
+                .WithRequired(e => e.KHACHHANG)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<KHACHHANG>()
                 .HasMany(e => e.TAIKHOANs)
@@ -105,13 +96,6 @@ namespace WebApplication1.Models
             modelBuilder.Entity<MAUSAC>()
                 .HasMany(e => e.CHITIETDHs)
                 .WithRequired(e => e.MAUSAC)
-                .HasForeignKey(e => e.MaMau)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MAUSAC>()
-                .HasMany(e => e.CHITIETDHs1)
-                .WithRequired(e => e.MAUSAC1)
-                .HasForeignKey(e => e.MaMau)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<MAUSAC>()
@@ -129,13 +113,8 @@ namespace WebApplication1.Models
 
             modelBuilder.Entity<NSX>()
                 .HasMany(e => e.SANPHAMs)
-                .WithOptional(e => e.NSX)
-                .HasForeignKey(e => e.MaNSX);
-
-            modelBuilder.Entity<NSX>()
-                .HasMany(e => e.SANPHAMs1)
-                .WithOptional(e => e.NSX1)
-                .HasForeignKey(e => e.MaNSX);
+                .WithRequired(e => e.NSX)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SANPHAM>()
                 .Property(e => e.DonGia)
@@ -149,13 +128,6 @@ namespace WebApplication1.Models
             modelBuilder.Entity<SANPHAM>()
                 .HasMany(e => e.CHITIETDHs)
                 .WithRequired(e => e.SANPHAM)
-                .HasForeignKey(e => e.MaSP)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETDHs1)
-                .WithRequired(e => e.SANPHAM1)
-                .HasForeignKey(e => e.MaSP)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SANPHAM>()
@@ -171,13 +143,6 @@ namespace WebApplication1.Models
             modelBuilder.Entity<SIZE>()
                 .HasMany(e => e.CHITIETDHs)
                 .WithRequired(e => e.SIZE)
-                .HasForeignKey(e => e.MaSize)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SIZE>()
-                .HasMany(e => e.CHITIETDHs1)
-                .WithRequired(e => e.SIZE1)
-                .HasForeignKey(e => e.MaSize)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SIZE>()

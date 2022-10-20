@@ -1,11 +1,16 @@
-﻿
+﻿@using KarmaModels.KarmaModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/MyLayout.cshtml";
 }
-
-
+@*@{
+    var cus = (customer)ViewData["customer"];
+}*@
 <!-- start banner Area -->
+@*@if (@cus != null)
+            {
+                <h1>@cus.Name</h1>
+            }*@
 <section class="banner-area">
     <div class="container">
         <div class="row fullscreen align-items-center justify-content-start">
