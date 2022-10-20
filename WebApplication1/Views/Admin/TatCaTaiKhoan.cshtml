@@ -1,4 +1,5 @@
-﻿
+﻿@using KarmaModels.KarmaModels
+@model List<TAIKHOAN>
 @{
     ViewBag.Title = "TatCaTaiKhoan";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
@@ -23,92 +24,35 @@
         <table width="100%" class="table table-hover" id="dataTables-example">
             <thead>
                 <tr>
-                    <th>Họ tên</th>
+                    <th>STT</th>
+                    <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên tài khoản</th>
                     <th>Email</th>
+                    <th>Mật khẩu</th>
                     <th>Quyền</th>
-                    <th>Chức vụ</th>
-                    <th>Tình trạng</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Minh Hoang</td>
-                    <td>philip.chaney@gmail.com</td>
-                    <td>Quản lý</td>
-                    <td>Admin</td>
-                    <td>Hoạt động</td>
+                @foreach (var data in Model.Select((value, i) => new { value, i = i + 1}))
+                {
+                <tr> 
+                    <td>@data.i</td>
+                    <td>@data.value.MaKH</td>
+                    <td>@data.value.KHACHHANG.TenKH</td>
+                    <td>@data.value.username</td>
+                    <td>@data.value.KHACHHANG.Email</td>
+                    <td>@data.value.pass</td>
+                    <td>@data.value.Quyen</td>
                     <td class="text-end">
                         <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
                         <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Manh Dat</td>
-                    <td>ms.greene@outlook.com</td>
-                    <td>Tác giả</td>
-                    <td>Nhân viên</td>
-                    <td>Hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mai Son</td>
-                    <td>mason_porter@gmail.com</td>
-                    <td>Cộng sự</td>
-                    <td>Nhân viên</td>
-                    <td>Hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Minh Tri</td>
-                    <td>minerva.hooper@gmail.com</td>
-                    <td>Người quản trị</td>
-                    <td>Admin</td>
-                    <td>Không hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nguyen Ly</td>
-                    <td>jessie@gmail.com</td>
-                    <td>Người quản trị</td>
-                    <td>Admin</td>
-                    <td>Hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Phi Phương</td>
-                    <td>pette@gmail.com</td>
-                    <td>Người thiết kế</td>
-                    <td>Nhân viên</td>
-                    <td>Hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Dinh Manh</td>
-                    <td>jose.rodz@gmail.com</td>
-                    <td>Tác giả</td>
-                    <td>Nhân viên</td>
-                    <td>Hoạt động</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
+                }
+
+
             </tbody>
         </table>
     </div>

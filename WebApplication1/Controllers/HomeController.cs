@@ -13,9 +13,9 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-            var customerId = SessionHelper.GetSession().CustomerId;
-            var customer = new CustomerModel().getById(customerId);
-            ViewData["customer"] = customer;
+            //var customerId = SessionHelper.GetSession().CustomerId;
+            //var customer = new CustomerModel().getById(customerId);
+            //ViewData["customer"] = customer;
             return View();
         }
 

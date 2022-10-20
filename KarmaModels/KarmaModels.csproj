@@ -55,9 +55,21 @@
   <ItemGroup>
     <Compile Include="AccountModel.cs" />
     <Compile Include="CustomerModel.cs" />
-    <Compile Include="KarmaModels\Account.cs" />
-    <Compile Include="KarmaModels\customer.cs" />
+    <Compile Include="KarmaModels\ANH.cs" />
+    <Compile Include="KarmaModels\BINHLUANSP.cs" />
+    <Compile Include="KarmaModels\CHATLIEU.cs" />
+    <Compile Include="KarmaModels\CHITIETDH.cs" />
+    <Compile Include="KarmaModels\CHITIETSP.cs" />
+    <Compile Include="KarmaModels\DANHGIA.cs" />
+    <Compile Include="KarmaModels\DANHMUCSP.cs" />
+    <Compile Include="KarmaModels\DONHANG.cs" />
     <Compile Include="KarmaModels\KarmaDBContext.cs" />
+    <Compile Include="KarmaModels\KHACHHANG.cs" />
+    <Compile Include="KarmaModels\MAUSAC.cs" />
+    <Compile Include="KarmaModels\NSX.cs" />
+    <Compile Include="KarmaModels\SANPHAM.cs" />
+    <Compile Include="KarmaModels\SIZE.cs" />
+    <Compile Include="KarmaModels\TAIKHOAN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />

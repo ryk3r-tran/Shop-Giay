@@ -4,7 +4,7 @@
 @{
     Layout = null;
 }
-@{
+@*@{
     var customerId = "";
     customer customer = null;
     if (SessionHelper.GetSession() != null)
@@ -17,7 +17,7 @@
 
     }
 
-}
+}*@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -119,10 +119,10 @@
                                      height="35">
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-top: 0;">
                                     <button class="dropdown-item" type="button">Làm gì</button>
-                                    @if (customerId != null && customer != null)
+                                    @*@if (customerId != null && customer != null)
                                     {
                                         <button class="dropdown-item" type="button">@customer.Name</button>
-                                    }
+                                    }*@
                                     
 
                                     <button class="dropdown-item" type="button">

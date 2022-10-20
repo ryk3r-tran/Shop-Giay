@@ -14,17 +14,5 @@ namespace KarmaModels
         {
             context = new KarmaDBContext();
         }
-        public Account Login(string username, string password)
-        {
-            Account check_account = context.Accounts.SingleOrDefault(u => u.username == username && u.pass == password);
-            if (check_account != null)
-            {
-                return check_account;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }

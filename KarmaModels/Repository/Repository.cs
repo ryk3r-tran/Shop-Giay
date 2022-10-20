@@ -12,6 +12,7 @@ namespace KarmaModels.Repository
     {
         private readonly KarmaDBContext _context = null;
         private DbSet<T> table = null;
+        private DbSet<T> join = null;
         public Repository()
         {
             this._context = new KarmaDBContext();

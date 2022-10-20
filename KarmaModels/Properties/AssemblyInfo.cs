@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
+using System.Data.Entity.SqlServer;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
@@ -34,3 +34,12 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+
+internal static class MissingDllHack
+{
+    // Must reference a type in EntityFramework.SqlServer.dll so that this dll will be
+    // included in the output folder of referencing projects without requiring a direct 
+    // dependency on Entity Framework. See http://stackoverflow.com/a/22315164/1141360.
+    private static SqlProviderServices instance = SqlProviderServices.Instance;
+}
