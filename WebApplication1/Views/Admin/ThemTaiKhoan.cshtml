@@ -25,23 +25,23 @@
         <h5 class="card-title">Thêm tài khoản</h5>
 
         <!-- Horizontal Form -->
-        <form>
+        <form action="ThemTK" method="post">
             <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Họ và Tên</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputText">
+                    <input name="hoTen" type="text" class="form-control" id="inputText">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail">
+                    <input name="Email" type="email" class="form-control" id="inputEmail">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Quyền</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input name="Quyen" type="password" class="form-control" id="inputPassword">
                 </div>
             </div>
             <fieldset class="row mb-3">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button href="TatCaTK.html" type="submit" class="btn btn-primary">Thêm</button>
+                <button type="submit" class="btn btn-primary">Thêm</button>
                 <button type="reset" class="btn btn-secondary">Làm mới</button>
                 <button type="reset" class="btn btn-secondary">Thông tin chi tiết</button>
             </div>

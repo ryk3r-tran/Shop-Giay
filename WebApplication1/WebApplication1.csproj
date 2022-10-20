@@ -1327,6 +1327,7 @@
     <Content Include="Content\img\sd\c3.jpg" />
     <Content Include="Content\img\sd\c4.jpg" />
     <Content Include="Content\img\sd\c5.jpg" />
+    <Content Include="Content\js\app.js" />
     <Content Include="Content\js\countdown.js" />
     <Content Include="Content\js\gmaps.min.js" />
     <Content Include="Content\js\ion.rangeSlider.js" />
@@ -1338,7 +1339,6 @@
     <Content Include="Content\js\nouislider.min.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
     <Content Include="Content\js\parallax.min.js" />
-    <Content Include="Content\js\PhanDau.js" />
     <Content Include="Content\js\vendor\bootstrap.min.js" />
     <Content Include="Content\js\vendor\jquery-2.2.4.min.js" />
     <Content Include="Content\js\vendor\popper.js" />
@@ -1346,6 +1346,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\css\.DS_Store" />
@@ -1504,6 +1514,13 @@
     <Content Include="Content\Admin\vendor\tinymce\composer.json" />
     <Content Include="Content\Admin\vendor\tinymce\package.json" />
     <Content Include="Content\Admin\vendor\tinymce\README.md" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
