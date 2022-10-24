@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
         KarmaDBContext _context = new KarmaDBContext();
         // GET: Admin
         
-        public ActionResult DieuKhien()
+        public ActionResult Admin()
         {
             return View();
         }
@@ -30,11 +30,9 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult ThemTK(Class1 tk1)
+        public ActionResult ThemTK()
         {
-            string HoTen = tk1.hoTen;
-            string email = tk1.Email;
-            string quyen = tk1.Quyen;
+            
             return View();
         }
 

@@ -10,5 +10,12 @@ namespace WebApplication1.Models
     {
         public SANPHAM sanpham { set; get; }
         public int quantity { set; get; }
+        public decimal? thanhtien
+        {
+            get
+            {
+                return sanpham.DonGia*quantity;
+            }
+        }
     }
 }

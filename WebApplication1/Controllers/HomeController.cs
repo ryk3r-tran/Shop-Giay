@@ -1,4 +1,6 @@
 ﻿using KarmaModels;
+using KarmaModels.KarmaModels;
+using KarmaModels.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,9 @@ namespace WebApplication1.Controllers
     {
         public ActionResult Index()
         {
-            //var customerId = SessionHelper.GetSession().CustomerId;
-            //var customer = new CustomerModel().getById(customerId);
-            //ViewData["customer"] = customer;
-            return View();
+            IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
+             var data = sanpham.GetAll();
+            return View(data);
         }
 
     }
