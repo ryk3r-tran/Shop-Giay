@@ -24,9 +24,7 @@
 <section class="cart_area">
     <div class="container">
         @if(Model != null){
-
-
-<div class="cart_inner">
+         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -35,13 +33,14 @@
                             <th scope="col">Giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tổng</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (CartItem item in Model)
                          {
 
-                            <tr>
+                            <tr data-item="@item.sanpham.MaSP">
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
@@ -59,18 +58,19 @@
                                     <div class="product_count">
                                         <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
                                                class="input-text qty">
-                                        <button data-id="@item.sanpham.MaSP" onclick="myfuntion()"
-                                                class="increase items-count" type="button">
+                                        <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
                                             <i class="lnr lnr-chevron-up"></i>
                                         </button>
-                                        <button onclick="var result = document.getElementById(@item.sanpham.MaSP.ToString()); var sst = result.value; if (!isNaN(sst) && sst > 0) result.value--; return false;"
-                                                class="reduced items-count" type="button">
+                                        <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
                                             <i class="lnr lnr-chevron-down"></i>
                                         </button>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>@item.thanhtien</h5>
+                                    <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
+                                </td>
+                                <td>
+                                    <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
                                 </td>
                             </tr>
                          }
@@ -155,31 +155,107 @@
             }
             else
             {
-                <h1>Giỏ hàng rỗng</h1>
+                <div class="text-center">
+                    <div class="cart-empty-wrap" style="margin:20px 0;">
+                        <img src="~/Content/img/shopping-cart-256.jpg"/>
+                        <div style="font-size: 1.2rem; font-weight:500; margin-top:20px">
+                            Giỏ hàng rỗng
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="/" class="btn btn-success">
+                            <img src="~/Content/img/shopping-cart-16.png" style="margin-right:10px;"/>
+                            Về trang chủ
+                        </a>
+                    </div>
+                </div>
             }
     </div>
 </section>
 <script>
-
-    //var input = $(".product_count input");
-    //console.log(input);
-    //Array.from(input).forEach((item) => {
-    //    item.change(function () {
-    //        console.log($(this).val());
-    //    })
-    //})
-
-    function myfuntion() {
-        var id = $("button").data('id');
-        console.log(id);
-        var input_quantity = $('#' + id);
-        if (!isNaN(input_quantity.val())) {
-            console.log(input_quantity.val());
-        } else {
-            return false;
+    var url_update_cart = "/GioHang/CapNhatGioHang";
+    var url_delete_item = "/GioHang/XoaSanPham";
+    $(".increase").click(function () {       
+        var id = $(this).data('id');
+        var count_value = $("#" + id).val();
+        if (!isNaN(count_value)) {
+            count_value++;
+            $("#" + id).val(count_value);
         }
-        console.log(input_quantity.val())
-    }
-    //var result = document.getElementById(); var sst = result.value; if (!isNaN(sst)) result.value++; console.log(result.value)
+        console.log(count_value);
+        $.ajax({
+            url: url_update_cart,
+            type: "POST",
+            data: {
+                id: id,
+                soluong: count_value,
+            },
+            success: function (data) {
+                if (data != null) {
+                    console.log(data.thanhtien);
+                    var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    thanhtien.html(data.thanhtien);
+                }
+            }
+        })
+    })
+    $(".reduced").click(function () {
+        var id = $(this).data('id');
+        var count_value = $("#" + id).val();
+        if (!isNaN(count_value) && count_value > 0) {
+            count_value--;
+            $("#" + id).val(count_value);
+            console.log(count_value);
+        }
+        $.ajax({
+            url: url_update_cart,
+            type: "POST",
+            data: {
+                id: id,
+                soluong: count_value,
+            },
+            success: function (data) {
+                if (data != null) {
+                    console.log(data.thanhtien);
+                    var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    thanhtien.html(data.thanhtien);
+                }
+            }
+        })
+    });
+
+    $(".btn-delete").click(function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: url_delete_item,
+            type: "POST",
+            data: {
+                id: id,
+            },
+            success: function (data) {
+                if (data.status == 1 && data.empty == 0) {
+                    $("tr[data-item=" + id + "]").remove();
+                }
+                else if (data.status == 1 && data.empty == 1) {
+                    $(".cart_area").empty().append(
+                        "<div class='text-center'>"+
+                            "<div class='cart-empty-wrap' style='margin:20px 0;'>"+
+                                "<img src="+"'/Content/img/shopping-cart-256.jpg'"+"/>"+
+                                "<div style='font-size: 1.2rem; font-weight:500; margin-top:20px'>"+
+                                    "Giỏ hàng rỗng"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='text-center'>"+
+                                "<a href='/' class='btn btn-success'>"+
+                                    "<img src="+"'/Content/img/shopping-cart-16.png' style='margin-right:10px;'"+"/>"+
+                                    "Về trang chủ"+
+                                "</a>"+
+                            "</div>"+
+                       "</div>"
+                    );
+                }
+            }
+        })
+    })
 </script>
 <!--================End Cart Area =================-->

@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
 {
     public class GioHangController : Controller
     {
-        // GET: GioHang
+          // GET: GioHang
         public ActionResult Index()
         {
             
@@ -52,6 +52,47 @@ namespace WebApplication1.Controllers
             }
             Session["UserCart"] = cart;
             return Json(new { status = "successful"});
+        }
+
+
+        public ActionResult CapNhatGioHang(int id, int soluong)
+        {
+            List<CartItem> session_cart = Session["UserCart"] as List<CartItem>;
+            var item = session_cart.FirstOrDefault(i => i.sanpham.MaSP == id);
+            item.quantity = soluong;
+            Session["UserCart"] = session_cart;
+            var quanity = session_cart.FirstOrDefault(i => i.sanpham.MaSP == id).quantity;
+            var thanhtien = session_cart.FirstOrDefault(i => i.sanpham.MaSP == id).thanhtien;
+            return Json(new
+            {
+                id_sp = id,
+                quanity = quanity,
+                thanhtien = thanhtien,
+            }) ;
+        }
+        public ActionResult XoaSanPham(int id)
+        {
+            List<CartItem> cart = Session["UserCart"] as List<CartItem>;
+            var item = cart.SingleOrDefault(i => i.sanpham.MaSP == id);
+            cart.Remove(item);
+            Session["UserCart"] = cart;
+            if (cart.Count == 0)
+            {
+                return Json(new
+                {
+                    status = 1,
+                    empty = 1,
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = 1,
+                    empty=0,
+                });
+            }
+            
         }
         public ActionResult ThanhToan()
         {
