@@ -30,11 +30,36 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult ThemTK(Class1 tk1)
+        public ActionResult ThemTK(TAIKHOAN tk1, KHACHHANG kh1, string check_DK)
         {
-            string HoTen = tk1.hoTen;
-            string email = tk1.Email;
-            string quyen = tk1.Quyen;
+            if(kh1.GioiTinh == "option1")
+            {
+                kh1.GioiTinh = "Nam";
+            }
+            if (kh1.GioiTinh == "option2")
+            {
+                kh1.GioiTinh = "Nữ";
+            }
+            if (tk1.Quyen == "option1")
+            {
+                tk1.Quyen = "Quản lý";
+            }
+            if (tk1.Quyen == "option2")
+            {
+                tk1.Quyen = "Nhân viên";
+            }
+            if (tk1.Quyen == "option3")
+            {
+                tk1.Quyen = "Khách hàng";
+            }
+
+
+            _context.KHACHHANGs.Add(kh1);
+            _context.TAIKHOANs.Add(tk1);
+            
+
+            _context.SaveChanges();
+
             return View();
         }
 

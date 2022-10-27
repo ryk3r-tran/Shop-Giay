@@ -14,10 +14,6 @@ namespace KarmaModels
         {
             context = new KarmaDBContext();
         }
-        public customer getById(string Id)
-        {
-            customer cus = context.customers.SingleOrDefault(u => u.CustomerId == Id);
-            return cus;
-        }
+        
     }
 }
