@@ -1542,7 +1542,7 @@
     <Content Include="Views\KiemTraDonHang\KiemTraDonHang.cshtml" />
     <Content Include="Views\LienHe\LienHe.cshtml" />
     <Content Include="Views\Layout\AdminLayout.cshtml" />
-    <Content Include="Views\Admin\DieuKhien.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\TatCaTaiKhoan.cshtml" />
     <Content Include="Views\Admin\ThemTaiKhoan.cshtml" />
     <Content Include="Views\Admin\ThongKe.cshtml" />

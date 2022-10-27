@@ -4,20 +4,17 @@
 @{
     Layout = null;
 }
-@*@{
-    var customerId = "";
-    customer customer = null;
-    if (SessionHelper.GetSession() != null)
+@{
+    KHACHHANG customer = null;
+    if(Session["UserLogin"] != null)
     {
-        customerId = SessionHelper.GetSession().CustomerId;
-        customer = new CustomerModel().getById(customerId);
+        customer = Session["UserLogin"] as KHACHHANG;
     }
     else
     {
-
+        customer = null;
     }
-
-}*@
+}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -50,6 +47,7 @@
     <link rel="stylesheet" href="/Content/css/ion.rangeSlider.skinFlat.css" />
     <link rel="stylesheet" href="/Content/css/magnific-popup.css">
     <link rel="stylesheet" href="/Content/css/main.css">
+    <script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>
 
 </head>
 
@@ -83,16 +81,16 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="/GioHang/ThanhToan" class="nav-link">Thanh toán</a>
-                                        
+
                                     </li>
                                     <li class="nav-item">
                                         <a href="/GioHang" class="nav-link">Giỏ Hàng</a>
-                                        
+
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="/GioHang/XacNhanDonHang" class="nav-link">Xác nhận</a>
-                                       
+
                                     </li>
                                 </ul>
                             </li>
@@ -115,21 +113,19 @@
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
                             <div class="dropdown" style="display: flex; align-items: center; margin-left: 25px;">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" alt=""
-                                     class="rounded-circle  dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
-                                     height="35">
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-top: 0;">
-                                    <button class="dropdown-item" type="button">Làm gì</button>
-                                    @*@if (customerId != null && customer != null)
-                                    {
-                                        <button class="dropdown-item" type="button">@customer.Name</button>
-                                    }*@
-                                    
-
-                                    <button class="dropdown-item" type="button">
-                                        @Html.ActionLink("Đăng xuất", "DangNhap", "TaiKhoan", null, new { @class = "nav-link" })
-                                    </button>
-                                </div>
+                                @if (customer != null)
+                                {
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" alt=""
+                                         class="rounded-circle  dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown"
+                                         height="35">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="margin-top: 0;">
+                                        <button class="dropdown-item" type="button">Làm gì</button>
+                                        <button class="dropdown-item" type="button">@customer.TenKH</button>
+                                        <button class="dropdown-item" type="button">
+                                            @Html.ActionLink("Đăng xuất", "DangNhap", "TaiKhoan", null, new { @class = "nav-link" })
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </ul>
                     </div>
@@ -239,6 +235,7 @@
             integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
             crossorigin="anonymous"></script>
     <script src="/Content/js/vendor/bootstrap.min.js"></script>
+    
     <script src="/Content/js/jquery.ajaxchimp.min.js"></script>
     <script src="/Content/js/jquery.nice-select.min.js"></script>
     <script src="/Content/js/jquery.sticky.js"></script>

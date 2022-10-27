@@ -1,4 +1,5 @@
-﻿
+﻿@using WebApplication1.Models
+@model List<CartItem>
 @{
     ViewBag.Title = "GioHang";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -22,7 +23,8 @@
 <!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
-        <div class="cart_inner">
+        @if(Model != null){
+         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -31,105 +33,47 @@
                             <th scope="col">Giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tổng</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/cart.jpg" alt="">
+                        @foreach (CartItem item in Model)
+                         {
+
+                            <tr data-item="@item.sanpham.MaSP">
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="/Content/img/cart.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@item.sanpham.TenSP</p>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <p>Giày thể thao Adidas Ultraboost 4.0</p>
+                                </td>
+                                <td>
+                                    <h5>@item.sanpham.DonGia</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
+                                               class="input-text qty">
+                                        <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
+                                            <i class="lnr lnr-chevron-up"></i>
+                                        </button>
+                                        <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
+                                            <i class="lnr lnr-chevron-down"></i>
+                                        </button>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>3.360.000</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
-                                    </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>3.360.000</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/cart.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Dép Adidas </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>360.000</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
-                                    </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>720.000</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/cart.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Tất Adidas trắng</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>36.000</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
-                                    </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>72.000</h5>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
+                                </td>
+                                <td>
+                                    <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
+                                </td>
+                            </tr>
+                         }
                         <tr class="bottom_button">
                             <td>
                                 <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
@@ -207,7 +151,111 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+         </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <div class="cart-empty-wrap" style="margin:20px 0;">
+                        <img src="~/Content/img/shopping-cart-256.jpg"/>
+                        <div style="font-size: 1.2rem; font-weight:500; margin-top:20px">
+                            Giỏ hàng rỗng
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="/" class="btn btn-success">
+                            <img src="~/Content/img/shopping-cart-16.png" style="margin-right:10px;"/>
+                            Về trang chủ
+                        </a>
+                    </div>
+                </div>
+            }
     </div>
 </section>
+<script>
+    var url_update_cart = "/GioHang/CapNhatGioHang";
+    var url_delete_item = "/GioHang/XoaSanPham";
+    $(".increase").click(function () {       
+        var id = $(this).data('id');
+        var count_value = $("#" + id).val();
+        if (!isNaN(count_value)) {
+            count_value++;
+            $("#" + id).val(count_value);
+        }
+        console.log(count_value);
+        $.ajax({
+            url: url_update_cart,
+            type: "POST",
+            data: {
+                id: id,
+                soluong: count_value,
+            },
+            success: function (data) {
+                if (data != null) {
+                    console.log(data.thanhtien);
+                    var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    thanhtien.html(data.thanhtien);
+                }
+            }
+        })
+    })
+    $(".reduced").click(function () {
+        var id = $(this).data('id');
+        var count_value = $("#" + id).val();
+        if (!isNaN(count_value) && count_value > 0) {
+            count_value--;
+            $("#" + id).val(count_value);
+            console.log(count_value);
+        }
+        $.ajax({
+            url: url_update_cart,
+            type: "POST",
+            data: {
+                id: id,
+                soluong: count_value,
+            },
+            success: function (data) {
+                if (data != null) {
+                    console.log(data.thanhtien);
+                    var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    thanhtien.html(data.thanhtien);
+                }
+            }
+        })
+    });
+
+    $(".btn-delete").click(function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: url_delete_item,
+            type: "POST",
+            data: {
+                id: id,
+            },
+            success: function (data) {
+                if (data.status == 1 && data.empty == 0) {
+                    $("tr[data-item=" + id + "]").remove();
+                }
+                else if (data.status == 1 && data.empty == 1) {
+                    $(".cart_area").empty().append(
+                        "<div class='text-center'>"+
+                            "<div class='cart-empty-wrap' style='margin:20px 0;'>"+
+                                "<img src="+"'/Content/img/shopping-cart-256.jpg'"+"/>"+
+                                "<div style='font-size: 1.2rem; font-weight:500; margin-top:20px'>"+
+                                    "Giỏ hàng rỗng"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='text-center'>"+
+                                "<a href='/' class='btn btn-success'>"+
+                                    "<img src="+"'/Content/img/shopping-cart-16.png' style='margin-right:10px;'"+"/>"+
+                                    "Về trang chủ"+
+                                "</a>"+
+                            "</div>"+
+                       "</div>"
+                    );
+                }
+            }
+        })
+    })
+</script>
 <!--================End Cart Area =================-->

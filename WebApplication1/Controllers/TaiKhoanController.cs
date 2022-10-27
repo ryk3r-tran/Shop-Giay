@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using KarmaModels;
+using KarmaModels.KarmaModels;
 using WebApplication1.code;
+using KarmaModels.Repository;
+using KarmaModels;
 
 namespace WebApplication1.Controllers
 {
@@ -23,19 +25,19 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult verify(LoginModel acc)
         {
-            //var check_account = new AccountModel().Login(acc.username, acc.password);
-            //if (check_account != null)
-            //{
-            //    var accountId = check_account.accountId;
-            //    var customerId = new CustomerModel().getById(accountId).CustomerId;
-            //    SessionHelper.SetSession(new CustomerSession() { CustomerId = customerId});
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else
-            //{
-            //    return View("DangNhap", "TaiKhoan");
-            //}
-            return View("Dang Nhap", "Tai Khoan");
+            IRepository<KHACHHANG> khachhang = new Repository<KHACHHANG>();
+            
+            var account = new AccountModel().IdenAccount(acc.username, acc.password);
+            if(account != null)
+            {
+                var kh = khachhang.GetById(account.MaKH);
+                Session["UserLogin"] = kh;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("Dang Nhap", "Tai Khoan");
+            }
             
         }
     }

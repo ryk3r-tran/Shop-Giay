@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
         KarmaDBContext _context = new KarmaDBContext();
         // GET: Admin
         
-        public ActionResult DieuKhien()
+        public ActionResult Admin()
         {
             return View();
         }

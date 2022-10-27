@@ -1,4 +1,5 @@
 ﻿using KarmaModels.KarmaModels;
+using KarmaModels.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,18 @@ namespace KarmaModels
 {
     public class AccountModel
     {
-        private KarmaDBContext context = null;
-        public AccountModel()
+        KarmaDBContext _context = new KarmaDBContext();
+        public TAIKHOAN IdenAccount(string usrname, string password)
         {
-            context = new KarmaDBContext();
+            var taikhoan = _context.TAIKHOANs.SingleOrDefault(u => u.username == usrname && u.pass == password);
+            if (taikhoan != null)
+            {
+                return taikhoan;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
