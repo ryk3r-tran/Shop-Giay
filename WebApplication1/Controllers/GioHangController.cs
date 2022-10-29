@@ -12,11 +12,7 @@ namespace WebApplication1.Controllers
     public class GioHangController : Controller
     {
           // GET: GioHang
-        public ActionResult Index()
-        {
-            
-            return View();
-        }
+      
 
         public ActionResult GioHang()
         {
