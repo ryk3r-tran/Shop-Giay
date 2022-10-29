@@ -1555,6 +1555,7 @@
     <Content Include="Views\Admin\TatCaSanPham.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
     <Content Include="Views\SanPham\BinhLuanPatialView.cshtml" />
+    <Content Include="Views\SanPham\TestCauLenh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

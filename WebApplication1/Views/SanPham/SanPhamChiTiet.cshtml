@@ -114,10 +114,7 @@
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
                    aria-selected="false">Bình Luận</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
-                   aria-selected="false">Đánh Giá</a>
-            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -222,10 +219,54 @@
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="row">
 
+                    @*//Phần thống kế số sao*@
+                    <div class="col-lg-3">
+                        <div class="row total_rate">
+                            <div class="col-2">
+                                @*<div class="box_total">
 
+                                    <h4>4.0</h4>
 
+                                </div>*@
+                            </div>
+                            <div class="col-8">
+                                <div class="rating_list">
 
-                    <div class="col-lg-6">
+                                    <ul class="list">
+                                        <li>
+                                            <a href="#">
+
+                                                5 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.NamSao
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                4 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.BonSao
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                3 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.BaSao
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                2 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.HaiSao
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                1 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.MotSao
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*// phần nhận xét*@
+                    <div class="col-lg-9">
                         @{
                             PagedList.PagedList<BinhLuan> BinhLuan = (PagedList.PagedList<BinhLuan>)ViewBag.NDBinhLuan;
 
@@ -243,11 +284,17 @@
                                         </div>
                                         <div class="media-body">
                                             <h4>@it.TenKH</h4>
-                                            @*<h5>12th Feb, 2018 at 05:56 pm</h5>*@
+                                            <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
+                                            @for (int i = 1; i <= @it.Sao; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+
                                             <a class="reply_btn" href="#">Phản Hồi</a>
                                         </div>
                                     </div>
-                                    <p>@it.ND</p>
+                                    <p style="margin-left : 86px">@it.ND</p>
+                                    <hr style="border: 1px solid "/>
                                 </div>
 
                             }
@@ -263,49 +310,49 @@
 
                     </div>
 
+                    @*Gửi nhận xét
+        //////////////*@
 
-
-
-
-
-
-
-
-                    <div class="col-lg-6">
-                        <div class="review_box">
-                            <h4>Gửi Đánh Giá</h4>
-                            <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ Và Tên">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="message" id="message" rows="1" placeholder="Nhận Xét"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" value="submit" class="btn primary-btn">Gửi</button>
-                                </div>
-                            </form>
+                    @*<div class="col-lg-6">
+            <div class="review_box">
+                <h4>Gửi Nhận Xét</h4>
+                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Họ Và Tên">
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Nhận Xét"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" value="submit" class="btn primary-btn">Gửi</button>
+                    </div>
+                </form>
+            </div>
+        </div>*@
+
                 </div>
             </div>
-            @*//////////////////////////*@
 
-            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+
+
+
+            @*//////////////////////////  phần đánh giá sao*@
+
+            <!--<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row total_rate">
@@ -382,7 +429,7 @@
                                 </div>
                                 <p>Tuyệt Vời</p>
                             </div>
-                            <!-- <div class="review_item">
+                             <div class="review_item">
                         <div class="media">
                             <div class="d-flex">
                                 <img src="/Content/img/product/review-3.png" alt="">
@@ -399,7 +446,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo</p>
-                    </div> -->
+                    </div> 
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -442,7 +489,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
+
+            @*hết phần đánh giá
+            //////////////*@
+
+
+
         </div>
     </div>
 </section>

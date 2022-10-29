@@ -46,5 +46,10 @@ namespace WebApplication1.Models
 
         public string ND { get; set; }
 
+        public DateTime NgayBinhLuan { get; set; }
+
+        public int Sao { get; set; }
+
+
     }
 }
