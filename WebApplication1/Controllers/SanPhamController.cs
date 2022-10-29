@@ -18,9 +18,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult DanhSachSanPham()
+        public ActionResult DanhSachSanPham(int page = 1)
         {
-            return View();
+            int pageSize = 6;
+            var db = new KarmaDBContext();
+            var data = db.SANPHAMs.OrderBy(s => s.MaSP).ToPagedList(page, pageSize);
+            return View(data);
         }
 
 
@@ -64,10 +67,26 @@ namespace WebApplication1.Controllers
             return View(SanPhamChon);
 
         }
-        public ActionResult BinhLuanPatialView()
+        public ActionResult BinhLuan(int page=1)
         {
+            int pageSize = 2;
             int MaSP = Convert.ToInt32(TempData["ID"]);
-            return PartialView();
+            var db = new KarmaDBContext();
+            ViewBag.NDBinhLuan = (from sp in db.SANPHAMs
+                                  join BinhLuan in db.BINHLUANSPs on sp.MaSP equals BinhLuan.MaSP
+                                  join Kh in db.KHACHHANGs on BinhLuan.MaKH equals Kh.MaKH
+                                  where sp.MaSP == MaSP
+                                  select new BinhLuan
+                                  {
+                                      TenKH = Kh.TenKH,
+                                      ND = BinhLuan.ND,
+                                      MaBL = BinhLuan.MaBL,
+                                      Sao = BinhLuan.Sao,
+                                      NgayBinhLuan = BinhLuan.NgayBinhLuan
+
+                                  }).OrderBy(s => s.MaBL).ToPagedList(page, pageSize);
+
+            return View();
         }
 
         public ActionResult TestCauLenh()

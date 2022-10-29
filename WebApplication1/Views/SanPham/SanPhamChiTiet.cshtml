@@ -111,8 +111,7 @@
                    aria-selected="false">Thông Số</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                   aria-selected="false">Bình Luận</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Bình Luận</a>
             </li>
 
         </ul>
@@ -266,49 +265,54 @@
                     </div>
 
                     @*// phần nhận xét*@
-                    <div class="col-lg-9">
-                        @{
-                            PagedList.PagedList<BinhLuan> BinhLuan = (PagedList.PagedList<BinhLuan>)ViewBag.NDBinhLuan;
+                <div class="col-lg-9">
+
+                    @{
+                        PagedList.PagedList<BinhLuan> BinhLuan = (PagedList.PagedList<BinhLuan>)ViewBag.NDBinhLuan;
+
+                    }
+                    <div class="comment_list">
+
+
+                        @foreach (var it in BinhLuan)
+                        {
+                            <div class="review_item">
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="/Content/img/product/review-1.jpg" alt="" width="71" height="71" class="rounded-circle">
+
+                                    </div>
+                                    <div class="media-body">
+                                        <h4>@it.TenKH</h4>
+                                        <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
+                                        @for (int i = 1; i <= @it.Sao; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
+
+                                        <a class="reply_btn" href="#">Phản Hồi</a>
+                                    </div>
+                                </div>
+                                <p style="margin-left : 86px">@it.ND</p>
+                                <hr style="border: 1px solid " />
+                            </div>
 
                         }
-                        <div class="comment_list">
 
-
-                            @foreach (var it in BinhLuan)
-                            {
-                                <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="/Content/img/product/review-1.jpg" alt="" width="71" height="71" class="rounded-circle">
-
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>@it.TenKH</h4>
-                                            <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
-                                            @for (int i = 1; i <= @it.Sao; i++)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
-
-                                            <a class="reply_btn" href="#">Phản Hồi</a>
-                                        </div>
-                                    </div>
-                                    <p style="margin-left : 86px">@it.ND</p>
-                                    <hr style="border: 1px solid "/>
-                                </div>
-
-                            }
-
-                        </div>
-
-                        @Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))
-
-                        @*@PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "contact", InsertionMode = InsertionMode.Replace });*@
-
-                        @*@Html.Partial("BinhLuanPatialView", BinhLuan);*@
 
 
                     </div>
+
+                    @Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))
+
+                    @*@PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "contact", InsertionMode = InsertionMode.Replace });*@
+
+                    @*@Html.Partial("BinhLuanPatialView", BinhLuan);*@
+
+
+
+
+                </div>
 
                     @*Gửi nhận xét
         //////////////*@
