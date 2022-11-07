@@ -70,8 +70,8 @@
                         <td>@data.value.DonGia</td>
                         <td>
                             <div>
-                                <a href="" class="btn btn-outline-info btn-rounded" data-bs-toggle="modal" data-bs-target="#edit_prod_modal"><i class="fas fa-pen"></i></a>
-                                <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                <a href="" class="btn btn-outline-info btn-rounded btn-edit-prod" data-bs-toggle="modal" data-bs-target="#edit_prod_modal" data-id="@data.value.MaSP"><i class="fas fa-pen"></i></a>
+                                <a href="" class="btn btn-outline-danger btn-rounded btn-del-prod" data-id="@data.value.MaSP"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="modal-body">
                     <section class="section">
-                        <form action="#" enctype="multipart/form-data" class="inf-basic-form">
+                        <form enctype="multipart/form-data" class="inf-basic-form">
                             <div class="row inf-basic-wrap">
                                 <div class="inf-basic">Thông tin cơ bản</div>
                                 <div class="img-prod">
@@ -113,7 +113,7 @@
                                         </div>
                                         <div class="up-file-wrap">
                                             <label for="file-img-prod" class="lb_up_imgprod">Chọn ảnh</label>
-                                            <input type="file" name="" id="file-img-prod" hidden>
+                                            <input type="file" name="file-img-prod" id="file-img-prod" hidden>
                                         </div>
                                     </div>
                                     <div class="preview-img-wrap">
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="d-flex name_prod-wrap align-items-center">
                                     <div class="col-2">Danh mục</div>
-                                    <select name="category" id="" style="width: 50%"></select>
+                                    <select name="category_prod" id="category_prod" style="width: 50%"></select>
                                 </div>
 
                             </div>
@@ -134,11 +134,11 @@
                                 <div class="inf-basic">Thông tin chi tiết</div>
                                 <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
                                     <div class="col-2">Giá</div>
-                                    <input type="text" name="price" id="" style="width: 50%" />
+                                    <input type="text" name="price" id="price" style="width: 50%" />
                                 </div>
                                 <div class="d-flex name_prod-wrap align-items-center">
                                     <div class="col-2">Mô tả</div>
-                                    <textarea name="description" id="" cols="32" rows="3" style="width: 50%"></textarea>
+                                    <textarea name="description" id="description" cols="32" rows="3" style="width: 50%"></textarea>
                                 </div>
                             </div>
                             <div class="footer-modal">
@@ -152,3 +152,21 @@
         </div>
     </div>
 </main><!-- End #main -->
+<script>
+    var edit_btn = $(".btn-edit-prod");
+    edit_btn.click(function () {
+        var id_prod = $(this).data('id');
+        url = "/Admin/getSanPhamById/" + id_prod;
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+                console.log($("select[name='category_prod']"))
+                $("input[name='name_prod']").val(data.TenSP);
+                $("input[name='price']").val(data.DonGia);
+                $("textarea[name='description']").val(data.MoTa);
+            }
+        })
+    })
+</script>

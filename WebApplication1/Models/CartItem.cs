@@ -17,5 +17,6 @@ namespace WebApplication1.Models
                 return sanpham.DonGia*quantity;
             }
         }
+        
     }
 }

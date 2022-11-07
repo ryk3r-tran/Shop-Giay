@@ -4,7 +4,7 @@ var DsList = document.querySelectorAll('.nav-link')
 //    hrefs.push(DsList[i].href);
 //}
 
-var length = hrefs.length
+var length = href.length
 for (let i = 0; i < 4 ; i++) {
     if (currentLocation == 'https://localhost:44377/Admin/TatCaSanPham' || currentLocation == 'https://localhost:44377/Admin/ThemSanPham' || currentLocation == 'https://localhost:44377/Admin/TatCaTaiKhoan'
         || currentLocation == 'https://localhost:44377/Admin/ThemTaiKhoan') {
