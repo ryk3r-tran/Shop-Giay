@@ -227,6 +227,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1546,6 +1547,7 @@
     <Content Include="Views\Admin\ThongKe.cshtml" />
     <Content Include="Views\Admin\TatCaSanPham.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
+    <Content Include="Views\GioHang\XacNhanThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        // [Post] /TaiKhoan/Verify
+        // [Post] /TaiKhoan/verify
         [HttpPost]
         public ActionResult verify(LoginModel acc)
         {
@@ -36,7 +36,8 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                return View("Dang Nhap", "Tai Khoan");
+                //ViewBag.LoginError = "Tài khoản hoặc mật khẩu không chính xác";
+                return RedirectToAction("DangNhap", "TaiKhoan");
             }
             
         }
