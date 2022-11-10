@@ -173,7 +173,15 @@ namespace WebApplication1.Controllers
         
         public ActionResult XacNhanDonHang()
         {
-            
+            return View();
+        }
+
+        public ActionResult DonMua()
+        {
+            return View();
+        }
+        public ActionResult LichSuMuaHang()
+        {
             return View();
         }
     }
