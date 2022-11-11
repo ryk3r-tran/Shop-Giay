@@ -224,12 +224,14 @@
     <Compile Include="Controllers\LienHeController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
+    <Compile Include="Controllers\TAIKHOAN_APIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\TK_View_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,8 @@ namespace KarmaModels.Repository
         void Update(T entity);
         void Delete(object id);
         void Save();
+
+       
         
     }
 }

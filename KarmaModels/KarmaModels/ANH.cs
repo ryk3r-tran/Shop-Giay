@@ -18,8 +18,7 @@ namespace KarmaModels.KarmaModels
         [Key]
         public int MaAnh { get; set; }
 
-        [StringLength(50)]
-        public string TenAnh { get; set; }
+        
 
         [StringLength(50)]
         public string AnhChinh { get; set; }
