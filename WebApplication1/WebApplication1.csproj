@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
@@ -1135,6 +1136,7 @@
     <Content Include="Content\css\nouislider.min.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\user.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
     <Content Include="Content\fonts\themify.svg" />
@@ -1558,6 +1560,7 @@
     <Content Include="Views\GioHang\XacNhanThanhToan.cshtml" />
     <Content Include="Views\GioHang\DonMua.cshtml" />
     <Content Include="Views\GioHang\LichSuMuaHang.cshtml" />
+    <Content Include="Views\Customer\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
