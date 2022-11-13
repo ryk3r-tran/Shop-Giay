@@ -1,5 +1,5 @@
 ﻿@using WebApplication1.Models
-@model List<CartItem>
+@model Cart
 @{
     ViewBag.Title = "GioHang";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (CartItem item in Model)
+                        @foreach (var item in Model.ListCartItem)
                          {
 
                             <tr data-item="@item.sanpham.MaSP">
@@ -75,9 +75,9 @@
                             </tr>
                          }
                         <tr class="bottom_button">
-                            <td>
+                            @*<td>
                                 <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
-                            </td>
+                            </td>*@
                             <td>
                             </td>
                             <td>
@@ -99,7 +99,7 @@
                                 <h5>Tổng tiền</h5>
                             </td>
                             <td>
-                                <h5>21.600.000</h5>
+                                <h5 id="tongtien">@Model.TongTien</h5>
                             </td>
                         </tr>
                         <tr class="shipping_area">
@@ -143,7 +143,7 @@
                             </td>
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="#">Tiếp tục mua hàng</a>
+                                    <a class="gray_btn" href="/GioHang/Payment">Tiếp tục mua hàng</a>
                                     <a class="primary-btn" href="#">Tiến hành kiểm tra</a>
                                 </div>
                             </td>
@@ -192,9 +192,12 @@
             },
             success: function (data) {
                 if (data != null) {
-                    console.log(data.thanhtien);
                     var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    var tongtien = $("#tongtien");
+                    console.log(thanhtien);
+                    console.log(tongtien);
                     thanhtien.html(data.thanhtien);
+                    tongtien.html(data.tongtien);
                 }
             }
         })
@@ -216,9 +219,12 @@
             },
             success: function (data) {
                 if (data != null) {
-                    console.log(data.thanhtien);
                     var thanhtien = $(".thanhtien[data-id=" + id + "]");
+                    var tongtien = $("#tongtien");
+                    console.log(thanhtien);
+                    console.log(tongtien);
                     thanhtien.html(data.thanhtien);
+                    tongtien.html(data.tongtien);
                 }
             }
         })

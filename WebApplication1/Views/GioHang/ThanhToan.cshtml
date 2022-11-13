@@ -22,44 +22,6 @@
 <!--================Checkout Area =================-->
 <section class="checkout_area section_gap">
     <div class="container">
-        <div class="returning_customer">
-            <div class="check_title">
-                <h2>
-                    Phản hồi khách hàng?
-                    @*<a href="#">Bấm vào đây để Đăng nhập</a>*@
-                    @Html.ActionLink("Bấm vào đây để Đăng nhập", "DangNhap", "TaiKhoan")
-                </h2>
-            </div>
-            <p>
-                Nếu bạn đã mua sắm với chúng tôi trước đây, vui lòng nhập thông tin của bạn vào các hộp bên dưới.
-                Nếu bạn là khách hàng mới, vui lòng tiến hành phần thanh toán & vận chuyển.
-            </p>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="name" name="name">
-                    <span class="placeholder" data-placeholder="Tên đăng nhập hoặc Email"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="password" class="form-control" id="password" name="password">
-                    <span class="placeholder" data-placeholder="Mật khẩu"></span>
-                </div>
-                <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="primary-btn">đăng nhập</button>
-                    <div class="creat_account">
-                        <input type="checkbox" id="f-option" name="selector">
-                        <label for="f-option">Ghi nhớ tôi</label>
-                    </div>
-                    <a class="lost_pass" href="#">Quên mật khẩu?</a>
-                </div>
-            </form>
-        </div>
-        <div class="cupon_area">
-            <div class="check_title">
-                <h2>Bạn có phiếu giảm giá? <a href="#">Bấm vào đây để nhập mã giảm giá</a></h2>
-            </div>
-            <input type="text" placeholder="Nhập mã">
-            <a class="tp_btn" href="#">Áp dụng mã</a>
-        </div>
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
@@ -82,43 +44,29 @@
                             <input type="text" class="form-control" id="email" name="compemailany">
                             <span class="placeholder" data-placeholder="Địa chỉ email"></span>
                         </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Việt Nam</option>
-                                <option value="2">Mỹ</option>
-                                <option value="4">Hàn Quốc</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Địa chỉ"></span>
-                        </div>
-
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Thành phố"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Bắc Từ Liêm</option>
-                                <option value="2">Nam Từ Liêm</option>
-                                <option value="4">Trung Hòa</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Tạo tài khoản?</label>
-                            </div>
-                        </div>
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <h3>Thông tin Vận chuyển</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Vận chuyển đến địa chỉ khác?</label>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="add1" name="add1">
+                                    <span class="placeholder" data-placeholder="Địa chỉ"></span>
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <select class="country_select">
+                                        <option value="1">Bắc Từ Liêm</option>
+                                        <option value="2">Nam Từ Liêm</option>
+                                        <option value="4">Trung Hòa</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <select class="country_select">
+                                        <option value="1">Bắc Từ Liêm</option>
+                                        <option value="2">Nam Từ Liêm</option>
+                                        <option value="4">Trung Hòa</option>
+                                    </select>
+                                </div>
                             </div>
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Ghi chú"></textarea>
                         </div>
                     </form>
                 </div>
@@ -147,8 +95,7 @@
                         <div class="payment_item active">
                             <div class="radion_btn">
                                 <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Thẻ tín dụng</label>
-                                <img src="/Content/img/product/card.jpg" alt="">
+                                <label for="f-option6">VNPAY</label>
                                 <div class="check"></div>
                             </div>
 

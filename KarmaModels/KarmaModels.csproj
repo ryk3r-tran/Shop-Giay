@@ -45,6 +45,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +71,9 @@
     <Compile Include="KarmaModels\SIZE.cs" />
     <Compile Include="KarmaModels\sysdiagram.cs" />
     <Compile Include="KarmaModels\TAIKHOAN.cs" />
+    <Compile Include="Payment\PayCompare.cs" />
+    <Compile Include="Payment\PayLib.cs" />
+    <Compile Include="Payment\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />

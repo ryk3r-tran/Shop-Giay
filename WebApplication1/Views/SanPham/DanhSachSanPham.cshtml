@@ -1,4 +1,5 @@
-﻿
+﻿@using KarmaModels.KarmaModels
+@model List<SANPHAM> 
 @{
     ViewBag.Title = "DanhSachSanPham";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -26,6 +27,16 @@
             <div class="sidebar-categories">
                 <div class="head">Danh mục</div>
                 <ul class="main-categories">
+                    @*@foreach(var data1 in Model)
+                    {
+                        <li class="main-nav-list">
+                            <a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable">
+                                <span class="lnr lnr-arrow-right"></span>@data1.TenDM<span class="number">(53)</span>
+                            </a>
+                            
+                        </li>
+                    }*@
+
                     <li class="main-nav-list">
                         <a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable">
                             <span class="lnr lnr-arrow-right"></span>Giày thể thao<span class="number">(53)</span>
@@ -49,6 +60,7 @@
                             <li class="main-nav-list child"><a href="#">Giày khác<span class="number">(17)</span></a></li>
                         </ul>
                     </li>
+
                     <li class="main-nav-list">
                         <a data-toggle="collapse" href="#cooking" aria-expanded="false" aria-controls="cooking">
                             <span class="lnr lnr-arrow-right"></span>Giày cao gót<span class="number">(53)</span>
@@ -60,6 +72,7 @@
 
                         </ul>
                     </li>
+                    
                     <li class="main-nav-list">
                         <a data-toggle="collapse" href="#beverages" aria-expanded="false" aria-controls="beverages">
                             <span class="lnr lnr-arrow-right"></span>Dép<span class="number">(24)</span>
@@ -71,6 +84,7 @@
 
                         </ul>
                     </li>
+                    
                     <li class="main-nav-list">
                         <a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean">
                             <span class="lnr lnr-arrow-right"></span>Khác<span class="number">(53)</span>
@@ -82,6 +96,7 @@
 
                         </ul>
                     </li>
+                
                 </ul>
             </div>
             <div class="sidebar-filter mt-50">
@@ -137,11 +152,11 @@
                     </select>
                 </div>
                 <div class="sorting mr-auto">
-                    <select>
+                    @*<select>
                         <option value="1">Hiển thị 12</option>
                         <option value="1">Hiển thị 12</option>
                         <option value="1">Hiển thị 12</option>
-                    </select>
+                    </select>*@
                 </div>
                 <div class="pagination">
                     <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
@@ -158,208 +173,45 @@
             <section class="lattest-product-area pb-40 category-list">
                 <div class="row">
                     <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
+                    @foreach (var data in Model)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-product">
+                                <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
+                                <div class="product-details">
+                                    <h6>@data.TenSP</h6>
+                                    <div class="price">
+                                        <h6>@data.DonGia</h6>
+                                        <h6 class="l-through">@data.DonGia</h6>
+                                    </div>
+                                    <div class="prd-bottom">
 
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
+                                        <a href="" class="social-info add-to-cart">
+                                            <span class="ti-bag"></span>
+                                            <p class="hover-text">Thêm vào giỏ hàng</p>
+                                        </a>
+                                        
+                                        <a href="" class="social-info">
+                                            <span class="lnr lnr-move"></span>
+                                            <p class="hover-text">Xem thêm</p>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p2.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
+                        </div>    
+                     }
 
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p3.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
-
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p4.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
-
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p5.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
-
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single product -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p6.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Giày Adidas Ultraboost 4.0</h6>
-                                <div class="price">
-                                    <h6>1.500.000</h6>
-                                    <h6 class="l-through">2.100.000</h6>
-                                </div>
-                                <div class="prd-bottom">
-
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Wishlist</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-sync"></span>
-                                        <p class="hover-text">compare</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">view more</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
             <!-- End Best Seller -->
             <!-- Start Filter Bar -->
             <div class="filter-bar d-flex flex-wrap align-items-center">
                 <div class="sorting mr-auto">
-                    <select>
+                    @*<select>
                         <option value="1">Hiển thị 12</option>
                         <option value="1">Hiển thị 12</option>
                         <option value="1">Hiển thị 12</option>
-                    </select>
+                    </select>*@
                 </div>
                 <div class="pagination">
                     <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
@@ -375,4 +227,20 @@
         </div>
     </div>
 </div>
-
+<script>
+    $('.add-to-cart').click(function (e) {
+        e.preventDefault();
+        var id = $(this).attr('id');
+        var url = "/GioHang/ThemVaoGioHang/" + id;
+        console.log(url);
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (data) {
+                if (data.status == "successful") {
+                    alert("Thêm vào giỏ hàng thành công!");
+                }
+            }
+        });
+    });
+</script>
