@@ -1,62 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
+using System.Linq;
+using System.Web;
+using WebApplication1.Models;
+
+
 namespace WebApplication1.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    [Table("SANPHAM")]
-    public partial class SANPHAM
+    public class SanPham
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SANPHAM()
+        public int Masp { get; set; }
+        public string Tensp { get; set; }
+        public decimal Gia { get; set; }
+        public  double TbSoSao { get; set; }
+        public string TbSao { get; set; }
+        public string Anh { get; set; }
+        public string TenNSX { get; set; }
+        public List<SanPham> GetDsSanPham (string Timkiem)
         {
-            BINHLUANSPs = new HashSet<BINHLUANSP>();
-            CHITIETDHs = new HashSet<CHITIETDH>();
-            CHITIETDHs1 = new HashSet<CHITIETDH>();
-            CHITIETSPs = new HashSet<CHITIETSP>();
-            DANHGIAs = new HashSet<DANHGIA>();
+            string sql;
+            DataTable dt = new DataTable();
+           if (Timkiem == null)
+            {
+                sql = @"AllSanPham";
+                dt = Dataprovider.ExecuteQuery(sql);
+            }
+            else
+            {
+                 sql = @"TimKiemSanPham @TenSanPham";
+                dt = Dataprovider.ExecuteQuery(sql, new object[] { Timkiem });
+            }
+
+
+            List<SanPham> DsSanPham = new List<SanPham>();
+
+            SanPham MotSanPham;
+
+            for(int i = 0; i < dt.Rows.Count;i++)
+            {
+                MotSanPham = new SanPham();
+                if (dt.Rows[i]["TbSao"].ToString() == null)
+                {
+                    MotSanPham.TbSao = "0";
+                }
+                else
+                {
+
+                    MotSanPham.TbSao = dt.Rows[i]["TbSao"].ToString();
+
+
+                }
+                MotSanPham.Masp = Convert.ToInt32(dt.Rows[i]["MaSP"].ToString());
+                MotSanPham.Tensp = dt.Rows[i]["TenSP"].ToString();
+                MotSanPham.Anh = dt.Rows[i]["AnhChinh"].ToString();
+                MotSanPham.TenNSX = dt.Rows[i]["TenNSX"].ToString();
+                MotSanPham.Gia = Convert.ToDecimal(dt.Rows[i]["DonGia"].ToString());
+                DsSanPham.Add(MotSanPham);
+            }
+
+            return DsSanPham;
         }
 
-        [Key]
-        public int MaSP { get; set; }
-
-        [StringLength(50)]
-        public string TenSP { get; set; }
-
-        public int? SoLuongTong { get; set; }
-
-        public decimal? DonGia { get; set; }
-
-        public string MoTa { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? NgayCapNhat { get; set; }
-
-        public int? MaNSX { get; set; }
-
-        public int? MaAnh { get; set; }
-
-        public virtual ANH ANH { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINHLUANSP> BINHLUANSPs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDH> CHITIETDHs1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
-
-        public virtual NSX NSX { get; set; }
-
-        public virtual NSX NSX1 { get; set; }
     }
 }
