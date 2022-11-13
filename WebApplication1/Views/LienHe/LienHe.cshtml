@@ -1,16 +1,75 @@
-﻿
+﻿@using WebApplication1.Models
 @{
-    ViewBag.Title = "LienHe";
+    
     Layout = "~/Views/Layout/MyLayout.cshtml";
 }
+<script>
+    #mapCanvas{
+        height: 600px;
+    }
+</script>
+@section jsFooter{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+            defer></script>
+    <script>
+        function initMap() {
+            const uluru = { lat: -25.363, lng: 131.044 };
+            const map = new google.maps.Map($('#mapCanvas'), {
+                zoom: 18,
+                center: uluru,
+            });
+            const contentString =
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+                '<div id="bodyContent">' +
+                "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+                "sandstone rock formation in the southern part of the " +
+                "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+                "south west of the nearest large town, Alice Springs; 450&#160;km " +
+                "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+                "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+                "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+                "Aboriginal people of the area. It has many springs, waterholes, " +
+                "rock caves and ancient paintings. Uluru is listed as a World " +
+                "Heritage Site.</p>" +
+                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+                "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+                "(last visited June 22, 2009).</p>" +
+                "</div>" +
+                "</div>";
+            const infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                ariaLabel: "Uluru",
+            });
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map,
+                title: "Uluru (Ayers Rock)",
+            });
 
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+            });
+        }
+
+        window.initMap = initMap;
+
+
+    </script>
+
+}
 
 <!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-                <h1>Liên hệ với chúng tôi</h1>
+                <h1>Liên hệ</h1>
                 <nav class="d-flex align-items-center">
                     <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
                     <a href="category.html">Liên hệ</a>
@@ -23,9 +82,12 @@
 <!--================Contact Area =================-->
 <section class="contact_area section_gap_bottom">
     <div class="container">
-        <div id="mapBox" class="mapBox" data-lat="21.046699" data-lon="105.786465" data-zoom="13" data-info="236, Hoàng Quốc Việt, Cố Nhuế 1, Bắc Từ Liêm, Hà Nội"
+
+        <div class="map" id="mapCanvas"></div>
+
+        @*<div id="mapBox" class="mapBox" data-lat="21.046699" data-lon="105.786465" data-zoom="13" data-info="236, Hoàng Quốc Việt, Cố Nhuế 1, Bắc Từ Liêm, Hà Nội"
              data-mlat="21.046699" data-mlon="105.786465">
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-lg-3">
                 <div class="contact_info">
@@ -51,18 +113,18 @@
                 <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ email'">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Chủ đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Chủ đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Chủ đề'">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 text-right">

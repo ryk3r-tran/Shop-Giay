@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
@@ -234,10 +235,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BinhLuan.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
-    <Compile Include="Models\Dataprovider.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\SanPham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1136,6 +1136,7 @@
     <Content Include="Content\css\nouislider.min.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\user.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\Linearicons-Free.svg" />
     <Content Include="Content\fonts\themify.svg" />
@@ -1525,8 +1526,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\paginate.js" />
-    <Content Include="Scripts\paginate.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1558,9 +1557,10 @@
     <Content Include="Views\Admin\ThongKe.cshtml" />
     <Content Include="Views\Admin\TatCaSanPham.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
-    <Content Include="Views\SanPham\DsBinhLuan.cshtml" />
-    <Content Include="Views\SanPham\DsSanPhamTheoTieuChi.cshtml" />
-    <Content Include="Views\SanPham\TimKiem.cshtml" />
+    <Content Include="Views\GioHang\XacNhanThanhToan.cshtml" />
+    <Content Include="Views\GioHang\DonMua.cshtml" />
+    <Content Include="Views\GioHang\LichSuMuaHang.cshtml" />
+    <Content Include="Views\Customer\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -52,5 +52,22 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult getSanPhamById(string id)
+        {
+            int i = Int32.Parse(id);
+            IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
+            var result = sanpham.GetById(i);
+            return Json(new {
+                TenSP = result.TenSP,
+                SoLuongTong = result.SoLuongTong,
+                DonGia = result.DonGia,
+                MoTa = result.MoTa,
+                NgayCapNhat = result.NgayCapNhat,
+            });
+        }
+
     }
 }
