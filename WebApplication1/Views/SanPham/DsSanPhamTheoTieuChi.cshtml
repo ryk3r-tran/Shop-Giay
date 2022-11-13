@@ -1,0 +1,126 @@
+﻿@using WebApplication1.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<SanPham>
+@using System.Globalization;
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+<div class="row">
+
+    @foreach (var it in Model)
+    {
+        <div class="col-lg-4 col-md-6">
+            <div class="single-product">
+                <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
+                <div class="product-details">
+                    <h6>@it.Tensp</h6>
+                    <div class="price">
+
+                        @{
+                            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                            string gia = it.Gia.ToString("#,###", cul.NumberFormat);
+                        }
+                        <h6>Giá: @gia VND</h6>
+                    
+
+                        <h6>Đánh giá: @it.TbSoSao<i style="color: #ffce3d" class="fa fa-star"></i></h6>
+                        <br />
+                        <h6>Hãng: @it.TenNSX</h6>
+                    </div>
+                    <div class="prd-bottom">
+
+                        <a href="#" class="social-info add-to-cart" id="@it.Masp">
+                            <span class="ti-bag"></span>
+                            <p class="hover-text">Thêm vào</p>
+                        </a>
+                     
+                        <a href="/SanPham/SanPhamChiTiet/@it.Masp" class="social-info">
+                            
+                            <span class="lnr lnr-move"></span>
+                            <p class="hover-text">xem chi tiết</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<div class="pageIndexs">
+
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+
+
+        if (i == Model.PageNumber)
+        {
+
+            <span data-id="@i" style="color:orangered" class="pageIndex">@i</span>
+        }
+        else
+        {
+            <span data-id="@i" style="color:black" class="pageIndex">@i</span>
+        }
+
+    }
+
+
+
+    <script>
+        $(document).ready(function () {
+
+
+            $('.pageIndex').click(function () {
+
+                var ChiSoTrang = $(this).data('id');
+                var Madm = $('.DanhMuc').data('id');
+                var SoSao = $("input[type='radio'][name='Sao']:checked").val();
+                var SapXep = $("#SapXep").val();
+                var nsx = $("input[type='radio'][name='NhanHang']:checked").val();
+                LoadDsSanPham(ChiSoTrang, Madm, SapXep, nsx, SoSao);
+            })
+
+            $('.add-to-cart').click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+                var url = "/GioHang/ThemVaoGioHang/" + id;
+                console.log(url);
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    success: function (data) {
+                        if (data.status == "successful") {
+                            alert("Thêm vào giỏ hàng thành công!");
+                        }
+                    }
+                });
+            });
+           
+
+
+
+        })
+
+
+    </script>
+    <style>
+        .pageIndexs {
+            padding: 20px 0 0 50px;
+        }
+
+            .pageIndexs span {
+                margin-left: 10px;
+                padding: 10px;
+                background-color: azure;
+            }
+
+                .pageIndexs span:hover {
+                    cursor: pointer;
+                }
+    </style>
+
+</div>
+
+

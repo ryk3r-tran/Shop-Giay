@@ -25,7 +25,7 @@ namespace KarmaModels.KarmaModels
 
         public string ND { get; set; }
 
-        public int Sao { get; set; }
+        public double Sao { get; set; }
 
        public DateTime NgayBinhLuan { get; set; }
 

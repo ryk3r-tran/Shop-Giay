@@ -12,7 +12,7 @@
                 <h1>Thanh toán</h1>
                 <nav class="d-flex align-items-center">
                     <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="single-product.html">Thanh toán</a>
+                    <a href="single-product.html">Xác nhận thanh toán</a>
                 </nav>
             </div>
         </div>
@@ -22,11 +22,11 @@
 <!--================Checkout Area =================-->
 <section class="checkout_area section_gap">
     <div class="container">
-        <div class="returning_customer">
+        @*<div class="returning_customer">
             <div class="check_title">
                 <h2>
                     Phản hồi khách hàng?
-                    @*<a href="#">Bấm vào đây để Đăng nhập</a>*@
+                    <a href="#">Bấm vào đây để Đăng nhập</a>
                     @Html.ActionLink("Bấm vào đây để Đăng nhập", "DangNhap", "TaiKhoan")
                 </h2>
             </div>
@@ -52,72 +52,51 @@
                     <a class="lost_pass" href="#">Quên mật khẩu?</a>
                 </div>
             </form>
-        </div>
-        <div class="cupon_area">
+        </div>*@
+        @*<div class="cupon_area">
             <div class="check_title">
                 <h2>Bạn có phiếu giảm giá? <a href="#">Bấm vào đây để nhập mã giảm giá</a></h2>
             </div>
             <input type="text" placeholder="Nhập mã">
             <a class="tp_btn" href="#">Áp dụng mã</a>
-        </div>
+        </div>*@
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Chi tiết Thanh toán</h3>
+                    <h3>Thông tin khách hàng</h3>
                     <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="Họ"></span>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" placeholder="Họ Tên" id="first" name="name">                          
                         </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Tên"></span>
+ 
+                        <div class="col-md-12 form-group p_star">
+                            <input type="number" class="form-control" id="number" name="number" placeholder="Số Điện Thoại">                        
                         </div>
 
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Địa chỉ email"></span>
-                        </div>
                         <div class="col-md-12 form-group p_star">
+                            <input type="email" class="form-control" id="email" name="compemailany" placeholder="Email">                           
+                        </div>
+
+                        @*<div class="col-md-12 form-group p_star">
                             <select class="country_select">
                                 <option value="1">Việt Nam</option>
                                 <option value="2">Mỹ</option>
                                 <option value="4">Hàn Quốc</option>
                             </select>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Địa chỉ"></span>
-                        </div>
+                        </div>*@
 
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Thành phố"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Bắc Từ Liêm</option>
-                                <option value="2">Nam Từ Liêm</option>
-                                <option value="4">Trung Hòa</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="message" id="message" rows="1" placeholder="Địa chỉ nhận"></textarea>
+                    </div>
+                 
+                        @*<div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <input type="checkbox" id="f-option2" name="selector">
                                 <label for="f-option2">Tạo tài khoản?</label>
                             </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <h3>Thông tin Vận chuyển</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Vận chuyển đến địa chỉ khác?</label>
-                            </div>
+                        </div>*@
+
+                        <div class="col-md-12 form-group">                           
                             <textarea class="form-control" name="message" id="message" rows="1" placeholder="Ghi chú"></textarea>
                         </div>
                     </form>
@@ -128,37 +107,14 @@
                         <ul class="list">
                             <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
                             <li><a href="#">Bitis Hunter Core 3D<span class="middle">x 01</span> <span class="last">694.000</span></a></li>
-                            <li><a href="#">Bitis Hunter X <span class="middle">x 01</span> <span class="last">786.000</span></a></li>
-                            <li><a href="#">Nike Air Force 1 <span class="middle">x 01</span> <span class="last">442.000</span></a></li>
+                            <li><a href="#">Bitis Hunter X <span class="middle">x 01</span> <span class="last">786.000</span></a></li>                       
                         </ul>
                         <ul class="list list_2">
                             <li><a href="#">Tạm tính <span>1.922.000</span></a></li>
                             <li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
                             <li><a href="#">Tổng tiền <span>1.947.000</span></a></li>
                         </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Thanh toán khi nhận hàng</label>
-                                <div class="check"></div>
-                            </div>
-
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Thẻ tín dụng</label>
-                                <img src="/Content/img/product/card.jpg" alt="">
-                                <div class="check"></div>
-                            </div>
-
-                        </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">Tôi đã đọc và chấp nhận </label>
-                            <a href="#">Điều khoản và điều kiện*</a>
-                        </div>
-                        <a class="primary-btn" href="#">thanh toán</a>
+ 
                     </div>
                 </div>
             </div>

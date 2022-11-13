@@ -46,12 +46,14 @@
                 <div class="s_product_text">
                     @{
                         CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                        //string gia = Model.DonGia.Value.ToString("#,###", cul.NumberFormat);
                         string gia = Model.DonGia.Value.ToString("#,###", cul.NumberFormat);
                     }
+                    <span hidden class="MaSP" data-id="@Model.MaSP"></span>
                     <h3>@Model.TenSP</h3>
                     <h2>@gia VND</h2>
                     <ul class="list">
-                        @{ 
+                        @{
                             var db = new KarmaDBContext();
                             string TinhTrang = "";
                             var NhaSx = db.NSXes.Find(Model.MaNSX);
@@ -65,19 +67,16 @@
                             }
 
                         }
-                        <li><a class="active" href="#"><span>Thương Hiệu</span> :@NhaSx.TenNSX</a></li>
-               
+                        <li><a class="active" href="#   "><span>Thương Hiệu</span> :@NhaSx.TenNSX</a></li>
+
                         <li><a href="#"><span>Tình Trạng</span> :@TinhTrang</a></li>
                     </ul>
-                  
-                    @*<p>
-                        Chất liệu vải dệt cao cấp khiến giày thoáng khí không gây mùi.
-                        Đế giày cao su đúc nguyên khối mang lại sự êm ái khi mang.Thiết kế phong cách, trẻ trung, năng động, tôn dáng khi đi giày
-                        . Form ôm chân thoải mái ngay cả khi mang giày cả ngày dài.
-                    </p>*@
 
+
+                    @*// số lượng sản phẩm
                     <div class="product_count">
                         <label for="qty">Số Lượng:</label>
+                        
                         <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                         <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                                 class="increase items-count" type="button">
@@ -87,11 +86,14 @@
                                 class="reduced items-count" type="button">
                             <i class="lnr lnr-chevron-down"></i>
                         </button>
-                    </div>
-                    <div class="card_area d-flex align-items-center">
-                        <a class="primary-btn" href="#">Thêm Vào Giỏ Hàng</a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                    </div>*@
+
+                <p>@Model.MoTa</p>
+
+                    <div style="margin-top:50px" class="card_area d-flex align-items-center">
+                        <a class="primary-btn add-to-cart" id="@Model.MaSP" href="#">Thêm Vào Giỏ Hàng</a>
+                        @*<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
+                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>*@
                     </div>
                 </div>
             </div>
@@ -123,6 +125,7 @@
                     <ul>
                         <li>- Thương hiệu: @NhaSx.TenNSX</li>
                         <p>- @Model.MoTa</p>
+                        
                     </ul>
                 </p>
                 <p style="text-decoration:none">
@@ -171,13 +174,13 @@
                                 </td>
                             </tr>
                             @*<tr>
-                            <td>
-                                <h5>Chiều cao cổ giày</h5>
-                            </td>
-                            <td>
-                                <h5>Cổ thấp</h5>
-                            </td>
-                        </tr>*@
+                                    <td>
+                                        <h5>Chiều cao cổ giày</h5>
+                                    </td>
+                                    <td>
+                                        <h5>Cổ thấp</h5>
+                                    </td>
+                                </tr>*@
                             <tr>
                                 <td>
                                     <h5>Kiểm Tra Trước</h5>
@@ -187,29 +190,29 @@
                                 </td>
                             </tr>
                             @*<tr>
-                            <td>
-                                <h5>Kho Hàng</h5>
-                            </td>
-                            <td>
-                                <h5>1997</h5>
-                            </td>
-                        </tr>*@
+                                    <td>
+                                        <h5>Kho Hàng</h5>
+                                    </td>
+                                    <td>
+                                        <h5>1997</h5>
+                                    </td>
+                                </tr>*@
                             @*<tr>
-                            <td>
-                                <h5>Gửi Từ</h5>
-                            </td>
-                            <td>
-                                <h5>Hà Nội</h5>
-                            </td>
-                        </tr>*@
+                                    <td>
+                                        <h5>Gửi Từ</h5>
+                                    </td>
+                                    <td>
+                                        <h5>Hà Nội</h5>
+                                    </td>
+                                </tr>*@
                             <!-- <tr>
-                        <td>
-                            <h5>Each Box contains</h5>
-                        </td>
-                        <td>
-                            <h5>60pcs</h5>
-                        </td>
-                    </tr> -->
+                                <td>
+                                    <h5>Each Box contains</h5>
+                                </td>
+                                <td>
+                                    <h5>60pcs</h5>
+                                </td>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -222,11 +225,21 @@
                     <div class="col-lg-3">
                         <div class="row total_rate">
                             <div class="col-2">
-                                @*<div class="box_total">
+                               
+                                    @{
+                                        double TbSoSao = 0;
 
-                                    <h4>4.0</h4>
 
-                                </div>*@
+                                        var TbSao = db.BINHLUANSPs.Where(s => s.MaSP == Model.MaSP);
+                                        if (TbSao.Any())
+                                        {
+                                            TbSoSao = TbSao.Average(t => t.Sao);
+                                        }
+
+
+                              }
+                               
+
                             </div>
                             <div class="col-8">
                                 <div class="rating_list">
@@ -234,273 +247,121 @@
                                     <ul class="list">
                                         <li>
                                             <a href="#">
+                                                @{
 
-                                                5 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.NamSao
+                                                    var MotSao = db.BINHLUANSPs.Count(s => s.MaSP == Model.MaSP && s.Sao == 1);
+                                                    var HaiSao = db.BINHLUANSPs.Count(s => s.MaSP == Model.MaSP && s.Sao == 2);
+                                                    var BaSao = db.BINHLUANSPs.Count(s => s.MaSP == Model.MaSP && s.Sao == 3);
+                                                    var BonSao = db.BINHLUANSPs.Count(s => s.MaSP == Model.MaSP && s.Sao == 4);
+                                                    var NamSao = db.BINHLUANSPs.Count(s => s.MaSP == Model.MaSP && s.Sao == 5);
+
+
+                                                }
+
+
+
+                                                5 Sao <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i> @NamSao
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                4 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.BonSao
+                                                4 Sao <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i> @BonSao
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                3 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.BaSao
+                                                3 Sao <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i> @BaSao
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                2 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.HaiSao
+                                                2 Sao <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i> @HaiSao
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                1 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> @ViewBag.MotSao
+                                                1 Sao <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i> @MotSao
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div style="margin-left:10px;width:200px;height:100px" class="box_total">
+
+                               
+                                
+                                    <h4>@TbSoSao<i style="color:yellow;font-size:50px" class="fa fa-star"></i></h4>
+                                
+
+
+
                             </div>
                         </div>
                     </div>
 
                     @*// phần nhận xét*@
-                <div class="col-lg-9">
-
-                    @{
-                        PagedList.PagedList<BinhLuan> BinhLuan = (PagedList.PagedList<BinhLuan>)ViewBag.NDBinhLuan;
-
-                    }
-                    <div class="comment_list">
+                    <div class="col-lg-9" id="TraVe">
 
 
-                        @foreach (var it in BinhLuan)
-                        {
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/product/review-1.jpg" alt="" width="71" height="71" class="rounded-circle">
+                    </div>
 
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>@it.TenKH</h4>
-                                        <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
-                                        @for (int i = 1; i <= @it.Sao; i++)
-                                        {
-                                            <i class="fa fa-star"></i>
-                                        }
+                    <script>
+                       
+                        function LoadDsBinhLuan(ChiSoTrang, MaSP) {
+                           
+                            $.ajax({
+                                type: "GET",// kiểu get/post mà action cần truy cập đến
+                                data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
+                                {
+                                    pageIndex: ChiSoTrang,
+                                    id : MaSP
 
-                                        <a class="reply_btn" href="#">Phản Hồi</a>
-                                    </div>
-                                </div>
-                                <p style="margin-left : 86px">@it.ND</p>
-                                <hr style="border: 1px solid " />
-                            </div>
 
+                                },
+
+
+                                url: '/SanPham/DsBinhLuan',// ‘/Controller/action’
+
+                                dataType: 'html',
+                                success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
+                                    $('#TraVe').html(KetQuaTraVeHam);
+
+
+                                }
+
+                            });
                         }
-
-
-
-                    </div>
-
-                    @Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))
-
-                    @*@PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "contact", InsertionMode = InsertionMode.Replace });*@
-
-                    @*@Html.Partial("BinhLuanPatialView", BinhLuan);*@
-
-
-
-
-                </div>
-
-                    @*Gửi nhận xét
-        //////////////*@
-
-                    @*<div class="col-lg-6">
-            <div class="review_box">
-                <h4>Gửi Nhận Xét</h4>
-                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Họ Và Tên">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Nhận Xét"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-right">
-                        <button type="submit" value="submit" class="btn primary-btn">Gửi</button>
-                    </div>
-                </form>
-            </div>
-        </div>*@
-
+                        var MaSanPham = $('.MaSP').data('id');
+                        LoadDsBinhLuan(null,MaSanPham);
+                    </script>
+                        
                 </div>
             </div>
 
 
 
 
-            @*//////////////////////////  phần đánh giá sao*@
-
-            <!--<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row total_rate">
-                            <div class="col-6">
-                                <div class="box_total">
-
-                                    <h4>4.0</h4>
-
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="rating_list">
-
-                                    <ul class="list">
-                                        <li>
-                                            <a href="#">
-                                                5 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                4 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                3 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                2 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                1 Sao <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review_list">
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/product/review-1.jpg" height="71" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Quang Huy đẹp trai nhất lớp</h4>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <p>giày đẹp</p>
-                            </div>
-                            <div class="review_item">
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="/Content/img/product/review-2.jpg" height="71" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Tùng Lâm trưởng CLB Msec</h4>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <p>Tuyệt Vời</p>
-                            </div>
-                             <div class="review_item">
-                        <div class="media">
-                            <div class="d-flex">
-                                <img src="/Content/img/product/review-3.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <h4>Blake Ruiz</h4>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo</p>
-                    </div> 
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="review_box">
-                            <h4>Thêm Đánh Giá</h4>
-                            <p>Đánh Giá Của Bạn:</p>
-                            <ul class="list">
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                            </ul>
-                            <p>Xuất Sắc</p>
-                            <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ Và Tên" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ Và Tên'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="number" name="number" placeholder="Số Điện Thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số Điện Thoại'">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="message" id="message" rows="1" placeholder="Đánh Giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đánh Giá'"></textarea></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" value="submit" class="primary-btn">Gửi</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-
-            @*hết phần đánh giá
-            //////////////*@
 
 
 
         </div>
     </div>
 </section>
+<script>
+    $('.add-to-cart').click(function (e) {
+        e.preventDefault();
+        var id = $(this).attr('id');
+        var url = "/GioHang/ThemVaoGioHang/" + id;
+        console.log(url);
+        $.ajax({
+            url: url,
+            type: "POST",
+            success: function (data) {
+                if (data.status == "successful") {
+                    alert("Thêm vào giỏ hàng thành công!");
+                }
+            }
+        });
+    });
+</script>
 <!--================End Product Description Area =================-->

@@ -235,7 +235,9 @@
     </Compile>
     <Compile Include="Models\BinhLuan.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Dataprovider.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SanPham.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1556,9 +1558,9 @@
     <Content Include="Views\Admin\ThongKe.cshtml" />
     <Content Include="Views\Admin\TatCaSanPham.cshtml" />
     <Content Include="Views\Admin\ThemSanPham.cshtml" />
-    <Content Include="Views\SanPham\BinhLuanPatialView.cshtml" />
-    <Content Include="Views\SanPham\TestCauLenh.cshtml" />
-    <Content Include="Views\SanPham\BinhLuan.cshtml" />
+    <Content Include="Views\SanPham\DsBinhLuan.cshtml" />
+    <Content Include="Views\SanPham\DsSanPhamTheoTieuChi.cshtml" />
+    <Content Include="Views\SanPham\TimKiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
