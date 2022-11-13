@@ -48,8 +48,8 @@ namespace WebApplication1.Models
 
         public DateTime NgayBinhLuan { get; set; }
 
-        public int Sao { get; set; }
+        public double Sao { get; set; }
 
-
+       
     }
 }

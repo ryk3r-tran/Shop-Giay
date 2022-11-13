@@ -36,6 +36,7 @@ namespace KarmaModels.KarmaModels
         public int MaNSX { get; set; }
 
         public int MaAnh { get; set; }
+        public int MaDM { get; set; }
 
         public virtual ANH ANH { get; set; }
 
