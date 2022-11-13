@@ -16,8 +16,7 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
-            var data = sanpham.GetAll();
-           
+            var data = sanpham.GetAll();          
             return View(data);
         }
 
