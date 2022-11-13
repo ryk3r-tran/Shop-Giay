@@ -9,12 +9,6 @@ namespace KarmaModels.KarmaModels
     [Table("NSX")]
     public partial class NSX
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NSX()
-        {
-            SANPHAMs = new HashSet<SANPHAM>();
-        }
-
         [Key]
         public int MaNSX { get; set; }
 
@@ -29,8 +23,5 @@ namespace KarmaModels.KarmaModels
 
         [StringLength(10)]
         public string Sdt { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

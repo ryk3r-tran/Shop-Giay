@@ -229,6 +229,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
     <Compile Include="Controllers\LienHeController.cs" />
+    <Compile Include="Models\Dataprovider.cs" />
+    <Compile Include="Models\SanPham.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TAIKHOAN_APIController.cs" />

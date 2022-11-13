@@ -38,7 +38,5 @@ namespace KarmaModels.KarmaModels
         public virtual SIZE SIZE { get; set; }
 
         public virtual SANPHAM SANPHAM { get; set; }
-
-        public virtual DANHMUCSP DANHMUCSP { get; set; }
     }
 }
