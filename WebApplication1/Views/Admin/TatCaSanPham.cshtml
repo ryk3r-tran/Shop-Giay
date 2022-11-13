@@ -58,24 +58,25 @@
                         <th>Tác vụ</th>
                     </tr>
                 </thead>
-                <tbody>                   
-                    @foreach (var data in Model.Select((value, i) => new { value, i=i+1 })) {
-                    <tr>
-                        <th scope="row">@data.i.ToString()</th>
-                        <td>
-                            <img src="/Content/Admin/img/product-1.jpg" class="img-product">
-                        </td>
-                        <td>@data.value.TenSP</td>
-                        <td>@data.value.SoLuongTong</td>
-                        <td>@data.value.DonGia</td>
-                        <td>
-                            <div>
-                                <a href="" class="btn btn-outline-info btn-rounded btn-edit-prod"  data-bs-toggle="modal" data-bs-target="#edit_prod_modal"><i class="fas fa-pen"></i></a>
-                                <a href="" class="btn btn-outline-danger btn-rounded btn-delete-prod"><i class="fas fa-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    }                    
+                <tbody>
+                    @foreach (var data in Model.Select((value, i) => new { value, i = i + 1 }))
+                    {
+                        <tr>
+                            <th scope="row">@data.i.ToString()</th>
+                            <td>
+                                <img src="/Content/Admin/img/product-1.jpg" class="img-product">
+                            </td>
+                            <td>@data.value.TenSP</td>
+                            <td>@data.value.SoLuongTong</td>
+                            <td>@data.value.DonGia</td>
+                            <td>
+                                <div>
+                                    <a href="" class="btn btn-outline-info btn-rounded btn-edit-prod" data-bs-toggle="modal" data-bs-target="#edit_prod_modal"><i class="fas fa-pen"></i></a>
+                                    <a data-id= "@data.value.MaSP"  href="" class="btn btn-outline-danger btn-rounded btn-delete-prod"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
 
             </table>
@@ -152,5 +153,25 @@
         </div>
     </div>
 </main><!-- End #main -->
+
+<script>
+    $(".btn-delete-prod").click(function () {
+        console.log("a")
+        var id_tk = $(this).data('id');
+        console.log($(this).data('id'))
+        const url = "/Admin/DeleteSP/";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                id: id_tk
+            },
+
+
+        })
+    })
+
+</script>
 
 

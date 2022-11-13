@@ -25,12 +25,10 @@ namespace KarmaModels.KarmaModels
 
         public string ND { get; set; }
 
-        public int Sao { get; set; }
-
-       public DateTime NgayBinhLuan { get; set; }
-
         public virtual KHACHHANG KHACHHANG { get; set; }
 
         public virtual SANPHAM SANPHAM { get; set; }
+        public DateTime NgayBinhLuan { get; set; }
+        public int Sao { get; set; }
     }
 }

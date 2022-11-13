@@ -150,51 +150,104 @@ namespace WebApplication1.Controllers
             return View(d);
         }
 
+        public ActionResult DeleteSP (string id)
+        {
+            int int_id = Int32.Parse(id);
+            var sp1 = _context.SANPHAMs.Find(int_id);
+            _context.SANPHAMs.Remove(sp1);
+            _context.SaveChanges();
+
+            return RedirectToAction("TatCaSanPham");
+
+        }
+
         [HttpPost]
-        public ActionResult ThemSP(SANPHAM sp  , MAUSAC m, SIZE s, CHATLIEU c, NSX n, HttpPostedFileBase AnhChinh, HttpPostedFileBase AnhPhu1, HttpPostedFileBase AnhPhu2, HttpPostedFileBase AnhPhu3)
+        public ActionResult ThemSP(SANPHAM sp  , MAUSAC m, SIZE s, CHATLIEU c, NSX n, List<HttpPostedFileBase> Anhs, DANHMUCSP d)
         {
             var a = new ANH();
-            string _FileName = Path.GetFileName(AnhChinh.FileName);
-            string _path = Path.Combine(Server.MapPath("~/Content/img/product"), _FileName);
-            string _dbPath = "Content/img/product" + _FileName;
-            AnhChinh.SaveAs(_path);
-            a.AnhChinh = _dbPath;
-            var maAnh = _context.ANHs.SqlQuery("Select top 1 MaAnh from Anh where AnhChinh = @path",
-                new SqlParameter("@path", _dbPath)).FirstOrDefault();
-            sp.MaAnh = sp.MaAnh;
-
-
-
-            _FileName = Path.GetFileName(AnhPhu2.FileName);
-            _path = Path.Combine(Server.MapPath("~/Content/img/product"), _FileName);
-            _dbPath = "Content/img/product" + _FileName;
-            AnhPhu2.SaveAs(_path);
-            a.AnhPhu2 = _dbPath;
-
-            _FileName = Path.GetFileName(AnhPhu3.FileName);
-            _path = Path.Combine(Server.MapPath("~/Content/img/product"), _FileName);
-            _dbPath = "Content/img/product" + _FileName;
-            AnhPhu3.SaveAs(_path);
-            a.AnhPhu3 = _dbPath;
-
-            _FileName = Path.GetFileName(AnhPhu1.FileName);
-            _path = Path.Combine(Server.MapPath("~/Content/img/product"), _FileName);
-            _dbPath = "Content/img/product" + _FileName;
-            AnhPhu1.SaveAs(_path);
-            a.AnhPhu1 = _dbPath;
-
-
-            var maNSX = _context.NSXes.SqlQuery("Select top 1 MaAnh from Anh where TenNSX = @t",
-                new SqlParameter("@t", n.TenNSX)).FirstOrDefault();
-            _context.NSXes.Add(n);
+            int i = 0;
+            foreach(var AnhF in Anhs)
+            {
+                string _FileName = Path.GetFileName(AnhF.FileName);
+                string _path = Path.Combine(Server.MapPath("~/Content/img/product"), _FileName);
+                string _dbPath = "~/Content/img/product" + _FileName;
+                AnhF.SaveAs(_path);
+                if(i == 0)
+                {
+                    a.AnhChinh = _dbPath;
+                    i++;
+                }
+                else if( i == 1)
+                {
+                    a.AnhPhu1 = _dbPath;
+                    i++;
+                }
+                else if(i == 2)
+                {
+                    a.AnhPhu2 = _dbPath;
+                    i++;
+                }
+                else
+                {
+                    a.AnhPhu3 = _dbPath;
+                }
+                
+            }
+            sp.NgayCapNhat = DateTime.Today;
             
-            _context.SANPHAMs.Add(sp);
             _context.ANHs.Add(a);
-            _context.MAUSACs.Add(m);
-            _context.SIZEs.Add(s);
+            _context.MAUSACs.Add(m);            
+            _context.SIZEs.Add(s);         
             _context.CHATLIEUx.Add(c);
-            
+            _context.NSXes.Add(n);
             _context.SaveChanges();
+
+
+            var anhid = _context.ANHs
+                .OrderByDescending(id => id.MaAnh)
+                .FirstOrDefault();
+
+            var NSXid = _context.NSXes
+                .OrderByDescending(id => id.MaNSX)
+                .FirstOrDefault();
+
+            var Mauid = _context.MAUSACs
+                .OrderByDescending(id => id.MaMau)
+                .FirstOrDefault();
+
+            var Sizeid = _context.SIZEs
+                .OrderByDescending(id => id.MaSize)
+                .FirstOrDefault();
+
+            var CLid = _context.CHATLIEUx
+                .OrderByDescending(id => id.MaCL)
+                .FirstOrDefault();
+
+            Console.WriteLine(anhid.MaAnh);
+
+            var d1 = _context.DANHMUCSPs
+                .Where(t => t.TenDM == d.TenDM)
+                .FirstOrDefault<DANHMUCSP>();
+
+            sp.MaNSX = NSXid.MaNSX;
+            sp.MaAnh = anhid.MaAnh;
+            _context.SANPHAMs.Add(sp);
+            _context.SaveChanges();
+
+            var SPid = _context.SANPHAMs
+                .OrderByDescending(id => id.MaSP)
+                .FirstOrDefault();
+
+            var ctSP = new CHITIETSP();
+            ctSP.MaSP = SPid.MaSP;
+            ctSP.MaDM = d1.MaDM;
+            ctSP.MaCL = CLid.MaCL;
+            ctSP.MaMau = Mauid.MaMau;
+            ctSP.MaSize = Sizeid.MaSize;
+
+            _context.CHITIETSPs.Add(ctSP);
+            _context.SaveChanges();
+
 
             return RedirectToAction("TatCaSanPham");
 

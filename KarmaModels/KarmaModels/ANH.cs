@@ -18,18 +18,16 @@ namespace KarmaModels.KarmaModels
         [Key]
         public int MaAnh { get; set; }
 
-        
-
-        [StringLength(50)]
+        [StringLength(1000)]
         public string AnhChinh { get; set; }
 
-        [StringLength(50)]
+        [StringLength(1000)]
         public string AnhPhu1 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(1000)]
         public string AnhPhu2 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(1000)]
         public string AnhPhu3 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
