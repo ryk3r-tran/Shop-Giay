@@ -24,8 +24,12 @@ namespace KarmaModels.KarmaModels
         public int MaSP { get; set; }
 
         public string ND { get; set; }
-        public int Sao { get; set; }
+
+        public double Sao { get; set; }
+
+        [Column(TypeName = "date")]
         public DateTime NgayBinhLuan { get; set; }
+
         public virtual KHACHHANG KHACHHANG { get; set; }
 
         public virtual SANPHAM SANPHAM { get; set; }

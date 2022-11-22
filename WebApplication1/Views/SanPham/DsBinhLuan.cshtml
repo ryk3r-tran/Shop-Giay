@@ -1,0 +1,86 @@
+﻿@using WebApplication1.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<BinhLuan>
+@using System.Globalization;
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="comment_list">
+
+    
+    @foreach (var it in Model)
+    {
+        <div class="review_item">
+            <div class="media">
+                <div class="d-flex">
+                    <img src="/Content/img/product/review-1.jpg" alt="" width="71" height="71" class="rounded-circle">
+
+                </div>
+                <div class="media-body">
+                    <h4>@it.TenKH</h4>
+                    <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
+                    @for (int i = 1; i <= @it.Sao; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+
+                    <a class="reply_btn" href="#">Phản Hồi</a>
+                </div>
+            </div>
+            <p style="margin-left : 86px">@it.ND</p>
+            <hr style="border: 1px solid " />
+        </div>
+
+    }
+
+</div>
+
+
+<div class="pageIndexs">
+
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+
+
+        if (i == Model.PageNumber)
+        {
+
+            <span data-id="@i" style="color:orangered" class="pageIndex">@i</span>
+        }
+        else
+        {
+            <span data-id="@i" style="color:black" class="pageIndex">@i</span>
+        }
+
+    }
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.pageIndex').click(function () {
+                var ChiSoTrang = $(this).data('id');
+                var MaSanPham = $('.MaSP').data('id');
+                LoadDsBinhLuan(ChiSoTrang, MaSanPham);
+            })
+        })
+
+
+    </script>
+    <style>
+        .pageIndexs {
+            padding: 20px 0 0 50px;
+        }
+
+            .pageIndexs span {
+                margin-left: 10px;
+                padding: 10px;
+                background-color: azure;
+            }
+
+                .pageIndexs span:hover {
+                    cursor: pointer;
+                }
+    </style>
+
+</div>
+
+@*@Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))*@

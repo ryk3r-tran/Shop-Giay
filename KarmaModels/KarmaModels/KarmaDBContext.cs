@@ -25,15 +25,11 @@ namespace KarmaModels.KarmaModels
         public virtual DbSet<NSX> NSXes { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ANH>()
-                .HasMany(e => e.SANPHAMs)
-                .WithRequired(e => e.ANH)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<CHATLIEU>()
                 .HasMany(e => e.CHITIETSPs)
                 .WithRequired(e => e.CHATLIEU)
@@ -42,11 +38,6 @@ namespace KarmaModels.KarmaModels
             modelBuilder.Entity<CHITIETDH>()
                 .Property(e => e.DonGia)
                 .HasPrecision(18, 0);
-
-            modelBuilder.Entity<DANHMUCSP>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.DANHMUCSP)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DONHANG>()
                 .Property(e => e.TongTien)
@@ -110,11 +101,6 @@ namespace KarmaModels.KarmaModels
             modelBuilder.Entity<NSX>()
                 .Property(e => e.Sdt)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<NSX>()
-                .HasMany(e => e.SANPHAMs)
-                .WithRequired(e => e.NSX)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SANPHAM>()
                 .Property(e => e.DonGia)

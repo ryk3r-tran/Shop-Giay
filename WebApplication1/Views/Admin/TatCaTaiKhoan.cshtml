@@ -18,7 +18,7 @@
 
     <h3>
         Người dùng
-        <a href="ThemTK.html" class="btn btn-sm btn-outline-primary float-end"><i class="fas fa-plus-circle"></i> Add</a>
+        <a href="~/Admin/ThemTaiKhoan" class="btn btn-sm btn-outline-primary float-end"><i class="fas fa-plus-circle"></i> Add</a>
     </h3>
     <div class="box-body">
         <table width="100%" class="table table-hover" id="dataTables-example">
@@ -35,28 +35,189 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var data in Model.Select((value, i) => new { value, i = i + 1}))
+                @foreach (var data in Model.Select((value, i) => new { value, i = i + 1 }))
                 {
-                <tr> 
-                    <td>@data.i</td>
-                    <td>@data.value.MaKH</td>
-                    <td>@data.value.KHACHHANG.TenKH</td>
-                    <td>@data.value.username</td>
-                    <td>@data.value.KHACHHANG.Email</td>
-                    <td>@data.value.pass</td>
-                    <td>@data.value.Quyen</td>
-                    <td class="text-end">
-                        <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                        <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
+                    string id = @data.value.id + " " + @data.value.MaKH;
+                    <tr>
+                        <td>@data.i</td>
+                        <td>@data.value.MaKH</td>
+                        <td>@data.value.KHACHHANG.TenKH</td>
+                        <td>@data.value.username</td>
+                        <td>@data.value.KHACHHANG.Email</td>
+                        <td>@data.value.pass</td>
+                        <td>@data.value.Quyen</td>
+                        <td class="text-end">
+                            <a href="" data-id="@id" class="btn btn-outline-info btn-rounded btn-edit-tk" data-bs-toggle="modal" data-bs-target="#edit_prod_modal"><i class="fas fa-pen"></i></a>
+                            <a href="" data-id="@id" name="id" class="btn btn-outline-danger btn-rounded btn-delete-tk"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+
                 }
 
 
             </tbody>
         </table>
+       
+    </div>
+    <div class="modal fade" id="edit_prod_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="edit_prod_modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_prod_modalLabel">SỬA THÔNG TIN TÀI KHOẢN</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="section">
+                        <form action="" enctype="multipart/form-data" class="inf-basic-form" method="post">
+                            <div class="row inf-basic-wrap"> 
+                                <div class="inf-basic">Tài khoản</div>
+                                
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">UserName</div>
+                                    <input type="text" name="userName" id="" style="width: 50%" >
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Password</div>
+                                    <input type="text" name="pass" id="" style="width: 50%" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Quyền</div>
+                                    <select class="Quyen" name="Quyen" id="" style="width: 50%">
+                                        <option value= "admin">
+                                            Admin
+                                        </option>
+                                        <option value="khách">
+                                            User
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                                <div class="inf-basic">Thông tin Khách Hàng</div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Họ và Tên</div>
+                                    <input type="text" name="TenKH" id="" style="width: 50%" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Giới Tính</div>
+                                    <select class="gioiTinh" name="gioiTinh" id="" style="width: 50%">
+                                        <option value="Nam">
+                                            Nam
+                                        </option>
+                                        <option value="Nữ">
+                                            Nữ
+                                        </option>
+
+                                    </select>
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Email</div>
+                                    <input type="email" name="Email" id="" style="width: 50%" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Địa Chỉ</div>
+                                    <input type="text" name="DiaChi" id="" style="width: 50%" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">SĐT</div>
+                                    <input type="text" name="Sdt" id="" style="width: 50%" />
+                                </div>
+                            </div>
+                            <div class="footer-modal">
+                                <button class="btn btn-sm btn-secondary btn-exit" >Thoát</button>
+                                <button class="btn btn-sm btn-primary btn-save" type="submit" name="Luu" >Lưu</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
 </main><!-- End #main -->
+
+<script>
+    $(".btn-edit-tk").click(function(){
+        console.log("a")
+        var id_tk = $(this).data('id');
+        console.log($(this).data ('id'))
+        const url = "/Admin/getTKbyID/";
+       
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                id :id_tk
+            },
+            success: (data)=>{
+                console.log(data.userName);
+                console.log(data.diaChi);
+                console.log(data.sdt);  
+                console.log(data.quyen);
+        $("input[name = 'userName']").val(data.userName);
+        $("input[name = 'pass']").val(data.pass);
+        $(".Quyen").val(data.quyen);
+                $("input[name = 'TenKH']").val(data.TenKH);
+                $(".gioiTinh").val(data.GioiTinh);
+                $("input[name = 'Email']").val(data.Email);
+                $("input[name = 'DiaChi']").val(data.diaChi);
+                $("input[name = 'Sdt']").val(data.sdt);
+                $("button[name = 'Luu']").val(id_tk);
+
+
+
+    }
+        })
+    })
+
+    $(".btn-save").click(function () {
+        console.log("a")
+        var id_tk = $(this).val();
+        console.log($(this).val());
+        const url1 = "/Admin/SuaThongTinTK";
+
+        $.ajax({
+            url: url1,
+            type: "POST",
+            data: {
+                id_kh: id_tk,
+                username: $("input[name = 'userName']").val(),
+                pass: $("input[name = 'pass']").val(),
+                Quyen: $(".Quyen").val(),
+                TenKH: $("input[name = 'TenKH']").val(),
+                GioiTinh: $(".gioiTinh").val(),
+                DiaChi: $("input[name = 'DiaChi']").val(),
+                Sdt: $("input[name = 'Sdt']").val(),
+                Email: $("input[name = 'Email']").val()
+
+            },
+            
+            
+        })
+    })
+
+    $(".btn-delete-tk").click(function () {
+        console.log("a")
+        var id_tk = $(this).data('id');
+        console.log($(this).data('id'))
+        const url = "/Admin/DeleteTK/";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                id: id_tk
+            },
+
+
+            })
+        })
+   
+
+
+</script>

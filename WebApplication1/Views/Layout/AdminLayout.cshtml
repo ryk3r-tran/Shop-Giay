@@ -43,6 +43,8 @@
     <link href="/Content/Admin/vendor/bootstrap copy/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Content/Admin/vendor/datatables/datatables.min.css" rel="stylesheet">
     <link href="/Content/Admin/css/master.css" rel="stylesheet">
+    <script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>
+
     <!-- =======================================================
     * Template Name: NiceAdmin - v2.4.0
     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -59,7 +61,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="@Url.Action("DieuKhien", "Admin")" class="logo d-flex align-items-center">
+            <a href="@Url.Action("Admin", "Admin")" class="logo d-flex align-items-center">
                 <img src="/Content/Admin/img/user.png" alt="">
                 <span class="d-none d-lg-block">Admin</span>
             </a>
@@ -73,7 +75,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("DieuKhien", "Admin")">
+                <a class="nav-link collapsed" href="@Url.Action("Admin", "Admin")">
                     <i class="bi bi-grid"></i>
                     <span>Điều khiển</span>
                 </a>

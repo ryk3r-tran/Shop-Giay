@@ -1,4 +1,4 @@
-﻿
+﻿@model List<KarmaModels.KarmaModels.DANHMUCSP>
 @{
     ViewBag.Title = "ThemSanPham";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
@@ -17,43 +17,138 @@
 
     </div><!-- End Page Title -->
     <section class="section">
-        <form action="" enctype="multipart/form-data" class="inf-basic-form">
+        <form action="ThemSP" method="post" enctype="multipart/form-data" class="inf-basic-form">
             <div class="row inf-basic-wrap">
                 <div class="inf-basic">Thông tin cơ bản</div>
+
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Tên sản phẩm</div>
+                    <input type="text" name="TenSP" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Danh mục</div>
+                    <select name="TenDM" id="">
+                        @foreach (var d in Model)
+                        {
+                            <option value="@d.TenDM">@d.TenDM</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Số lượng</div>
+                    <input type="text" name="SoLuongTong" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Đơn giá</div>
+                    <input type="text" name="DonGia" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Mô tả</div>
+                    <textarea name="MoTa" id="" cols="32" rows="3"></textarea>
+                </div>
+
+            </div>
+            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                <div class="inf-basic">Ảnh</div>
                 <div class="img-prod">
                     <div class="d-flex align-items-center justify-content-between" style="width: 25%">
                         <div class="col-2" style="width:50%">
-                            Hình ảnh
+                            Hình ảnh chính
                         </div>
                         <div class="up-file-wrap">
-                            <label for="file-img-prod" class="lb_up_imgprod">Chọn ảnh</label>
-                            <input type="file" name="" id="file-img-prod" hidden>
+                            <label for="file-img-prod0" class="lb_up_imgprod">Chọn ảnh</label>
+                            <input type="file" name="Anhs" id="file-img-prod0"  hidden>
+                        </div>
+                    </div>
+                    <div class="preview-img-wrap">
+                        <img src="" alt="preview" class="preview-img-prod">
+                    </div>
+                    
+                </div>
+                <div class="img-prod">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                        <div class="col-2" style="width:50%">
+                            Hình ảnh 1
+                        </div>
+                        <div class="up-file-wrap">
+                            <label for="file-img-prod1" class="lb_up_imgprod">Chọn ảnh</label>
+                            <input type="file" name="Anhs" id="file-img-prod1"  hidden>
                         </div>
                     </div>
                     <div class="preview-img-wrap">
                         <img src="/Content/Admin/img/product-3.jpg" alt="preview" class="preview-img-prod">
                     </div>
                 </div>
-                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
-                    <div class="col-2">Tên sản phẩm</div>
-                    <input type="text" name="name_prod" id="" />
+                <div class="img-prod">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                        <div class="col-2" style="width:50%">
+                            Hình ảnh 2
+                        </div>
+                        <div class="up-file-wrap">
+                            <label for="file-img-prod2" class="lb_up_imgprod">Chọn ảnh</label>
+                            <input type="file" name="Anhs" id="file-img-prod2"  hidden>
+                        </div>
+                    </div>
+                    <div class="preview-img-wrap">
+                        <img src="/Content/Admin/img/product-3.jpg" alt="preview" class="preview-img-prod">
+                    </div>
                 </div>
-                <div class="d-flex name_prod-wrap align-items-center">
-                    <div class="col-2">Danh mục</div>
-                    <select name="category" id=""></select>
+                <div class="img-prod">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                        <div class="col-2" style="width:50%">
+                            Hình ảnh 3
+                        </div>
+                        <div class="up-file-wrap">
+                            <label for="file-img-prod3" class="lb_up_imgprod">Chọn ảnh</label>
+                            <input type="file" name="Anhs" id="file-img-prod3"  hidden>
+                        </div>
+                    </div>
+                    <div class="preview-img-wrap">
+                        <img src="/Content/Admin/img/product-3.jpg" alt="preview" class="preview-img-prod">
+                    </div>
                 </div>
 
+
             </div>
+
             <div class="row inf-basic-wrap" style="margin-top: 10px;">
                 <div class="inf-basic">Thông tin chi tiết</div>
                 <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
-                    <div class="col-2">Giá</div>
-                    <input type="text" name="price" id="" />
+                    <div class="col-2">Màu</div>
+                    <input type="color" name="Color" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Size</div>
+                    <input type="text" name="Size1" id="" />
                 </div>
                 <div class="d-flex name_prod-wrap align-items-center">
-                    <div class="col-2">Mô tả</div>
-                    <textarea name="description" id="" cols="32" rows="3"></textarea>
+                    <div class="col-2">Chất liệu</div>
+                    <input type="text" name="ChatLieu1" id="" />
                 </div>
+
+            </div>
+
+
+            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                <div class="inf-basic">Thông tin Nhà sản xuất</div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Tên nhà SX</div>
+                    <input type="text" name="TenNSX" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Địa chỉ</div>
+                    <input type="text" name="DiaChi" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Email</div>
+                    <input type="email" name="Email" id="" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">SĐT</div>
+                    <input type="number" name="Sdt" id="" />
+                </div>
+
             </div>
             <div class="btn-sx-wrap d-flex justify-content-end">
                 <div class="d-flex justify-content-between btn-wrap">
@@ -64,5 +159,15 @@
 
         </form>
     </section>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#file-img-prod').on('change', function () {
+                var filePath = $(this).val();
+                console.log(filePath);
+            });
+        });
+
+    </script>
 
 </main><!-- End #main -->
