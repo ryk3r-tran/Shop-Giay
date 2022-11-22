@@ -20,7 +20,7 @@ namespace KarmaModels.KarmaModels
         public string pass { get; set; }
 
         [StringLength(50)]
-        public string Quyen { get; set; }
+        public string Roles { get; set; }
 
         public virtual KHACHHANG KHACHHANG { get; set; }
     }
