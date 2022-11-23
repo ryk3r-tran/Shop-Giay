@@ -8,9 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.App_Start;
 
 namespace WebApplication1.Controllers
 {
+    //[Authorization(Quyen = "admin")]
     public class AdminController : Controller
     {
         KarmaDBContext _context = new KarmaDBContext();

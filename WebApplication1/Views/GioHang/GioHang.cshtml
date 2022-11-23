@@ -25,85 +25,75 @@
     <div class="container">
         @if(Model != null){
          <div class="cart_inner">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Sản phẩm</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Tổng</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ListCartItem)
+             <div class="table-responsive">
+                 <table class="table overflow-auto" style="height:500px;">
+                     <thead>
+                         <tr>
+                             <th scope="col">Sản phẩm</th>
+                             <th scope="col">Giá</th>
+                             <th scope="col">Số lượng</th>
+                             <th scope="col">Tổng</th>
+                             <th scope="col"></th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         @foreach (var item in Model.ListCartItem)
                          {
 
-                            <tr data-item="@item.sanpham.MaSP">
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="/Content/img/cart.jpg" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>@item.sanpham.TenSP</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>@item.sanpham.DonGia</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
-                                               class="input-text qty">
-                                        <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
-                                            <i class="lnr lnr-chevron-up"></i>
-                                        </button>
-                                        <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
-                                            <i class="lnr lnr-chevron-down"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
-                                </td>
-                                <td>
-                                    <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
-                                </td>
-                            </tr>
+                             <tr data-item="@item.sanpham.MaSP">
+                                 <td>
+                                     <div class="media">
+                                         <div class="d-flex">
+                                             <img src="/Content/img/cart.jpg" alt="">
+                                         </div>
+                                         <div class="media-body">
+                                             <p>@item.sanpham.TenSP</p>
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <h5>@item.sanpham.DonGia</h5>
+                                 </td>
+                                 <td>
+                                     <div class="product_count">
+                                         <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
+                                                class="input-text qty">
+                                         <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
+                                             <i class="lnr lnr-chevron-up"></i>
+                                         </button>
+                                         <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
+                                             <i class="lnr lnr-chevron-down"></i>
+                                         </button>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
+                                 </td>
+                                 <td>
+                                     <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
+                                 </td>
+                             </tr>
                          }
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <h5>Tổng tiền</h5>
-                            </td>
-                            <td>
-                                <h5 id="tongtien">@Model.TongTien</h5>
-                            </td>
-                        </tr>
-                        <tr class="out_button_area">
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="checkout_btn_inner d-flex justify-content-end">
-                                    @*<a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>*@
-                                    <a class="gray_btn btn-ttmh" href="#">Tiếp tục mua hàng</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h5 class="maintance-message text-danger"></h5>
-            </div>
+                         <tr>
+                             <td>
+                             </td>
+                             <td>
+                             </td>
+                             <td>
+                                 <h5>Tổng tiền</h5>
+                             </td>
+                             <td>
+                                 <h5 id="tongtien">@Model.TongTien</h5>
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <div class="d-flex justify-content-end" style="margin-top:50px;">
+                     <div class="checkout_btn_inner d-flex">
+                         <a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>
+                     </div>
+                 </div>
+             </div>
          </div>
             }
             else
