@@ -11,7 +11,7 @@ namespace WebApplication1.Models
     public static class Dataprovider
     {
         
-        static string cnstr = @"Data Source=LAPTOP-IMOK4Q50\SQLEXPRESS;Initial Catalog=QLShopGiay;Integrated Security=True";
+        static string cnstr = @"Data Source=RYK3R\RYK3R;Initial Catalog=QLShopGiay;Integrated Security=True";
         // mạnh  Data Source=LAPTOP-IMOK4Q50\SQLEXPRESS;Initial Catalog=QLTHUVIEN;Integrated Security=True
         static SqlConnection cn;
         public static DataTable ExecuteQuery(string query, object[] parameter = null) // phương thức này trả về 1 bảng

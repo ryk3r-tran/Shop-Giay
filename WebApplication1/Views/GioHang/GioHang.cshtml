@@ -74,22 +74,6 @@
                                 </td>
                             </tr>
                          }
-                        <tr class="bottom_button">
-                            @*<td>
-                                <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
-                            </td>*@
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="cupon_text d-flex align-items-center">
-                                    <input type="text" placeholder="Coupon Code">
-                                    <a class="primary-btn" href="#" style="width: 150px;">Áp dụng</a>
-                                    <a class="gray_btn" href="#" style="width: 230px;">Đóng khuyễn mãi</a>
-                                </div>
-                            </td>
-                        </tr>
                         <tr>
                             <td>
                             </td>
@@ -102,38 +86,6 @@
                                 <h5 id="tongtien">@Model.TongTien</h5>
                             </td>
                         </tr>
-                        <tr class="shipping_area">
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <h5>Vận chuyển</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li><a href="#">Cố định: 5.000</a></li>
-                                        <li><a href="#">Miễn phí vận chuyển</a></li>
-                                        <li><a href="#">Cố định: 10.000</a></li>
-                                        <li class="active"><a href="#">Vận chuyển nội thành: 20.000</a></li>
-                                    </ul>
-                                    <h6>Tính toán vận chuyển <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                    <select class="shipping_select">
-                                        <option value="1">Hà Nội</option>
-                                        <option value="2"></option>
-                                        <option value="4">Bắc Ninh</option>
-                                    </select>
-                                    <select class="shipping_select">
-                                        <option value="1">Chọn Quận/ Huyện</option>
-                                        <option value="2">Chọn Quận/ Huyện</option>
-                                        <option value="4">Chọn Quận/ Huyện</option>
-                                    </select>
-                                    <input type="text" placeholder="Mã bưu điện">
-                                    <a class="gray_btn" href="#">Chi tiết</a>
-                                </div>
-                            </td>
-                        </tr>
                         <tr class="out_button_area">
                             <td>
                             </td>
@@ -142,14 +94,15 @@
                             <td>
                             </td>
                             <td>
-                                <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="/GioHang/Payment">Tiếp tục mua hàng</a>
-                                    <a class="primary-btn" href="#">Tiến hành kiểm tra</a>
+                                <div class="checkout_btn_inner d-flex justify-content-end">
+                                    @*<a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>*@
+                                    <a class="gray_btn btn-ttmh" href="#">Tiếp tục mua hàng</a>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <h5 class="maintance-message text-danger"></h5>
             </div>
          </div>
             }
@@ -262,6 +215,15 @@
                 }
             }
         })
+    })
+
+    $(".btn-ttmh").click(function (e) {
+        e.preventDefault();
+        $(".maintance-message").append("Hiện tại chức năng thanh toán đang được bảo trì");
+        setTimeout(function () {
+            $(".maintance-message").empty();
+        }, 5000)
+        
     })
 </script>
 <!--================End Cart Area =================-->

@@ -30,11 +30,6 @@ namespace KarmaModels.KarmaModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CHATLIEU>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.CHATLIEU)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<CHITIETDH>()
                 .Property(e => e.DonGia)
                 .HasPrecision(18, 0);
@@ -51,11 +46,6 @@ namespace KarmaModels.KarmaModels
                 .Property(e => e.Sdt)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<DONHANG>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.DONHANG)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.Email)
                 .IsUnicode(false);
@@ -63,36 +53,6 @@ namespace KarmaModels.KarmaModels
             modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.Sdt)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.BINHLUANSPs)
-                .WithRequired(e => e.KHACHHANG)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.DANHGIAs)
-                .WithRequired(e => e.KHACHHANG)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.DONHANGs)
-                .WithRequired(e => e.KHACHHANG)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.TAIKHOANs)
-                .WithRequired(e => e.KHACHHANG)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MAUSAC>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.MAUSAC)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MAUSAC>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.MAUSAC)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NSX>()
                 .Property(e => e.Email)
@@ -105,36 +65,6 @@ namespace KarmaModels.KarmaModels
             modelBuilder.Entity<SANPHAM>()
                 .Property(e => e.DonGia)
                 .HasPrecision(18, 0);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.BINHLUANSPs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.DANHGIAs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SIZE>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.SIZE)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SIZE>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.SIZE)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TAIKHOAN>()
                 .Property(e => e.username)

@@ -231,6 +231,7 @@ namespace WebApplication1.Controllers
 
             sp.MaNSX = NSXid.MaNSX;
             sp.MaAnh = anhid.MaAnh;
+            sp.MaDM = d1.MaDM;
             _context.SANPHAMs.Add(sp);
             _context.SaveChanges();
 
@@ -240,7 +241,6 @@ namespace WebApplication1.Controllers
 
             var ctSP = new CHITIETSP();
             ctSP.MaSP = SPid.MaSP;
-            ctSP.MaDM = d1.MaDM;
             ctSP.MaCL = CLid.MaCL;
             ctSP.MaMau = Mauid.MaMau;
             ctSP.MaSize = Sizeid.MaSize;
