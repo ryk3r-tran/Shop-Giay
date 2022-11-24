@@ -12,7 +12,6 @@ namespace KarmaModels.KarmaModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SIZE()
         {
-            CHITIETDHs = new HashSet<CHITIETDH>();
             CHITIETSPs = new HashSet<CHITIETSP>();
         }
 
@@ -21,9 +20,6 @@ namespace KarmaModels.KarmaModels
 
         [Column("Size")]
         public int? Size1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }

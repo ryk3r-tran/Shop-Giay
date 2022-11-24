@@ -206,5 +206,14 @@
             }
         })
     })
+
+    $(".btn-ttmh").click(function (e) {
+        e.preventDefault();
+        $(".maintance-message").append("Hiện tại chức năng thanh toán đang được bảo trì");
+        setTimeout(function () {
+            $(".maintance-message").empty();
+        }, 5000)
+        
+    })
 </script>
 <!--================End Cart Area =================-->

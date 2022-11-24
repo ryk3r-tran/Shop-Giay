@@ -41,5 +41,32 @@ namespace WebApplication1.Controllers
             }
             
         }
+        [HttpGet]
+        public ActionResult DangKy()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DangKy(string HoTen, string Email, string DiaChi,string sdt,string TenDangNhap , string MatKhau, int MaKh)
+        {
+            var db = new KarmaDBContext();
+            KHACHHANG kh = new KHACHHANG();
+            TAIKHOAN tk = new TAIKHOAN();
+            kh.TenKH = HoTen;
+            kh.GioiTinh = "Nam";
+            kh.DiaChi = DiaChi;
+            kh.Email = Email;
+            kh.Sdt = sdt;
+            tk.MaKH = MaKh;
+            tk.username = TenDangNhap;
+            tk.pass = MatKhau;
+            tk.Quyen = "khách";
+            db.KHACHHANGs.Add(kh);
+            db.TAIKHOANs.Add(tk);
+            db.SaveChanges();
+            return RedirectToAction("DangNhap");
+        }
+
     }
 }

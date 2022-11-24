@@ -12,7 +12,7 @@ namespace KarmaModels.KarmaModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CHATLIEU()
         {
-            CHITIETSPs = new HashSet<CHITIETSP>();
+            SANPHAMs = new HashSet<SANPHAM>();
         }
 
         [Key]
@@ -23,6 +23,6 @@ namespace KarmaModels.KarmaModels
         public string ChatLieu1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

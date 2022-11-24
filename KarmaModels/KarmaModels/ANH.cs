@@ -9,6 +9,12 @@ namespace KarmaModels.KarmaModels
     [Table("ANH")]
     public partial class ANH
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ANH()
+        {
+            SANPHAMs = new HashSet<SANPHAM>();
+        }
+
         [Key]
         public int MaAnh { get; set; }
 
@@ -26,5 +32,8 @@ namespace KarmaModels.KarmaModels
 
         [StringLength(50)]
         public string AnhPhu3 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

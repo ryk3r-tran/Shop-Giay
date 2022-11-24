@@ -17,8 +17,8 @@ namespace WebApplication1.Controllers
     public class GioHangController : Controller
     {
         // GET: GioHang
+        KarmaDBContext _context = new KarmaDBContext();
 
-      
         public ActionResult GioHang()
         {
             Cart cart = Session["UserCart"] as Cart;
@@ -104,6 +104,7 @@ namespace WebApplication1.Controllers
             
             return View(cart);
         }
+
 
         public ActionResult Payment(string id)
         {

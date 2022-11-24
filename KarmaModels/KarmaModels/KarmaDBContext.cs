@@ -17,7 +17,6 @@ namespace KarmaModels.KarmaModels
         public virtual DbSet<CHATLIEU> CHATLIEUx { get; set; }
         public virtual DbSet<CHITIETDH> CHITIETDHs { get; set; }
         public virtual DbSet<CHITIETSP> CHITIETSPs { get; set; }
-        public virtual DbSet<DANHGIA> DANHGIAs { get; set; }
         public virtual DbSet<DANHMUCSP> DANHMUCSPs { get; set; }
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
@@ -30,14 +29,20 @@ namespace KarmaModels.KarmaModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CHATLIEU>()
-                .HasMany(e => e.CHITIETSPs)
-                .WithRequired(e => e.CHATLIEU)
+            modelBuilder.Entity<ANH>()
+                .HasMany(e => e.SANPHAMs)
+                .WithRequired(e => e.ANH)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<CHITIETDH>()
-                .Property(e => e.DonGia)
-                .HasPrecision(18, 0);
+            modelBuilder.Entity<CHITIETSP>()
+                .HasMany(e => e.CHITIETDHs)
+                .WithRequired(e => e.CHITIETSP)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DANHMUCSP>()
+                .HasMany(e => e.SANPHAMs)
+                .WithRequired(e => e.DANHMUCSP)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DONHANG>()
                 .Property(e => e.TongTien)
@@ -70,11 +75,6 @@ namespace KarmaModels.KarmaModels
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<KHACHHANG>()
-                .HasMany(e => e.DANHGIAs)
-                .WithRequired(e => e.KHACHHANG)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KHACHHANG>()
                 .HasMany(e => e.DONHANGs)
                 .WithRequired(e => e.KHACHHANG)
                 .WillCascadeOnDelete(false);
@@ -85,9 +85,8 @@ namespace KarmaModels.KarmaModels
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<MAUSAC>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.MAUSAC)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.MaHeXan)
+                .IsFixedLength();
 
             modelBuilder.Entity<MAUSAC>()
                 .HasMany(e => e.CHITIETSPs)
@@ -102,6 +101,11 @@ namespace KarmaModels.KarmaModels
                 .Property(e => e.Sdt)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<NSX>()
+                .HasMany(e => e.SANPHAMs)
+                .WithRequired(e => e.NSX)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<SANPHAM>()
                 .Property(e => e.DonGia)
                 .HasPrecision(18, 0);
@@ -112,23 +116,8 @@ namespace KarmaModels.KarmaModels
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
                 .HasMany(e => e.CHITIETSPs)
                 .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.DANHGIAs)
-                .WithRequired(e => e.SANPHAM)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SIZE>()
-                .HasMany(e => e.CHITIETDHs)
-                .WithRequired(e => e.SIZE)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SIZE>()

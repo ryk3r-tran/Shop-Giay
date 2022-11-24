@@ -12,7 +12,6 @@ namespace KarmaModels.KarmaModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MAUSAC()
         {
-            CHITIETDHs = new HashSet<CHITIETDH>();
             CHITIETSPs = new HashSet<CHITIETSP>();
         }
 
@@ -22,8 +21,8 @@ namespace KarmaModels.KarmaModels
         [StringLength(20)]
         public string Color { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
+        [StringLength(10)]
+        public string MaHeXan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }
