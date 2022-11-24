@@ -179,16 +179,16 @@
     <div class="single-product-slider">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
+                @*<div class="col-lg-6 text-center">
                     <div class="section-title">
                         <h1>Sản Phẩm Mới</h1>
 
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="row">
                 <!-- single product -->
-                @foreach (var data in Model)
+                @foreach (var data in Model.Take(8))
                 {
 
                     <div class="col-lg-3 col-md-6">
@@ -207,16 +207,9 @@
                                         CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
                                         string gia = data.DonGia.Value.ToString("#,###", cul.NumberFormat);
                                     }
-                                    <h6 >@gia VND</h6>
-                                    @*<h6 class="l-through"> @data.DonGia </h6>*@
-
+                                    <h6 >@gia VND</h6>                                 
                                 </div>
-                                @*<div class="prd-bottom">                                  
-                                    <a style="margin-left:50px" href="/SanPham/SanPhamChiTiet/@data.MaSP" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                        <p class="hover-text">Xem Chi Tiết</p>
-                                    </a>
-                                </div>*@
+                               
                             </div>
                         </div>
                     </div>
@@ -228,50 +221,18 @@
 
 
 
-    <!-- single product slide -->
+     @*single product slide*@ 
     <div class="single-product-slider">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <div class="section-title">
-                        <h1>Sản Phẩm Mới</h1>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @*// single product 
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <img class="img-fluid" src="/Content/img/product/p6.jpg" alt="">
-                        <div class="product-details">
-                            <h6>
-                                addidas New Hammer sole
-                                for Sports person
-                            </h6>
-                            <div class="price">
-                                <h6>1.500.000</h6>
-                                <h6 class="l-through">1.210.000</h6>
-                            </div>
-                            <div class="prd-bottom">
-
-                                <a href="" class="social-info">
-                                    <span class="ti-bag"></span>
-                                    <p class="hover-text">Thêm vào giỏ hàng</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-move"></span>
-                                    <p class="hover-text">Xem thêm</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-               
-            </div>
+                @*<div class="col-lg-6 text-center">
+                    
+            </div>*@
         </div>
     </div>
-</section>
+
+        
+        </section>
 <script>
     $('.add-to-cart').click(function (e) {
         e.preventDefault();

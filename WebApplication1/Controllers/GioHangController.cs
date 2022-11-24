@@ -13,7 +13,7 @@ using System.IO;
 using WebApplication1.App_Start;
 namespace WebApplication1.Controllers
 {
-    //[Authorization(Quyen = "admin,customer")]
+    [Authorization(Quyen = "admin,khách")]
     public class GioHangController : Controller
     {
         // GET: GioHang

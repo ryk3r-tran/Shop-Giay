@@ -30,18 +30,9 @@
     <div class="container">
         <div class="row s_product_inner">
             <div class="col-lg-6">
-                <div class="s_Product_carousel">
-                    <div class="single-prd-item">
-                        <img class="img-fluid" src="/Content/img/category/s-p1.jpg" alt="">
-                    </div>
-                    <div class="single-prd-item">
-                        <img class="img-fluid" src="/Content/img/category/s-p1.jpg" alt="">
-                    </div>
-                    <div class="single-prd-item">
-                        <img class="img-fluid" src="/Content/img/category/s-p1.jpg" alt="">
-                    </div>
-                </div>
+                <img class="img-fluid" src="/Content/img/category/s-p1.jpg" alt="">
             </div>
+
             <div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
                     @{
@@ -72,7 +63,8 @@
                         <li><a href="#"><span>Tình Trạng</span> : @TinhTrang</a></li>
 
                         @*lấy size*@
-                        <li><span>Size</span>:
+                        <li>
+                            <span>Size</span>:
                             <select name="MaSize">
                                 @foreach (var item in db.SIZEs.ToList())
                                 {
@@ -81,7 +73,7 @@
                             </select>
                         </li>
 
-                    <br />
+                        <br />
                         <h5>Chọn màu :</h5>
                         @foreach (var item in db.MAUSACs.ToList())
                         {
@@ -91,7 +83,7 @@
 
 
                     </ul>
-                    
+
                     <style>
                         .Mau {
                             height: 36px;
@@ -100,12 +92,12 @@
                             border-radius: 5px;
                             /* border: solid 3px #bbb295; */
                         }
+
                         .Color {
                             display: inline-block;
                             margin-left: 5px;
-                           
-                            
                         }
+
                         .Mau.Them {
                             border: solid 5px #736a6a;
                         }
@@ -132,7 +124,7 @@
                     <div style="margin-top:50px" class="card_area d-flex align-items-center">
                         <a class="primary-btn add-to-cart" id="@Model.MaSP" href="#">Thêm Vào Giỏ Hàng</a>
                         @*<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-            <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>*@
+                    <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>*@
                     </div>
                 </div>
             </div>
