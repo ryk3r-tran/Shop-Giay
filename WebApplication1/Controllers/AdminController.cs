@@ -195,7 +195,7 @@ namespace WebApplication1.Controllers
                 }
                 
             }
-            sp.NgayCapNhat = DateTime.Today;
+
             
             _context.ANHs.Add(a);
             _context.MAUSACs.Add(m);            
@@ -243,7 +243,6 @@ namespace WebApplication1.Controllers
 
             var ctSP = new CHITIETSP();
             ctSP.MaSP = SPid.MaSP;
-            ctSP.MaCL = CLid.MaCL;
             ctSP.MaMau = Mauid.MaMau;
             ctSP.MaSize = Sizeid.MaSize;
 

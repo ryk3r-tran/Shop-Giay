@@ -193,11 +193,15 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="single-product">
-                            <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
+                            <a href="/SanPham/SanPhamChiTiet/@data.MaSP">
+                                <img class="img-fluid"  src="/Content/img/product/p1.jpg" alt="">   
+                            </a>
                             <div class="product-details">
-                                <h6>
-                                    @data.TenSP
-                                </h6>
+                                <a href="/SanPham/SanPhamChiTiet/@data.MaSP">
+                                    <h6>
+                                        @data.TenSP
+                                    </h6>
+                                </a>
                                 <div class="price">
                                     @{
                                         CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
@@ -207,12 +211,12 @@
                                     @*<h6 class="l-through"> @data.DonGia </h6>*@
 
                                 </div>
-                                <div class="prd-bottom">                                  
+                                @*<div class="prd-bottom">                                  
                                     <a style="margin-left:50px" href="/SanPham/SanPhamChiTiet/@data.MaSP" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                         <p class="hover-text">Xem Chi Tiết</p>
                                     </a>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>

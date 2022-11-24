@@ -13,9 +13,7 @@ namespace KarmaModels.KarmaModels
         public SANPHAM()
         {
             BINHLUANSPs = new HashSet<BINHLUANSP>();
-            CHITIETDHs = new HashSet<CHITIETDH>();
             CHITIETSPs = new HashSet<CHITIETSP>();
-            DANHGIAs = new HashSet<DANHGIA>();
         }
 
         [Key]
@@ -30,28 +28,23 @@ namespace KarmaModels.KarmaModels
 
         public string MoTa { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? NgayCapNhat { get; set; }
-
         public int MaNSX { get; set; }
 
         public int MaAnh { get; set; }
 
         public int MaDM { get; set; }
 
+        public int? MaCL { get; set; }
+
         public virtual ANH ANH { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BINHLUANSP> BINHLUANSPs { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
+        public virtual CHATLIEU CHATLIEU { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
 
         public virtual DANHMUCSP DANHMUCSP { get; set; }
 

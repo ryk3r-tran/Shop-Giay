@@ -72,16 +72,14 @@
                         <li><a href="#"><span>Tình Trạng</span> : @TinhTrang</a></li>
 
                         @*lấy size*@
-                    <li>
-
-                      Size:  <select name="MaSize">
-                            @foreach (var item in db.SIZEs.ToList())
-                            {
-                                <option value="@item.MaSize">@item.Size1</option>
-                            }
-
-                        </select>
-                    </li>
+                        <li><span>Size</span>:
+                            <select name="MaSize">
+                                @foreach (var item in db.SIZEs.ToList())
+                                {
+                                    <option value="@item.MaSize">@item.Size1</option>
+                                }
+                            </select>
+                        </li>
 
                     <br />
                         <h5>Chọn màu :</h5>
@@ -205,8 +203,8 @@
                                 <td>
                                     @{
                                         var ChatLieu = (from sp in db.SANPHAMs
-                                                        join chitiet in db.CHITIETSPs on sp.MaSP equals chitiet.MaSP
-                                                        join chatlieu in db.CHATLIEUx on chitiet.MaCL equals chatlieu.MaCL
+                                                        
+                                                        join chatlieu in db.CHATLIEUx on sp.MaCL equals chatlieu.MaCL
 
                                                         select new { chatlieu.ChatLieu1 }).FirstOrDefault();
                                     }

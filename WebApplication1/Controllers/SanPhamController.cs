@@ -70,6 +70,8 @@ namespace WebApplication1.Controllers
             return View(SanPhamChon);
 
         }
+
+
         public ActionResult BinhLuanPatialView()
         {
             int MaSP = Convert.ToInt32(TempData["ID"]);
