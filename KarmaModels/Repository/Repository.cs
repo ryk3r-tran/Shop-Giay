@@ -48,7 +48,7 @@ namespace KarmaModels.Repository
             table.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
-
+         
         
     }
 }

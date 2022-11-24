@@ -107,9 +107,9 @@
                                 <span class="ti-bag"></span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                            </li>
+                            </li>*@
                             <div class="dropdown" style="display: flex; align-items: center; margin-left: 25px;">
                                 @if (customer != null)
                                 {
@@ -130,7 +130,7 @@
                 </div>
             </nav>
         </div>
-        <div class="search_input" id="search_input_box">
+        @*<div class="search_input" id="search_input_box">
             <div class="container">
                 <form action="/SanPham/Find" ass="d-flex justify-content-between" method="POST">
                     <input type="text" class="form-control" id="search_input" placeholder="Tìm kiếm" name="search_input">
@@ -138,7 +138,7 @@
                     <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
                 </form>
             </div>
-        </div>
+        </div>*@
     </header>
     <!-- End Header Area -->
     @RenderBody()

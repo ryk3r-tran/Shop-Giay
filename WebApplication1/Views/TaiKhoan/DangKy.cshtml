@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Đăng Ký</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Đăng Ký</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="/Content/img/register.jpg" alt="">
+                    <div class="hover">
+                        <h4>Trở thành thành viên mới ngay hôm nay</h4>
+                        <p>Để có thể mua sắm cùng chúng tôi</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Đăng Ký</h3>
+                    <form class="row login_form" action="/TaiKhoan/DangKy" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="HoTen" placeholder="Họ và tên" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" name="Email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="DiaChi" placeholder="Địa chỉ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="TenDangNhap" placeholder="Tên đăng nhập" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đăng nhập'">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" name="MatKhau" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" name="XNMatKhau" placeholder="Nhập lại mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập lại mật khẩu'">
+                        </div>
+
+                        @{
+                            var db = new KarmaModels.KarmaModels.KarmaDBContext();
+                            var makh = db.KHACHHANGs.Max(s => s.MaKH) + 1;
+                        }
+                        <input type="text" name="MaKh" value="@makh" hidden />
+                        @*<div class="col-md-12 form-group">
+
+        </div>*@
+                        @*                        <div class="form-group">
+            <div class="col-md-10 col-sm-3 p_star">
+                <select class="gender_select">
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
+                </select>
+            </div>
+        </div>*@
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Đăng Ký</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
