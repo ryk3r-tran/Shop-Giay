@@ -26,7 +26,7 @@ namespace WebApplication1.App_Start
                 TAIKHOAN acc = _context.TAIKHOANs.SingleOrDefault(p => p.MaKH == customer.MaKH);
                 string[] quyen = getQuyen();
                 
-                if (quyen.Contains(acc.Roles))
+                if (quyen.Contains(acc.Quyen))
                 {
                     return;
                 }
