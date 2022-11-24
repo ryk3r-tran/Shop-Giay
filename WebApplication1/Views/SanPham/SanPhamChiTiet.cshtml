@@ -74,7 +74,9 @@
                         @*lấy size*@
                     <li>
 
-                      Size:  <select name="MaSize">
+                      Size:  <select>
+
+
                             @foreach (var item in db.SIZEs.ToList())
                             {
                                 <option value="@item.MaSize">@item.Size1</option>
@@ -87,7 +89,7 @@
                         <h5>Chọn màu :</h5>
                         @foreach (var item in db.MAUSACs.ToList())
                         {
-                            <li class="Color"><span class="Mau" style="background-color:@item.MaHeXan"></span></li>
+                            <li class="Color"><span class="Mau" style="background-color:@item.MaHeXan" data-id="@item.MaMau"></span></li>
                         }
 
 
@@ -205,8 +207,8 @@
                                 <td>
                                     @{
                                         var ChatLieu = (from sp in db.SANPHAMs
-                                                        join chitiet in db.CHITIETSPs on sp.MaSP equals chitiet.MaSP
-                                                        join chatlieu in db.CHATLIEUx on chitiet.MaCL equals chatlieu.MaCL
+                                                        
+                                                        join chatlieu in db.CHATLIEUx on sp.MaCL equals chatlieu.MaCL 
 
                                                         select new { chatlieu.ChatLieu1 }).FirstOrDefault();
                                     }
@@ -396,15 +398,41 @@
     </div>
 </section>
 <script>
+
+    //var size = "";
+    //var mau ="";
+
+    var size = "";
+    var mau = "";
+    $('select').change(function () {
+        var MaSize = $(this).val();
+        size = MaSize.toString();
+        alert(size);
+    })
+
+    $('.Mau').click(function () {
+
+        var MaMau = $(this).data('id');
+        mau = MaMau.toString();
+        alert(mau);
+    })
+
     $('.add-to-cart').click(function (e) {
         e.preventDefault();
         var id = $(this).attr('id');
-        var url = "/GioHang/ThemVaoGioHang/" + id;
+        var url = "/GioHang/ThemVaoGioHang/";
         console.log(url);
         $.ajax({
             url: url,
             type: "POST",
+            data: {
+                id: id,
+                size: size,
+                mau: mau
+            },
+            
             success: function (data) {
+                console.log(data)
                 if (data.status == "successful") {
                     alert("Thêm vào giỏ hàng thành công!");
                 }

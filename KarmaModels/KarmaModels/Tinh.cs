@@ -6,23 +6,22 @@ namespace KarmaModels.KarmaModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CHATLIEU")]
-    public partial class CHATLIEU
+    [Table("Tinh")]
+    public partial class Tinh
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CHATLIEU()
+        public Tinh()
         {
-            SANPHAMs = new HashSet<SANPHAM>();
+            Huyens = new HashSet<Huyen>();
         }
 
         [Key]
-        public int MaCL { get; set; }
+        public int MaTinh { get; set; }
 
-        [Column("ChatLieu")]
         [StringLength(20)]
-        public string ChatLieu1 { get; set; }
+        public string TenTinh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
+        public virtual ICollection<Huyen> Huyens { get; set; }
     }
 }

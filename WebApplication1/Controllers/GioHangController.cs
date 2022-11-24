@@ -18,41 +18,83 @@ namespace WebApplication1.Controllers
     {
         // GET: GioHang
 
-      
+        
         public ActionResult GioHang()
         {
             Cart cart = Session["UserCart"] as Cart;
             return View(cart);
         }
         
-        public ActionResult ThemVaoGioHang(string id)
+        public ActionResult ThemVaoGioHang(string id, int? size, int? mau)
         {
+
             var idsp = Int32.Parse(id);
-            IRepository<SANPHAM> sp = new Repository<SANPHAM>();
-            if (Session["UserCart"] == null) // cart null
+            if(size == null)
             {
-                Session["UserCart"] = new Cart(); // create session user cart as list 
+                size = 1;
             }
-            Cart cart = Session["UserCart"] as Cart;
-            // check product was in cart
-            if (cart.ListCartItem.FirstOrDefault(p => p.sanpham.MaSP == idsp) == null)
-            {   
-                SANPHAM sanpham = sp.GetById(idsp);
-                // create 1 new cartItem
-                CartItem newItem = new CartItem() { 
-                    sanpham =  sanpham,
-                    quantity = 1,
-                };
-                // add prod to cart
-                cart.ListCartItem.Add(newItem);
-            }
-            else
+
+             var db = new KarmaDBContext();
+            if(mau == null)  // chưa chọn màu
             {
-                CartItem cartItem1 = cart.ListCartItem.FirstOrDefault(p => p.sanpham.MaSP == idsp);
-                cartItem1.quantity++;
+                return Json(new { status = "chua chon mau" });
             }
-            Session["UserCart"] = cart;
-            return Json(new { status = "successful"});
+            else  // đã chọn size và màu
+            {
+                var dem = db.CHITIETSPs.Count(s => s.MaSP == idsp && s.MaSize == size && s.MaMau == mau);
+                if (dem == 1)  // có sản phẩm ứng với size và màu đó
+                {
+                    IRepository<SANPHAM> sp = new Repository<SANPHAM>();
+                    IRepository<CHITIETSP> ctsp = new Repository<CHITIETSP>();
+                    IRepository<SIZE> table_size = new Repository<SIZE>();
+                    IRepository<MAUSAC> table_mau = new Repository<MAUSAC>();
+                    if (Session["UserCart"] == null) // cart null
+                    {
+                        Session["UserCart"] = new Cart(); // create session user cart as list 
+                    }
+                    Cart cart = Session["UserCart"] as Cart;
+                    //lấy id chi tiết sản phần dựa vào id, size, màu
+
+                    var idctsp = db.CHITIETSPs.SingleOrDefault(s => s.MaSP == idsp && s.MaMau == mau && s.MaSize == size).MaChiTietSP;
+
+                    // check product was in cart
+                    if (cart.ListCartItem.SingleOrDefault(p => p.ctsp.MaChiTietSP == idctsp) == null)
+                    {
+                        CHITIETSP chitietsp = ctsp.GetById(idctsp);
+                        // create 1 new cartItem
+                        int? size_giay = table_size.GetById(chitietsp.MaSize).Size1;
+                        var mau_giay = table_mau.GetById(chitietsp.MaMau).Color;
+                        var tensp = sp.GetById(chitietsp.MaSP).TenSP;
+                        decimal? dongia = sp.GetById(idctsp).DonGia;
+                        CartItem newItem = new CartItem()
+                        {
+                            ctsp = chitietsp,
+                            size = size_giay,
+                            mau = mau_giay,
+                            tensp = tensp,
+                            dongia = dongia,
+                            quantity = 1,
+                        };
+                        // add prod to cart
+                        cart.ListCartItem.Add(newItem);
+                    }
+                    else
+                    {
+                        CartItem cartItem1 = cart.ListCartItem.FirstOrDefault(p => p.ctsp.MaChiTietSP == idctsp);
+
+                        cartItem1.quantity++;
+                    }
+                    Session["UserCart"] = cart;
+                    return Json(new { status = "successful" });
+                }
+                else   // không có sản phẩm thỏa mãn
+                {
+                    return Json(new { status = "het hang" });
+                }
+            }
+
+
+            
         }
 
         
@@ -60,11 +102,11 @@ namespace WebApplication1.Controllers
         public ActionResult CapNhatGioHang(int id, int soluong)
         {
             Cart session_cart = Session["UserCart"] as Cart;
-            var item = session_cart.ListCartItem.FirstOrDefault(i => i.sanpham.MaSP == id);
+            var item = session_cart.ListCartItem.FirstOrDefault(p => p.ctsp.MaChiTietSP == id);
             item.quantity = soluong;
             Session["UserCart"] = session_cart;
-            var quanity = session_cart.ListCartItem.FirstOrDefault(i => i.sanpham.MaSP == id).quantity;
-            var thanhtien = session_cart.ListCartItem.FirstOrDefault(i => i.sanpham.MaSP == id).thanhtien;
+            var quanity = session_cart.ListCartItem.FirstOrDefault(i => i.ctsp.MaChiTietSP == id).quantity;
+            var thanhtien = session_cart.ListCartItem.FirstOrDefault(i => i.ctsp.MaChiTietSP == id).thanhtien;
             var tongtien = session_cart.TongTien;
             return Json(new
             {
@@ -77,7 +119,7 @@ namespace WebApplication1.Controllers
         public ActionResult XoaSanPham(int id)
         {
             Cart cart = Session["UserCart"] as Cart;
-            var item = cart.ListCartItem.SingleOrDefault(i => i.sanpham.MaSP == id);
+            var item = cart.ListCartItem.SingleOrDefault(i => i.ctsp.MaChiTietSP == id);
             cart.ListCartItem.Remove(item);
             Session["UserCart"] = cart;
             if (cart.ListCartItem.Count == 0)
@@ -100,8 +142,10 @@ namespace WebApplication1.Controllers
         }
         public ActionResult ThanhToan()
         {
+            IRepository<Tinh> tinh = new Repository<Tinh>();
+            List<Tinh> dsTinh = tinh.GetAll() as List<Tinh>;
+            ViewBag.Tinh = dsTinh;
             Cart cart = Session["UserCart"] as Cart;
-            
             return View(cart);
         }
 
@@ -203,10 +247,52 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult ThemDonHang(DONHANG dh)
+        {
+            return RedirectToAction("DanhSachSanPham");
+        }
         public ActionResult LichSuMuaHang()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult GetHuyen(string idtinh)
+        {
+            int matinh = Int32.Parse(idtinh);
+            KarmaDBContext _context = new KarmaDBContext();
+            var dsHuyen = _context.Huyens.Where(h => h.MaTinh == matinh).ToList();
+            List<object> huyen = new List<object> { };
+            foreach (var element in dsHuyen)
+            {
+                object a = new
+                {
+                    mahuyen = element.MaHuyen,
+                    tenhuyen = element.TenHuyen,
+                };
+                huyen.Add(a);
+            }               
+            return Json(huyen);
+        }
+
+        [HttpPost]
+        public ActionResult GetXa(string idhuyen)
+        {
+            int mahuyen = Int32.Parse(idhuyen);
+            KarmaDBContext _context = new KarmaDBContext();
+            var dsXa = _context.Xas.Where(h => h.MaHuyen == mahuyen).ToList();
+            List<object> xa = new List<object> { };
+            foreach (var element in dsXa)
+            {
+                object a = new
+                {
+                    maxa = element.MaXa,
+                    tenxa = element.TenXa,
+                };
+                xa.Add(a);
+            }
+            return Json(xa);
+        }
     }
 }

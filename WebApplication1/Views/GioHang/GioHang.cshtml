@@ -31,6 +31,8 @@
                          <tr>
                              <th scope="col">Sản phẩm</th>
                              <th scope="col">Giá</th>
+                             <th scope="col">Size</th>
+                             <th scope="col">Màu</th>
                              <th scope="col">Số lượng</th>
                              <th scope="col">Tổng</th>
                              <th scope="col"></th>
@@ -40,52 +42,56 @@
                          @foreach (var item in Model.ListCartItem)
                          {
 
-                             <tr data-item="@item.sanpham.MaSP">
+                             <tr data-item="@item.ctsp.MaChiTietSP">
                                  <td>
                                      <div class="media">
                                          <div class="d-flex">
                                              <img src="/Content/img/cart.jpg" alt="">
                                          </div>
                                          <div class="media-body">
-                                             <p>@item.sanpham.TenSP</p>
+                                             <p>@item.tensp</p>
                                          </div>
                                      </div>
                                  </td>
                                  <td>
-                                     <h5>@item.sanpham.DonGia</h5>
+                                     <h5>@item.dongia</h5>
+                                 </td>
+                                 <td>
+                                     <h5>@item.size</h5>
+                                 </td>
+                                 <td>
+                                     <h5>@item.mau</h5>
                                  </td>
                                  <td>
                                      <div class="product_count">
-                                         <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
+                                         <input type="text" name="qty" id="@item.ctsp.MaChiTietSP" maxlength="12" value="@item.quantity" title="Quantity:"
                                                 class="input-text qty">
-                                         <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
+                                         <button data-id="@item.ctsp.MaChiTietSP" class="increase items-count" type="button">
                                              <i class="lnr lnr-chevron-up"></i>
                                          </button>
-                                         <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
+                                         <button data-id="@item.ctsp.MaChiTietSP" class="reduced items-count" type="button">
                                              <i class="lnr lnr-chevron-down"></i>
                                          </button>
                                      </div>
                                  </td>
                                  <td>
-                                     <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
+                                     <h5 class="thanhtien" data-id="@item.ctsp.MaChiTietSP">@item.thanhtien</h5>
                                  </td>
                                  <td>
-                                     <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
+                                     <button data-id="@item.ctsp.MaChiTietSP" class="btn-sm btn-danger btn-delete">Delete</button>
                                  </td>
                              </tr>
                          }
-                         <tr>
-                             <td>
-                             </td>
-                             <td>
-                             </td>
-                             <td>
-                                 <h5>Tổng tiền</h5>
-                             </td>
-                             <td>
-                                 <h5 id="tongtien">@Model.TongTien</h5>
-                             </td>
-                         </tr>
+                         <td></td>
+                         <td></td>
+                            <td></td>
+                     <td></td>
+                         <td>
+                             <h5>Tổng tiền</h5>
+                         </td>
+                         <td>
+                             <h5 id="tongtien">@Model.TongTien</h5>
+                         </td>
                      </tbody>
                  </table>
                  <div class="d-flex justify-content-end" style="margin-top:50px;">
@@ -148,7 +154,7 @@
     $(".reduced").click(function () {
         var id = $(this).data('id');
         var count_value = $("#" + id).val();
-        if (!isNaN(count_value) && count_value > 0) {
+        if (!isNaN(count_value) && count_value > 1) {
             count_value--;
             $("#" + id).val(count_value);
             console.log(count_value);
