@@ -14,22 +14,22 @@ namespace WebApplication1.Models
         public int Masp { get; set; }
         public string Tensp { get; set; }
         public decimal Gia { get; set; }
-        public  double TbSoSao { get; set; }
+        public double TbSoSao { get; set; }
         public string TbSao { get; set; }
         public string Anh { get; set; }
         public string TenNSX { get; set; }
-        public List<SanPham> GetDsSanPham (string Timkiem)
+        public List<SanPham> GetDsSanPham(string Timkiem)
         {
             string sql;
             DataTable dt = new DataTable();
-           if (Timkiem == null)
+            if (Timkiem == null)
             {
                 sql = @"AllSanPham";
                 dt = Dataprovider.ExecuteQuery(sql);
             }
             else
             {
-                 sql = @"TimKiemSanPham @TenSanPham";
+                sql = @"TimKiemSanPham @TenSanPham";
                 dt = Dataprovider.ExecuteQuery(sql, new object[] { Timkiem });
             }
 
@@ -38,7 +38,7 @@ namespace WebApplication1.Models
 
             SanPham MotSanPham;
 
-            for(int i = 0; i < dt.Rows.Count;i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 MotSanPham = new SanPham();
                 if (dt.Rows[i]["TbSao"].ToString() == null)

@@ -67,16 +67,57 @@
                             }
 
                         }
-                        <li><a class="active" href="#   "><span>Thương Hiệu</span> :@NhaSx.TenNSX</a></li>
+                        <li><a class="active" href="#   "><span>Thương Hiệu</span> : @NhaSx.TenNSX</a></li>
 
-                        <li><a href="#"><span>Tình Trạng</span> :@TinhTrang</a></li>
+                        <li><a href="#"><span>Tình Trạng</span> : @TinhTrang</a></li>
+
+                        @*lấy size*@
+                    <li>
+
+                      Size:  <select name="MaSize">
+                            @foreach (var item in db.SIZEs.ToList())
+                            {
+                                <option value="@item.MaSize">@item.Size1</option>
+                            }
+
+                        </select>
+                    </li>
+
+                    <br />
+                        <h5>Chọn màu :</h5>
+                        @foreach (var item in db.MAUSACs.ToList())
+                        {
+                            <li class="Color"><span class="Mau" style="background-color:@item.MaHeXan"></span></li>
+                        }
+
+
+
                     </ul>
+                    
+                    <style>
+                        .Mau {
+                            height: 36px;
+                            width: 36px;
+                            display: inline-block;
+                            border-radius: 5px;
+                            /* border: solid 3px #bbb295; */
+                        }
+                        .Color {
+                            display: inline-block;
+                            margin-left: 5px;
+                           
+                            
+                        }
+                        .Mau.Them {
+                            border: solid 5px #736a6a;
+                        }
+                    </style>
+                    <br />
 
-
-                    @*// số lượng sản phẩm
+                    @*// số lượng sản phẩm*@
                     <div class="product_count">
                         <label for="qty">Số Lượng:</label>
-                        
+
                         <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
                         <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                                 class="increase items-count" type="button">
@@ -86,14 +127,14 @@
                                 class="reduced items-count" type="button">
                             <i class="lnr lnr-chevron-down"></i>
                         </button>
-                    </div>*@
+                    </div>
 
-                <p>@Model.MoTa</p>
+                    @*<p>@Model.MoTa</p>*@
 
                     <div style="margin-top:50px" class="card_area d-flex align-items-center">
                         <a class="primary-btn add-to-cart" id="@Model.MaSP" href="#">Thêm Vào Giỏ Hàng</a>
                         @*<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>*@
+            <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>*@
                     </div>
                 </div>
             </div>
@@ -332,7 +373,14 @@
                             });
                         }
                         var MaSanPham = $('.MaSP').data('id');
-                        LoadDsBinhLuan(null,MaSanPham);
+                        LoadDsBinhLuan(null, MaSanPham);
+
+                        $('.Mau').click(function () {
+                            
+                            $('.Mau').removeClass('Them');
+                            $(this).addClass('Them');
+                        })
+
                     </script>
                         
                 </div>

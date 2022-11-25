@@ -36,6 +36,7 @@ namespace KarmaModels.KarmaModels
         public int MaNSX { get; set; }
 
         public int MaAnh { get; set; }
+
         public int MaDM { get; set; }
 
         public virtual ANH ANH { get; set; }
@@ -51,6 +52,8 @@ namespace KarmaModels.KarmaModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
+
+        public virtual DANHMUCSP DANHMUCSP { get; set; }
 
         public virtual NSX NSX { get; set; }
     }

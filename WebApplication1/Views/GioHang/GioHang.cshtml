@@ -25,132 +25,75 @@
     <div class="container">
         @if(Model != null){
          <div class="cart_inner">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Sản phẩm</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Tổng</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ListCartItem)
+             <div class="table-responsive">
+                 <table class="table overflow-auto" style="height:500px;">
+                     <thead>
+                         <tr>
+                             <th scope="col">Sản phẩm</th>
+                             <th scope="col">Giá</th>
+                             <th scope="col">Số lượng</th>
+                             <th scope="col">Tổng</th>
+                             <th scope="col"></th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         @foreach (var item in Model.ListCartItem)
                          {
 
-                            <tr data-item="@item.sanpham.MaSP">
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="/Content/img/cart.jpg" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>@item.sanpham.TenSP</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>@item.sanpham.DonGia</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
-                                               class="input-text qty">
-                                        <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
-                                            <i class="lnr lnr-chevron-up"></i>
-                                        </button>
-                                        <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
-                                            <i class="lnr lnr-chevron-down"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
-                                </td>
-                                <td>
-                                    <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
-                                </td>
-                            </tr>
+                             <tr data-item="@item.sanpham.MaSP">
+                                 <td>
+                                     <div class="media">
+                                         <div class="d-flex">
+                                             <img src="/Content/img/cart.jpg" alt="">
+                                         </div>
+                                         <div class="media-body">
+                                             <p>@item.sanpham.TenSP</p>
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <h5>@item.sanpham.DonGia</h5>
+                                 </td>
+                                 <td>
+                                     <div class="product_count">
+                                         <input type="text" name="qty" id="@item.sanpham.MaSP" maxlength="12" value="@item.quantity" title="Quantity:"
+                                                class="input-text qty">
+                                         <button data-id="@item.sanpham.MaSP" class="increase items-count" type="button">
+                                             <i class="lnr lnr-chevron-up"></i>
+                                         </button>
+                                         <button data-id="@item.sanpham.MaSP" class="reduced items-count" type="button">
+                                             <i class="lnr lnr-chevron-down"></i>
+                                         </button>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <h5 class="thanhtien" data-id="@item.sanpham.MaSP">@item.thanhtien</h5>
+                                 </td>
+                                 <td>
+                                     <button data-id="@item.sanpham.MaSP" class="btn-sm btn-danger btn-delete">Delete</button>
+                                 </td>
+                             </tr>
                          }
-                        <tr class="bottom_button">
-                            @*<td>
-                                <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
-                            </td>*@
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="cupon_text d-flex align-items-center">
-                                    <input type="text" placeholder="Coupon Code">
-                                    <a class="primary-btn" href="#" style="width: 150px;">Áp dụng</a>
-                                    <a class="gray_btn" href="#" style="width: 230px;">Đóng khuyễn mãi</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <h5>Tổng tiền</h5>
-                            </td>
-                            <td>
-                                <h5 id="tongtien">@Model.TongTien</h5>
-                            </td>
-                        </tr>
-                        <tr class="shipping_area">
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <h5>Vận chuyển</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li><a href="#">Cố định: 5.000</a></li>
-                                        <li><a href="#">Miễn phí vận chuyển</a></li>
-                                        <li><a href="#">Cố định: 10.000</a></li>
-                                        <li class="active"><a href="#">Vận chuyển nội thành: 20.000</a></li>
-                                    </ul>
-                                    <h6>Tính toán vận chuyển <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                    <select class="shipping_select">
-                                        <option value="1">Hà Nội</option>
-                                        <option value="2"></option>
-                                        <option value="4">Bắc Ninh</option>
-                                    </select>
-                                    <select class="shipping_select">
-                                        <option value="1">Chọn Quận/ Huyện</option>
-                                        <option value="2">Chọn Quận/ Huyện</option>
-                                        <option value="4">Chọn Quận/ Huyện</option>
-                                    </select>
-                                    <input type="text" placeholder="Mã bưu điện">
-                                    <a class="gray_btn" href="#">Chi tiết</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="out_button_area">
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="/GioHang/Payment">Tiếp tục mua hàng</a>
-                                    <a class="primary-btn" href="#">Tiến hành kiểm tra</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                         <tr>
+                             <td>
+                             </td>
+                             <td>
+                             </td>
+                             <td>
+                                 <h5>Tổng tiền</h5>
+                             </td>
+                             <td>
+                                 <h5 id="tongtien">@Model.TongTien</h5>
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <div class="d-flex justify-content-end" style="margin-top:50px;">
+                     <div class="checkout_btn_inner d-flex">
+                         <a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>
+                     </div>
+                 </div>
+             </div>
          </div>
             }
             else
@@ -262,6 +205,15 @@
                 }
             }
         })
+    })
+
+    $(".btn-ttmh").click(function (e) {
+        e.preventDefault();
+        $(".maintance-message").append("Hiện tại chức năng thanh toán đang được bảo trì");
+        setTimeout(function () {
+            $(".maintance-message").empty();
+        }, 5000)
+        
     })
 </script>
 <!--================End Cart Area =================-->

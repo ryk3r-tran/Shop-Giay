@@ -215,6 +215,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Authorization.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -229,6 +230,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
     <Compile Include="Controllers\LienHeController.cs" />
+    <Compile Include="Models\Dataprovider.cs" />
+    <Compile Include="Models\SanPham.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TAIKHOAN_APIController.cs" />
@@ -1568,6 +1571,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DonHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1613,7 +1617,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51310</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44377/</IISUrl>
+          <IISUrl>https://localhost:44379/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

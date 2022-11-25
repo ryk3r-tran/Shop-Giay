@@ -27,11 +27,11 @@ namespace KarmaModels.KarmaModels
 
         public double Sao { get; set; }
 
-       public DateTime NgayBinhLuan { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime NgayBinhLuan { get; set; }
 
         public virtual KHACHHANG KHACHHANG { get; set; }
 
         public virtual SANPHAM SANPHAM { get; set; }
-       
     }
 }

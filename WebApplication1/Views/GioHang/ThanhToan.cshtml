@@ -1,4 +1,5 @@
-﻿
+﻿@using WebApplication1.Models
+@model Cart
 @{
     ViewBag.Title = "ThanhToan";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -25,7 +26,7 @@
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Chi tiết Thanh toán</h3>
+                    <h3>CHI TIẾT THANH TOÁN</h3>
                     <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                         <div class="col-md-6 form-group p_star">
                             <input type="text" class="form-control" id="first" name="name">
@@ -46,24 +47,24 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
-                                <h3>Thông tin Vận chuyển</h3>
-                                <div class="col-md-12 form-group p_star">
+                                <h3>THÔNG TIN VẬN CHUYỂN</h3>
+                                <div class="col-md-12 form-group p_star" style="padding:0;">
                                     <input type="text" class="form-control" id="add1" name="add1">
                                     <span class="placeholder" data-placeholder="Địa chỉ"></span>
                                 </div>
 
-                                <div class="col-md-12 form-group p_star">
+                                <div class="col-md-12 form-group p_star" style="padding:0;">
                                     <select class="country_select">
                                         <option value="1">Bắc Từ Liêm</option>
                                         <option value="2">Nam Từ Liêm</option>
-                                        <option value="4">Trung Hòa</option>
+                                        <option value="3">Trung Hòa</option>
                                     </select>
                                 </div>
-                                <div class="col-md-12 form-group p_star">
+                                <div class="col-md-12 form-group p_star" style="padding:0;">
                                     <select class="country_select">
                                         <option value="1">Bắc Từ Liêm</option>
                                         <option value="2">Nam Từ Liêm</option>
-                                        <option value="4">Trung Hòa</option>
+                                        <option value="3">Trung Hòa</option>
                                     </select>
                                 </div>
                             </div>
@@ -73,43 +74,66 @@
                 <div class="col-lg-4">
                     <div class="order_box">
                         <h2>Đơn hàng</h2>
-                        <ul class="list">
-                            <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
-                            <li><a href="#">Bitis Hunter Core 3D<span class="middle">x 01</span> <span class="last">694.000</span></a></li>
-                            <li><a href="#">Bitis Hunter X <span class="middle">x 01</span> <span class="last">786.000</span></a></li>
-                            <li><a href="#">Nike Air Force 1 <span class="middle">x 01</span> <span class="last">442.000</span></a></li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li><a href="#">Tạm tính <span>1.922.000</span></a></li>
-                            <li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
-                            <li><a href="#">Tổng tiền <span>1.947.000</span></a></li>
-                        </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Thanh toán khi nhận hàng</label>
-                                <div class="check"></div>
-                            </div>
+                        @if (Model != null)
+                        {
+                            <ul class="list">
+                                <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
+                                @foreach (var item in Model.ListCartItem)
+                                {
+                                    <li><a href="#">@item.sanpham.TenSP<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
+                                }
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Tổng tiền<span>@Model.TongTien</span></a></li>
+                                @*<li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
+                                <li><a href="#">Tổng tiền <span></span></a></li>*@
+                            </ul>
+                        }
+                        else
+                        {
+                            <div>nothing in cart</div>
+                        }
 
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">VNPAY</label>
-                                <div class="check"></div>
-                            </div>
-
-                        </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">Tôi đã đọc và chấp nhận </label>
-                            <a href="#">Điều khoản và điều kiện*</a>
-                        </div>
-                        <a class="primary-btn" href="#">thanh toán</a>
                     </div>
+                    <div class="payment_item">
+                        <div class="radion_btn">
+                            <input type="radio" class="payment_method" id="p-option1" name="selector" value="1">
+                            <label for="p-option1">Thanh toán khi nhận hàng</label>
+                            <div class="check"></div>
+                        </div>
+
+                    </div>
+                    <div class="payment_item active">
+                        <div class="radion_btn">
+                            <input type="radio" class="payment_method" id="p-option2" name="selector" value="2">
+                            <label for="p-option2">Thẻ tín dụng</label>
+                            <img src="/Content/img/product/card.jpg" alt="">
+                            <div class="check"></div>
+                        </div>
+                    </div>
+                    <div class="text-bg-danger">@ViewBag.Message</div>
+                    @*<div class="creat_account">
+                        <input type="checkbox" id="f-option4" name="abc">
+                        <label for="f-option4">Tôi đã đọc và chấp nhận </label>
+                        <a href="#">Điều khoản và điều kiện*</a>
+                    </div>*@
+                    
+                    <div class="d-flex justify-content-end" style="margin-top:58px;">
+                        <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!--================End Checkout Area =================-->
+<script>
+    var payment_method = ""
+    url_payment = "/GioHang/Payment/"
+    $(".payment_method").change(function () {
+        payment_method = this.value;
+        $("#btn-thanhtoan").removeClass("disabled_btn").attr("href", url_payment + payment_method);
+        console.log($("#btn-thanhtoan").attr("href"));
+    })
+</script>

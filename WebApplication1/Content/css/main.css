@@ -8203,17 +8203,6 @@ label {
     #success_tic .page-body .head {
         text-align: center;
     }
-/* #success_tic .tic{
-  font-size:186px;
-} */
-/*#success_tic .close {
-    opacity: 1;
-    position: absolute;
-    right: 0px;
-    font-size: 30px;
-    padding: 3px 15px;
-    margin-bottom: 10px;
-}*/
 
 #success_tic .checkmark-circle {
     width: 150px;
@@ -8352,6 +8341,11 @@ label {
         width: 37.5px;
         opacity: 1;
     }
+}
+.disabled_btn {
+    cursor: default;
+    pointer-events: none;
+    background: gray;
 }
 .footer-text a,
 .footer-text i {
