@@ -32,6 +32,7 @@ namespace WebApplication1.Controllers
             {
                 var kh = khachhang.GetById(account.MaKH);
                 Session["UserLogin"] = kh;
+                Session["Quyen"] = account.Quyen.ToString();
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -40,6 +41,11 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("DangNhap", "TaiKhoan");
             }
             
+        }
+        
+        public ActionResult DangKy()
+        {
+            return View();
         }
     }
 }

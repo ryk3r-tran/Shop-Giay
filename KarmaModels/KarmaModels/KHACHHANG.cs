@@ -13,7 +13,6 @@ namespace KarmaModels.KarmaModels
         public KHACHHANG()
         {
             BINHLUANSPs = new HashSet<BINHLUANSP>();
-            DANHGIAs = new HashSet<DANHGIA>();
             DONHANGs = new HashSet<DONHANG>();
             TAIKHOANs = new HashSet<TAIKHOAN>();
         }
@@ -38,9 +37,6 @@ namespace KarmaModels.KarmaModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BINHLUANSP> BINHLUANSPs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DONHANG> DONHANGs { get; set; }

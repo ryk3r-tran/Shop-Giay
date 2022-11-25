@@ -9,29 +9,23 @@ namespace KarmaModels.KarmaModels
     [Table("CHITIETSP")]
     public partial class CHITIETSP
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CHITIETSP()
+        {
+            CHITIETDHs = new HashSet<CHITIETDH>();
+        }
+
         public int MaSP { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaSize { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MaMau { get; set; }
 
-        public int MaDM { get; set; }
-
         [Key]
-        [Column(Order = 3)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MaCL { get; set; }
+        public int MaChiTietSP { get; set; }
 
-        public virtual CHATLIEU CHATLIEU { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETDH> CHITIETDHs { get; set; }
 
         public virtual MAUSAC MAUSAC { get; set; }
 

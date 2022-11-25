@@ -17,15 +17,64 @@ namespace WebApplication1.Controllers
     {
         KarmaDBContext _context = new KarmaDBContext();
         // GET: Admin
+
+        public bool CheckQuyen()
+        {
+            if(Session["Quyen"].ToString() == "admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         
         public ActionResult Admin()
         {
-            return View();
+            if (CheckQuyen())
+            {
+                
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            //var donHang = _context.DONHANGs;
+            //var donHangL = donHang.ToList();
+
+            //int[] tk = new int[14];
+            //for(int i = 1; i<= 12; i++)
+            //{
+                
+            //    tk[i] = 0;
+            //}
+
+            //foreach (var d in donHangL)
+            //{
+            //    var ng = d.NgayGiao.Value.Month.ToString();
+            //    int ngI = Int32.Parse(ng);
+            //    tk[ngI] += Int32.Parse(d.TongTien.ToString());
+            //}
+            //ViewBag.tkL = tk.ToList();
+            //return View();
+
         }
         public ActionResult TatCaTaiKhoan()
         {
-            var data = _context.TAIKHOANs.Include("KHACHHANG");
-            return View(data.ToList());        
+            if (CheckQuyen())
+            {
+                var data = _context.TAIKHOANs.Include("KHACHHANG");
+                return View(data.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+               
         }
 
         
@@ -38,35 +87,44 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult ThemTK(TAIKHOAN tk1, KHACHHANG kh1, string check_DK)
         {
-            if(kh1.GioiTinh == "option1")
+            if (CheckQuyen())
             {
-                kh1.GioiTinh = "Nam";
-            }
-            if (kh1.GioiTinh == "option2")
-            {
-                kh1.GioiTinh = "Nữ";
-            }
-            if (tk1.Quyen == "option1")
-            {
-                tk1.Quyen = "Quản lý";
-            }
-            if (tk1.Quyen == "option2")
-            {
-                tk1.Quyen = "Nhân viên";
-            }
-            if (tk1.Quyen == "option3")
-            {
-                tk1.Quyen = "Khách hàng";
-            }
+                if (kh1.GioiTinh == "option1")
+                {
+                    kh1.GioiTinh = "Nam";
+                }
+                if (kh1.GioiTinh == "option2")
+                {
+                    kh1.GioiTinh = "Nữ";
+                }
+                if (tk1.Quyen == "option1")
+                {
+                    tk1.Quyen = "Quản lý";
+                }
+                if (tk1.Quyen == "option2")
+                {
+                    tk1.Quyen = "Nhân viên";
+                }
+                if (tk1.Quyen == "option3")
+                {
+                    tk1.Quyen = "Khách hàng";
+                }
 
 
-            _context.KHACHHANGs.Add(kh1);
-            _context.TAIKHOANs.Add(tk1);
+                _context.KHACHHANGs.Add(kh1);
+                _context.TAIKHOANs.Add(tk1);
+
+
+                _context.SaveChanges();
+
+                return RedirectToAction("TatCaTaiKhoan");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             
-
-            _context.SaveChanges();
-
-            return RedirectToAction("TatCaTaiKhoan");
         }
 
         public ActionResult getTKbyID(string id)
@@ -141,9 +199,17 @@ namespace WebApplication1.Controllers
 
         public ActionResult TatCaSanPham()
         {
-            IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
-            var data = sanpham.GetAll();
-            return View(data);
+            if (CheckQuyen())
+            {
+                IRepository<SANPHAM> sanpham = new Repository<SANPHAM>();
+                var data = sanpham.GetAll();
+                return View(data);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         public ActionResult ThemSanPham()
@@ -195,7 +261,7 @@ namespace WebApplication1.Controllers
                 }
                 
             }
-            sp.NgayCapNhat = DateTime.Today;
+            
             
             _context.ANHs.Add(a);
             _context.MAUSACs.Add(m);            
@@ -234,6 +300,7 @@ namespace WebApplication1.Controllers
             sp.MaNSX = NSXid.MaNSX;
             sp.MaAnh = anhid.MaAnh;
             sp.MaDM = d1.MaDM;
+            sp.MaCL = CLid.MaCL;
             _context.SANPHAMs.Add(sp);
             _context.SaveChanges();
 
@@ -243,7 +310,7 @@ namespace WebApplication1.Controllers
 
             var ctSP = new CHITIETSP();
             ctSP.MaSP = SPid.MaSP;
-            ctSP.MaCL = CLid.MaCL;
+            
             ctSP.MaMau = Mauid.MaMau;
             ctSP.MaSize = Sizeid.MaSize;
 
@@ -270,7 +337,7 @@ namespace WebApplication1.Controllers
             _context.SaveChanges();
         }
 
-    
+        
         
 
     }

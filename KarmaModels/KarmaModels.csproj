@@ -60,7 +60,6 @@
     <Compile Include="KarmaModels\CHATLIEU.cs" />
     <Compile Include="KarmaModels\CHITIETDH.cs" />
     <Compile Include="KarmaModels\CHITIETSP.cs" />
-    <Compile Include="KarmaModels\DANHGIA.cs" />
     <Compile Include="KarmaModels\DANHMUCSP.cs" />
     <Compile Include="KarmaModels\DONHANG.cs" />
     <Compile Include="KarmaModels\KHACHHANG.cs" />
