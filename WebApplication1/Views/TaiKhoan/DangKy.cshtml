@@ -1,179 +1,90 @@
 ﻿
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+}
 
-@*<title>Điều khiển - Admin</title>*@
-<meta content="" name="description">
-<meta content="" name="keywords">
-
-<!-- Favicons -->
-<link href="~/Content/Admin/img/user.png" rel="icon">
-<link href="/Content/Admin/img/user.png" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-<!-- Vendor CSS Files -->
-<link href="/Content/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/quill/quill.snow.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/quill/quill.bubble.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/remixicon/remixicon.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/simple-datatables/style.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/Content/Admin/css/style.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/bootstrap copy/css/bootstrap.min.css" rel="stylesheet">
-<link href="/Content/Admin/vendor/datatables/datatables.min.css" rel="stylesheet">
-<link href="/Content/Admin/css/master.css" rel="stylesheet">
-<script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>
-
-<!-- =======================================================
-* Template Name: NiceAdmin - v2.4.0
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-======================================================== -->
-<script src="~/Content/js/vendor/jquery-2.2.4.min.js"></script>
-<!-- Vendor JS Files -->
-<script src="/Content/js/vendor/jquery-2.2.4.min.js"></script>
-<script src="/Content/Admin/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="/Content/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/Content/Admin/vendor/chart.js/chart.min.js"></script>
-<script src="/Content/Admin/vendor/echarts/echarts.min.js"></script>
-<script src="/Content/Admin/vendor/quill/quill.min.js"></script>
-<script src="/Content/Admin/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="/Content/Admin/vendor/tinymce/tinymce.min.js"></script>
-<script src="/Content/Admin/vendor/php-email-form/validate.js"></script>
-
-
-<!-- Template Main JS File -->
-<script src="/Content/Admin/js/main.js"></script>
-<script src="~/Content/Admin/js/admin.js"></script>
-
-<div class="card-body">
-    <h5 class="card-title">Thêm tài khoản</h5>
-
-    <!-- Horizontal Form -->
-    <form action="DangKy" method="post">
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">UserName</label>
-            <div class="col-sm-10">
-                <input name="username" type="text" class="form-control" id="inputText">
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Đăng Ký</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Đăng Ký</a>
+                </nav>
             </div>
         </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="/Content/img/register.jpg" alt="">
+                    <div class="hover">
+                        <h4>Trở thành thành viên mới ngay hôm nay</h4>
+                        <p>Để có thể mua sắm cùng chúng tôi</p>
 
-        <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input name="pass" type="password" class="form-control" id="inputPassword">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Nhập lại Password</label>
-            <div class="col-sm-10">
-                <input name="pass1" type="password" class="form-control" id="inputPassword">
-            </div>
-        </div>
-        <fieldset class="row mb-3">
-            <legend class="col-form-label col-sm-2 pt-0">Quyền</legend>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Quyen" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                        Quản lý
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="Quyen" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                        Nhân viên
-                    </label>
-                </div>
-                <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="Quyen" id="gridRadios3" value="option3">
-                    <label class="form-check-label" for="gridRadios3">
-                        Khách hàng
-                    </label>
+                    </div>
                 </div>
             </div>
-        </fieldset>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Đăng Ký</h3>
+                    <form class="row login_form" action="/TaiKhoan/DangKy" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="HoTen" placeholder="Họ và tên" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'">
+                        </div>
 
-        <h5 class="card-title">Thông tin khách hàng</h5>
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" name="Email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="DiaChi" placeholder="Địa chỉ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="TenDangNhap" placeholder="Tên đăng nhập" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đăng nhập'">
+                        </div>
 
-        <!-- Horizontal Form -->
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" name="MatKhau" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" name="XNMatKhau" placeholder="Nhập lại mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập lại mật khẩu'">
+                        </div>
 
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Họ và Tên</label>
-            <div class="col-sm-10">
-                <input name="TenKH" type="text" class="form-control" id="inputText">
-            </div>
-        </div>
-        <fieldset class="row mb-3">
-            <legend class="col-form-label col-sm-2 pt-0">Giới Tính</legend>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gioiTinh" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                        Nam
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gioiTinh" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                        Nữ
-                    </label>
-                </div>
+                        @{
+                            var db = new KarmaModels.KarmaModels.KarmaDBContext();
+                            var makh = db.KHACHHANGs.Max(s => s.MaKH) + 1;
+                        }
+                        <input type="text" name="MaKh" value="@makh" hidden />
+                        @*<div class="col-md-12 form-group">
 
+        </div>*@
+                        @*                        <div class="form-group">
+            <div class="col-md-10 col-sm-3 p_star">
+                <select class="gender_select">
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
+                </select>
             </div>
-        </fieldset>
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input name="Email" type="Email" class="form-control" id="inputEmail">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Địa chỉ</label>
-            <div class="col-sm-10">
-                <input name="DiaChi" type="text" class="form-control" id="inputPassword">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">SĐT</label>
-            <div class="col-sm-10">
-                <input name="Sdt" type="text" class="form-control" id="inputPassword">
-            </div>
-        </div>
+        </div>*@
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Đăng Ký</button>
 
-        <div class="row mb-3">
-            <div class="col-sm-10 offset-sm-2">
-                <div class="form-check">
-                    <input name="check_DK" class="form-check-input" type="checkbox" id="gridCheck1">
-                    <label class="form-check-label" for="gridCheck1">
-                        Tôi đồng ý với điều khoản
-                    </label>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Thêm</button>
-            <button type="reset" class="btn btn-secondary">Làm mới</button>
-            <button type="reset" class="btn btn-secondary">Thông tin chi tiết</button>
-        </div>
-    </form><!-- End Horizontal Form -->
-
-</div>
-
-
-
-
-
-
+    </div>
+</section>
+<!--================End Login Box Area =================-->

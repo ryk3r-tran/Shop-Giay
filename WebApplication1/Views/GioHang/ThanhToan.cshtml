@@ -1,4 +1,5 @@
 ﻿@using WebApplication1.Models
+@using KarmaModels.KarmaModels
 @model Cart
 @{
     ViewBag.Title = "ThanhToan";
@@ -24,106 +25,118 @@
 <section class="checkout_area section_gap">
     <div class="container">
         <div class="billing_details">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>CHI TIẾT THANH TOÁN</h3>
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="Họ"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Tên"></span>
+            <form class="row contact_form" action="/GioHang/ThemDonHang" method="get" novalidate="novalidate">
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <h3>CHI TIẾT THANH TOÁN</h3>
+
+
+                        <div class="col-md-12 form-group p_star">
+                            <input placeholder="Họ Và Tên" type="text" class="form-control" name="HoTen" value="">
+                            @*<span placeholder="Họ Và Tên" class="placeholder"></span>*@
                         </div>
 
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Số điện thoại"></span>
+                            <input placeholder="Số Điện Thoại" type="number" class="form-control" name="Sdt" value="">
+                            @*<span class="placeholder" data-placeholder="Số điện thoại"></span>*@
                         </div>
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Địa chỉ email"></span>
+                            <input type="text" class="form-control" placeholder="Nhập Email" name="Email" value="">
+                            @*<span class="placeholder" data-placeholder="Địa chỉ email"></span>*@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <h3>THÔNG TIN VẬN CHUYỂN</h3>
+                                <!--<div class="col-md-12 form-group p_star" style="padding:0;">
+    <input type="text" class="form-control" placeholder="Địa Chỉ Nhận" name="DCGiao" value="">-->
+                                @*<span class="placeholder" data-placeholder="Địa chỉ"></span>*@
+                                <!--</div>-->
+                                <div>Tỉnh</div>
                                 <div class="col-md-12 form-group p_star" style="padding:0;">
-                                    <input type="text" class="form-control" id="add1" name="add1">
-                                    <span class="placeholder" data-placeholder="Địa chỉ"></span>
-                                </div>
-
-                                <div class="col-md-12 form-group p_star" style="padding:0;">
-                                    <select class="country_select">
-                                        <option value="1">Bắc Từ Liêm</option>
-                                        <option value="2">Nam Từ Liêm</option>
-                                        <option value="3">Trung Hòa</option>
+                                    <select class="province" id="provinces">
+                                        <option>--- Chọn Tỉnh ---</option>
+                                        @{
+                                            var dsTinh = ViewBag.Tinh as List<Tinh>;
+                                        }
+                                        @foreach (var tinh in dsTinh)
+                                        {
+                                            <option value=@tinh.MaTinh> + @tinh.TenTinh + </option>
+                                            ;
+                                        }
                                     </select>
                                 </div>
-                                <div class="col-md-12 form-group p_star" style="padding:0;">
-                                    <select class="country_select">
-                                        <option value="1">Bắc Từ Liêm</option>
-                                        <option value="2">Nam Từ Liêm</option>
-                                        <option value="3">Trung Hòa</option>
+                                <div>Quận / Huyện</div>
+                                <div class="col-md-12 form-group p_star" id="select-district-wrap" style="padding:0;">
+
+                                </div>
+                                <div>Xã / Phường</div>
+                                <div class="col-md-12 form-group p_star" id="select-ward-wrap" style="padding:0;">
+                                    <select class="ward" id="wards">
+                                        <option>--- Chọn Xã ---</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Đơn hàng</h2>
-                        @if (Model != null)
-                        {
-                            <ul class="list">
-                                <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
-                                @foreach (var item in Model.ListCartItem)
-                                {
-                                    <li><a href="#">@item.sanpham.TenSP<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
-                                }
-                            </ul>
-                            <ul class="list list_2">
-                                <li><a href="#">Tổng tiền<span>@Model.TongTien</span></a></li>
-                                @*<li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Đơn hàng</h2>
+                            @if (Model != null)
+                            {
+                                <ul class="list">
+                                    <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
+                                    @foreach (var item in Model.ListCartItem)
+                                    {
+                                        <li><a href="#">@item.tensp<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
+                                    }
+                                </ul>
+                                <ul class="list list_2">
+                                    <li><a href="#">Tổng tiền<span>@Model.TongTien</span></a></li>
+                                    <input type="text" name="TongTien" value="@Model.TongTien" disabled />
+
+                                    @*<li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
                                 <li><a href="#">Tổng tiền <span></span></a></li>*@
-                            </ul>
-                        }
-                        else
-                        {
-                            <div>nothing in cart</div>
-                        }
+                                </ul>
+                            }
+                            else
+                            {
+                                <div>nothing in cart</div>
+                            }
 
-                    </div>
-                    <div class="payment_item">
-                        <div class="radion_btn">
-                            <input type="radio" class="payment_method" id="p-option1" name="selector" value="1">
-                            <label for="p-option1">Thanh toán khi nhận hàng</label>
-                            <div class="check"></div>
                         </div>
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" class="payment_method" id="p-option1" name="selector" value="1">
+                                <label for="p-option1">Thanh toán khi nhận hàng</label>
+                                <div class="check"></div>
+                            </div>
 
-                    </div>
-                    <div class="payment_item active">
-                        <div class="radion_btn">
-                            <input type="radio" class="payment_method" id="p-option2" name="selector" value="2">
-                            <label for="p-option2">Thẻ tín dụng</label>
-                            <img src="/Content/img/product/card.jpg" alt="">
-                            <div class="check"></div>
                         </div>
-                    </div>
-                    <div class="text-bg-danger">@ViewBag.Message</div>
-                    @*<div class="creat_account">
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" class="payment_method" id="p-option2" name="selector" value="2">
+                                <label for="p-option2">Thẻ tín dụng</label>
+                                <img src="/Content/img/product/card.jpg" alt="">
+                                <div class="check"></div>
+                            </div>
+                        </div>
+                        <div class="text-bg-danger">@ViewBag.Message</div>
+                        @*<div class="creat_account">
                         <input type="checkbox" id="f-option4" name="abc">
                         <label for="f-option4">Tôi đã đọc và chấp nhận </label>
                         <a href="#">Điều khoản và điều kiện*</a>
                     </div>*@
-                    
-                    <div class="d-flex justify-content-end" style="margin-top:58px;">
-                        <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
+
+                        <div class="d-flex justify-content-end" style="margin-top:58px;">
+                            <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
+                        </div>
                     </div>
                 </div>
-                </div>
-            </div>
+                </form>
+        </div>
         </div>
     </div>
 </section>
@@ -136,4 +149,79 @@
         $("#btn-thanhtoan").removeClass("disabled_btn").attr("href", url_payment + payment_method);
         console.log($("#btn-thanhtoan").attr("href"));
     })
+    $(document).ready(function () {
+
+        // get district
+        $("#select-district-wrap").append(
+            '<select class="district" id="districts">' +
+            '<option>--- Chọn Huyện ---</option>' +
+            '</select>'
+        )
+        $("#provinces").on('change', function () {
+            $(".distric").empty();
+            $(".distric").append(
+                '<option value="">' + "-- Quận / Huyện --" + "</option>"
+            );
+            var province_id = $(this).val();
+            var url = "/GioHang/GetHuyen/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    idtinh: province_id,
+                },
+                success: function (data) {
+                    console.log(data);
+                    $("#select-district-wrap").empty().append(
+                        '<select class="district" id="districts">' +
+                        '<option>--- Chọn Huyện ---</option>' +
+                        '</select>'
+                    )
+                    $("#districts").html(data);
+                    $.each(data, function (key, value) {
+                        $("#districts").append(
+                            "<option value=" + value.mahuyen + ">" + value.tenhuyen + "</option>"
+                        );
+                    });
+                }
+            }).then(function (response) {
+                $("#districts").on('change', function () {
+                    //console.log(this)
+                    //$("#wards").empty();
+                    //$("#ward").append(
+                    //    '<option value="">' + "-- Xã / Phường --" + "</option>"
+                    //);
+                    var district_id = $(this).val();
+                    var url = "/GioHang/GetXa/";
+                    console.log(district_id);
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            idhuyen: district_id,
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            $("#select-ward-wrap").empty().append(
+                                '<select class="ward" id="wards">' +
+                                '<option>--- Chọn Xã / Phường ---</option>' +
+                                '</select>'
+                            )
+                            console.log($("#wards"))
+                            $("#wards").html(data);
+                            $.each(data, function (key, value) {
+                                $("#wards").append(
+                                    "<option value=" + value.maxa + ">" + value.tenxa + "</option>"
+                                );
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
+        // get ward
+        
+    })
+    
 </script>

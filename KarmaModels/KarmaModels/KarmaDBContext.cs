@@ -19,6 +19,7 @@ namespace KarmaModels.KarmaModels
         public virtual DbSet<CHITIETSP> CHITIETSPs { get; set; }
         public virtual DbSet<DANHMUCSP> DANHMUCSPs { get; set; }
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
+        public virtual DbSet<Huyen> Huyens { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
         public virtual DbSet<MAUSAC> MAUSACs { get; set; }
         public virtual DbSet<NSX> NSXes { get; set; }
@@ -26,6 +27,8 @@ namespace KarmaModels.KarmaModels
         public virtual DbSet<SIZE> SIZEs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
+        public virtual DbSet<Tinh> Tinhs { get; set; }
+        public virtual DbSet<Xa> Xas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
