@@ -153,11 +153,11 @@
 <!--================End Checkout Area =================-->
 <script>
     // băt đầu hàm thêm đơn hàng
-    function ThemDonHang( madh, tinh, huyen, xa, tongtien, thanhtoan, hoten, email, sdt) {
+    function ThemDonHang( madh, tinh, huyen, xa, tongtien, phuongthuc, hoten, email, sdt) {
 
         $.ajax({
-
-            type: "GET",
+            url: '/GioHang/Payment',// ‘/Controller/action’
+            type: "POST",
             data:
             {
                 madh: madh,
@@ -165,16 +165,11 @@
                 huyen: huyen,
                 xa: xa,
                 tongtien: tongtien,
-                thanhtoan: thanhtoan,
+                phuongthuc: phuongthuc,
                 hoten: hoten,
                 email: email,
                 sdt: sdt
             },
-
-           
-        url: '/GioHang/ThemDonHang123',// ‘/Controller/action’
-
-            dataType: 'html',
             success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
             }
         });
@@ -188,18 +183,12 @@
             var Huyen = $('#districts option:selected').text();
             var Xa = $('#wards option:selected').text();
             var phuongthuc = $('input[name="selector"]:checked').val();
-            var PhuongThucThanhToan = "";
-            if (phuongthuc == 1) {
-                PhuongThucThanhToan = "Tiền mặt";
-            } else {
-                PhuongThucThanhToan = "Thẻ tín dụng";
-            }
             var TongTien = $('#TongTien').val();
             var Hoten = $('#Hoten').val();
             var Sdt = $('#Sdt').val();
             var Email = $('#Email').val();
 
-            ThemDonHang(madh, Tinh, Huyen, Xa, TongTien, PhuongThucThanhToan, Hoten, Email, Sdt);
+            ThemDonHang(madh, Tinh, Huyen, Xa, TongTien, phuongthuc, Hoten, Email, Sdt);
 
         })
     });

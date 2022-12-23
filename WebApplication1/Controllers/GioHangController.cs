@@ -151,23 +151,28 @@ namespace WebApplication1.Controllers
             return View(cart);
         }
 
-        public ActionResult Payment(string id)
+        public ActionResult Payment(int madh, string tinh, string huyen, string xa, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
         {
-            if (id == "1")
-            {
-                ViewBag.OrderSuccessful = "Đặt hàng thành công";
 
+            string diachi = tinh.Split('+')[1] + ", " + huyen + ", " + xa;
+            if (phuongthuc == 1)
+            {
+                ThemDonHang123(madh,diachi, tongtien, phuongthuc, hoten, email, sdt);
+                ViewBag.OrderSuccessful = "Đặt hàng thành công";
+                
                 string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/newOrder.html"));
-                content = content.Replace("{{customerName}}", "huy");
-                content = content.Replace("{{Phone}}", "123456");
-                content = content.Replace("{{Email}}", "hello");
-                content = content.Replace("{{Address}}", "Hanoi");
-                content = content.Replace("{{Total}}", "2000");
-                var toEmailAddress = ConfigurationManager.AppSettings["toEmailAdress"].ToString();
-                new MailHelper().SendMail(toEmailAddress, "Test send email ohhh yeahhhhhh", content);
+                content = content.Replace("{{idOrder}}", madh.ToString());
+                content = content.Replace("{{customerName}}", hoten);
+                content = content.Replace("{{Phone}}", sdt);
+                content = content.Replace("{{Email}}", email);
+                content = content.Replace("{{Address}}", diachi);
+                content = content.Replace("{{Total}}", tongtien.ToString());
+                
+                //var toEmailAddress = ConfigurationManager.AppSettings["toEmailAdress"].ToString();
+                new MailHelper().SendMail(email, "Test send email ohhh yeahhhhhh", content);
                 return RedirectToAction("DonMua", "GioHang");
             }
-            else if(id == "2")
+            else if(phuongthuc == 2)
             {
                 string url = ConfigurationManager.AppSettings["Url"];
                 string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
@@ -227,6 +232,7 @@ namespace WebApplication1.Controllers
                 {
                     if (vnp_ResponseCode == "00")
                     {
+                        
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
                         Session.Remove("UserCart");
@@ -304,24 +310,33 @@ namespace WebApplication1.Controllers
             }
             return Json(xa);
         }
-        [HttpGet]
-        public ActionResult ThemDonHang123(int madh, string tinh, string huyen, string xa, decimal tongtien, string thanhtoan, string hoten, string email, string sdt)
+        public void ThemDonHang123(int madh, string diachi, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
         {
             //var KH = Session["UserLogin"] as KHACHHANG;
             //int makh = KH.MaKH;
             int makh = 4;
             DateTime NgayDatHang = DateTime.Now;
-            string DiaChiGiao = tinh + "," + huyen + "," + xa;
-
             var db = new KarmaDBContext();
             DONHANG dh = new DONHANG();
             
             dh.MaKH = makh;
             dh.NgayDat = DateTime.Now;
-            dh.DCGiao = DiaChiGiao;
+            dh.DCGiao = diachi;
             dh.TongTien = tongtien;
             dh.TinhTrang = "Chưa Xác Nhận";
-            dh.ThanhToan = thanhtoan;
+            if (phuongthuc == 1)
+            {
+                dh.ThanhToan = "Tiền mặt";
+            }
+            else if(phuongthuc == 2)
+            {
+                dh.ThanhToan = "Thẻ ngân hàng";
+            }
+            else
+            {
+                dh.ThanhToan = "0";
+            }
+            
             dh.HoTen = hoten;
             dh.Email = email;
             dh.MaDH = madh;
@@ -343,9 +358,6 @@ namespace WebApplication1.Controllers
                 db.CHITIETDHs.Add(ctdh);
                 db.SaveChanges();
             }
-
-
-                return View();
         }
 
 
