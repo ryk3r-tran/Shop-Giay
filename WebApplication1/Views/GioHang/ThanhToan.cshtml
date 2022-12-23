@@ -34,16 +34,16 @@
 
 
                         <div class="col-md-12 form-group p_star">
-                            <input placeholder="Họ Và Tên" type="text" class="form-control" name="HoTen" value="">
+                            <input placeholder="Họ Và Tên" type="text" class="form-control" name="HoTen" id="Hoten" value="">
                             @*<span placeholder="Họ Và Tên" class="placeholder"></span>*@
                         </div>
 
                         <div class="col-md-6 form-group p_star">
-                            <input placeholder="Số Điện Thoại" type="number" class="form-control" name="Sdt" value="">
+                            <input placeholder="Số Điện Thoại" type="number" class="form-control" name="Sdt" id="Sdt" value="">
                             @*<span class="placeholder" data-placeholder="Số điện thoại"></span>*@
                         </div>
                         <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" placeholder="Nhập Email" name="Email" value="">
+                            <input type="text" class="form-control" placeholder="Nhập Email" name="Email" id="Email" value="">
                             @*<span class="placeholder" data-placeholder="Địa chỉ email"></span>*@
                         </div>
                         <div class="col-md-12 form-group">
@@ -84,21 +84,29 @@
                     <div class="col-lg-4">
                         <div class="order_box">
                             <h2>Đơn hàng</h2>
+                            @{
+                                var db = new KarmaModels.KarmaModels.KarmaDBContext();
+                                var madh = db.DONHANGs.Max(s => s.MaDH) + 1;
+                            }
+                        <input type="type" hidden id="madh" value="@madh" />
+                        <span></span>
                             @if (Model != null)
                             {
-                                <ul class="list">
-                                    <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
-                                    @foreach (var item in Model.ListCartItem)
-                                    {
-                                        <li><a href="#">@item.tensp<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
-                                    }
-                                </ul>
+                        <ul class="list">
+                            <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
+                            @foreach (var item in Model.ListCartItem)
+                            {
+                                <li><a href="#">@item.tensp<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
+                               
+
+                            }
+                        </ul>
                                 <ul class="list list_2">
                                     <li><a href="#">Tổng tiền<span>@Model.TongTien</span></a></li>
-                                    <input type="text" name="TongTien" value="@Model.TongTien" disabled />
+                                    <input type="text" id="TongTien" name="TongTien" value="@Model.TongTien" disabled hidden />
 
                                     @*<li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
-                                <li><a href="#">Tổng tiền <span></span></a></li>*@
+                <li><a href="#">Tổng tiền <span></span></a></li>*@
                                 </ul>
                             }
                             else
@@ -130,9 +138,11 @@
                         <a href="#">Điều khoản và điều kiện*</a>
                     </div>*@
 
-                        <div class="d-flex justify-content-end" style="margin-top:58px;">
-                            <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
-                        </div>
+                    <div class="d-flex justify-content-end" style="margin-top:58px;">
+                        <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
+                        <button id="btnThanhToan">Thanh Toán</button>           
+
+                    </div>
                     </div>
                 </div>
                 </form>
@@ -142,6 +152,61 @@
 </section>
 <!--================End Checkout Area =================-->
 <script>
+    // băt đầu hàm thêm đơn hàng
+    function ThemDonHang( madh, tinh, huyen, xa, tongtien, thanhtoan, hoten, email, sdt) {
+
+        $.ajax({
+
+            type: "GET",
+            data:
+            {
+                madh: madh,
+                tinh: tinh,
+                huyen: huyen,
+                xa: xa,
+                tongtien: tongtien,
+                thanhtoan: thanhtoan,
+                hoten: hoten,
+                email: email,
+                sdt: sdt
+            },
+
+           
+        url: '/GioHang/ThemDonHang123',// ‘/Controller/action’
+
+            dataType: 'html',
+            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
+            }
+        });
+    }
+    // kết thúc hàm thêm đơn hàng
+    // sự kiện khi click vào nút thanh toán
+    $(document).ready(function () {
+        $('#btnThanhToan').click(function () {
+            var madh = $('#madh').val();
+            var Tinh = $('#provinces option:selected').text();
+            var Huyen = $('#districts option:selected').text();
+            var Xa = $('#wards option:selected').text();
+            var phuongthuc = $('input[name="selector"]:checked').val();
+            var PhuongThucThanhToan = "";
+            if (phuongthuc == 1) {
+                PhuongThucThanhToan = "Tiền mặt";
+            } else {
+                PhuongThucThanhToan = "Thẻ tín dụng";
+            }
+            var TongTien = $('#TongTien').val();
+            var Hoten = $('#Hoten').val();
+            var Sdt = $('#Sdt').val();
+            var Email = $('#Email').val();
+
+            ThemDonHang(madh, Tinh, Huyen, Xa, TongTien, PhuongThucThanhToan, Hoten, Email, Sdt);
+
+        })
+    });
+
+
+
+    // kết thúc sự kiện click vào nút thanh toán
     var payment_method = ""
     url_payment = "/GioHang/Payment/"
     $(".payment_method").change(function () {
@@ -149,7 +214,17 @@
         $("#btn-thanhtoan").removeClass("disabled_btn").attr("href", url_payment + payment_method);
         console.log($("#btn-thanhtoan").attr("href"));
     })
+
+    
+  
+ 
+ 
+
     $(document).ready(function () {
+       
+
+       
+
 
         // get district
         $("#select-district-wrap").append(

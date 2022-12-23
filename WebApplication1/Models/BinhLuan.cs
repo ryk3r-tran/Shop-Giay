@@ -46,9 +46,9 @@ namespace WebApplication1.Models
 
         public string ND { get; set; }
 
-        public DateTime NgayBinhLuan { get; set; }
+        public DateTime? NgayBinhLuan { get; set; }
 
-        public double Sao { get; set; }
+        public double? Sao { get; set; }
 
        
     }

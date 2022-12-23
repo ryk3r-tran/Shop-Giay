@@ -14,7 +14,7 @@ namespace WebApplication1.Models
         public int Masp { get; set; }
         public string Tensp { get; set; }
         public decimal Gia { get; set; }
-        public double TbSoSao { get; set; }
+        public double? TbSoSao { get; set; }
         public string TbSao { get; set; }
         public string Anh { get; set; }
         public string TenNSX { get; set; }

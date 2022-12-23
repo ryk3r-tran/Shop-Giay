@@ -11,6 +11,8 @@ using KarmaModels.Payment;
 using System.Threading;
 using System.IO;
 using WebApplication1.App_Start;
+using WebApplication1.code;
+
 namespace WebApplication1.Controllers
 {
     //[Authorization(Quyen = "admin,customer")]
@@ -155,6 +157,14 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.OrderSuccessful = "Đặt hàng thành công";
 
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/newOrder.html"));
+                content = content.Replace("{{customerName}}", "huy");
+                content = content.Replace("{{Phone}}", "123456");
+                content = content.Replace("{{Email}}", "hello");
+                content = content.Replace("{{Address}}", "Hanoi");
+                content = content.Replace("{{Total}}", "2000");
+                var toEmailAddress = ConfigurationManager.AppSettings["toEmailAdress"].ToString();
+                new MailHelper().SendMail(toEmailAddress, "Test send email ohhh yeahhhhhh", content);
                 return RedirectToAction("DonMua", "GioHang");
             }
             else if(id == "2")
@@ -294,5 +304,50 @@ namespace WebApplication1.Controllers
             }
             return Json(xa);
         }
+        [HttpGet]
+        public ActionResult ThemDonHang123(int madh, string tinh, string huyen, string xa, decimal tongtien, string thanhtoan, string hoten, string email, string sdt)
+        {
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            DateTime NgayDatHang = DateTime.Now;
+            string DiaChiGiao = tinh + "," + huyen + "," + xa;
+
+            var db = new KarmaDBContext();
+            DONHANG dh = new DONHANG();
+            
+            dh.MaKH = makh;
+            dh.NgayDat = DateTime.Now;
+            dh.DCGiao = DiaChiGiao;
+            dh.TongTien = tongtien;
+            dh.TinhTrang = "Chưa Xác Nhận";
+            dh.ThanhToan = thanhtoan;
+            dh.HoTen = hoten;
+            dh.Email = email;
+            dh.MaDH = madh;
+            dh.Sdt = sdt;
+            db.DONHANGs.Add(dh);
+            db.SaveChanges();
+
+            Cart cart = Session["UserCart"] as Cart;
+            int MaCtsp;
+            int SoLuong;
+            foreach (var item in cart.ListCartItem)
+            {
+                CHITIETDH ctdh = new CHITIETDH();
+                MaCtsp = item.ctsp.MaChiTietSP;
+                SoLuong = item.quantity;
+                ctdh.MaDH = madh;
+                ctdh.SoLuong = SoLuong;
+                ctdh.MaChiTietSP = MaCtsp;
+                db.CHITIETDHs.Add(ctdh);
+                db.SaveChanges();
+            }
+
+
+                return View();
+        }
+
+
     }
 }
