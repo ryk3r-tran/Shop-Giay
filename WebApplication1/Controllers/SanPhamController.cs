@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
             var DanhMuc = db.DANHMUCSPs.ToList();
 
             ViewBag.NhaSanXuat = db.NSXes.ToList();
-
+            
             return View(DanhMuc);
         }
         [HttpPost]

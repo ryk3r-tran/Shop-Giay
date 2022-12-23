@@ -1,4 +1,5 @@
 ﻿@using WebApplication1.Models
+@using System.Globalization;
 @model Cart
 @{
     ViewBag.Title = "GioHang";
@@ -23,108 +24,121 @@
 <!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
-        @if(Model != null){
-         <div class="cart_inner">
-             <div class="table-responsive">
-                 <table class="table overflow-auto" style="height:500px;">
-                     <thead>
-                         <tr>
-                             <th scope="col">Sản phẩm</th>
-                             <th scope="col">Giá</th>
-                             <th scope="col">Size</th>
-                             <th scope="col">Màu</th>
-                             <th scope="col">Số lượng</th>
-                             <th scope="col">Tổng</th>
-                             <th scope="col"></th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         @foreach (var item in Model.ListCartItem)
-                         {
+        @if (Model != null)
+        {
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table overflow-auto" style="height:500px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Màu</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Tổng</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListCartItem)
+                            {
 
-                             <tr data-item="@item.ctsp.MaChiTietSP">
-                                 <td>
-                                     <div class="media">
-                                         <div class="d-flex">
-                                             <img src="/Content/img/cart.jpg" alt="">
-                                         </div>
-                                         <div class="media-body">
-                                             <p>@item.tensp</p>
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <h5>@item.dongia</h5>
-                                 </td>
-                                 <td>
-                                     <h5>@item.size</h5>
-                                 </td>
-                                 <td>
-                                     <h5>@item.mau</h5>
-                                 </td>
-                                 <td>
-                                     <div class="product_count">
-                                         <input type="text" name="qty" id="@item.ctsp.MaChiTietSP" maxlength="12" value="@item.quantity" title="Quantity:"
-                                                class="input-text qty">
-                                         <button data-id="@item.ctsp.MaChiTietSP" class="increase items-count" type="button">
-                                             <i class="lnr lnr-chevron-up"></i>
-                                         </button>
-                                         <button data-id="@item.ctsp.MaChiTietSP" class="reduced items-count" type="button">
-                                             <i class="lnr lnr-chevron-down"></i>
-                                         </button>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <h5 class="thanhtien" data-id="@item.ctsp.MaChiTietSP">@item.thanhtien</h5>
-                                 </td>
-                                 <td>
-                                     <button data-id="@item.ctsp.MaChiTietSP" class="btn-sm btn-danger btn-delete">Delete</button>
-                                 </td>
-                             </tr>
-                         }
-                         <td></td>
-                         <td></td>
-                            <td></td>
-                     <td></td>
-                         <td>
-                             <h5>Tổng tiền</h5>
-                         </td>
-                         <td>
-                             <h5 id="tongtien">@Model.TongTien</h5>
-                         </td>
-                     </tbody>
-                 </table>
-                 <div class="d-flex justify-content-end" style="margin-top:50px;">
-                     <div class="checkout_btn_inner d-flex">
-                         <a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-            }
-            else
-            {
-                <div class="text-center">
-                    <div class="cart-empty-wrap" style="margin:20px 0;">
-                        <img src="~/Content/img/shopping-cart-256.jpg"/>
-                        <div style="font-size: 1.2rem; font-weight:500; margin-top:20px">
-                            Giỏ hàng rỗng
+                                <tr data-item="@item.ctsp.MaChiTietSP">
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="/Content/img/cart.jpg" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <p>@item.tensp</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @{
+                                            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                                            string gia = item.dongia.Value.ToString("#,###", cul.NumberFormat);
+                                        }
+                                        <h5>@gia đ</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.size</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.mau</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input type="text" name="qty" id="@item.ctsp.MaChiTietSP" maxlength="12" value="@item.quantity" title="Quantity:"
+                                                   class="input-text qty">
+                                            <button data-id="@item.ctsp.MaChiTietSP" class="increase items-count" type="button">
+                                                <i class="lnr lnr-chevron-up"></i>
+                                            </button>
+                                            <button data-id="@item.ctsp.MaChiTietSP" class="reduced items-count" type="button">
+                                                <i class="lnr lnr-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @{
+                                            CultureInfo cul1 = CultureInfo.GetCultureInfo("vi-VN");
+                                            string ThanhTien = item.thanhtien.Value.ToString("#,###", cul1.NumberFormat);
+                                        }
+                                        <h5 class="thanhtien" data-id="@item.ctsp.MaChiTietSP">@ThanhTien đ</h5>
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.ctsp.MaChiTietSP" class="btn-sm btn-danger btn-delete">Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <h5>Tổng tiền</h5>
+                        </td>
+                        <td>
+                            @{
+                                CultureInfo cul2 = CultureInfo.GetCultureInfo("vi-VN");
+                                string tongtien = Model.TongTien.Value.ToString("#,###", cul2.NumberFormat);
+                            }
+                            <h5 id="tongtien">@tongtien đ</h5>
+                        </td>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end" style="margin-top:50px;">
+                        <div class="checkout_btn_inner d-flex">
+                            <a class="gray_btn" href="/GioHang/ThanhToan">Tiếp tục mua hàng</a>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <a href="/" class="btn btn-success">
-                            <img src="~/Content/img/shopping-cart-16.png" style="margin-right:10px;"/>
-                            Về trang chủ
-                        </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <div class="cart-empty-wrap" style="margin:20px 0;">
+                    <img src="~/Content/img/shopping-cart-256.jpg" />
+                    <div style="font-size: 1.2rem; font-weight:500; margin-top:20px">
+                        Giỏ hàng rỗng
                     </div>
                 </div>
-            }
+                <div class="text-center">
+                    <a href="/" class="btn btn-success">
+                        <img src="~/Content/img/shopping-cart-16.png" style="margin-right:10px;" />
+                        Về trang chủ
+                    </a>
+                </div>
+            </div>
+        }
     </div>
 </section>
 <script>
     var url_update_cart = "/GioHang/CapNhatGioHang";
     var url_delete_item = "/GioHang/XoaSanPham";
-    $(".increase").click(function () {       
+    $(".increase").click(function () {
         var id = $(this).data('id');
         var count_value = $("#" + id).val();
         if (!isNaN(count_value)) {
@@ -193,20 +207,20 @@
                 }
                 else if (data.status == 1 && data.empty == 1) {
                     $(".cart_area").empty().append(
-                        "<div class='text-center'>"+
-                            "<div class='cart-empty-wrap' style='margin:20px 0;'>"+
-                                "<img src="+"'/Content/img/shopping-cart-256.jpg'"+"/>"+
-                                "<div style='font-size: 1.2rem; font-weight:500; margin-top:20px'>"+
-                                    "Giỏ hàng rỗng"+
-                                "</div>"+
-                            "</div>"+
-                            "<div class='text-center'>"+
-                                "<a href='/' class='btn btn-success'>"+
-                                    "<img src="+"'/Content/img/shopping-cart-16.png' style='margin-right:10px;'"+"/>"+
-                                    "Về trang chủ"+
-                                "</a>"+
-                            "</div>"+
-                       "</div>"
+                        "<div class='text-center'>" +
+                        "<div class='cart-empty-wrap' style='margin:20px 0;'>" +
+                        "<img src=" + "'/Content/img/shopping-cart-256.jpg'" + "/>" +
+                        "<div style='font-size: 1.2rem; font-weight:500; margin-top:20px'>" +
+                        "Giỏ hàng rỗng" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='text-center'>" +
+                        "<a href='/' class='btn btn-success'>" +
+                        "<img src=" + "'/Content/img/shopping-cart-16.png' style='margin-right:10px;'" + "/>" +
+                        "Về trang chủ" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>"
                     );
                 }
             }
@@ -219,7 +233,7 @@
         setTimeout(function () {
             $(".maintance-message").empty();
         }, 5000)
-        
+
     })
 </script>
 <!--================End Cart Area =================-->

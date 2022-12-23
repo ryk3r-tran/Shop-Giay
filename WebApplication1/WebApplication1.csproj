@@ -230,6 +230,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
     <Compile Include="Controllers\LienHeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Models\Dataprovider.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
@@ -1570,10 +1571,14 @@
     <Content Include="Views\GioHang\LichSuMuaHang.cshtml" />
     <Content Include="Views\Customer\Profile.cshtml" />
     <Content Include="Views\TaiKhoan\DangKy.cshtml" />
+    <Content Include="Views\SanPham\TestCauLenh123.cshtml" />
+    <Content Include="Views\SanPham\DsSanPhamTheoTieuChi.cshtml" />
+    <Content Include="Views\SanPham\TimKiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DonHang\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

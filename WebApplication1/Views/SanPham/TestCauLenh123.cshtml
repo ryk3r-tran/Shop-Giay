@@ -1,5 +1,4 @@
-﻿
-@using WebApplication1.Models
+﻿@using WebApplication1.Models
 @using PagedList.Mvc
 @using System.Globalization;
 @model PagedList.PagedList<SanPham>
@@ -12,26 +11,33 @@
     {
         <div class="col-lg-4 col-md-6">
             <div class="single-product">
-                <a href="/SanPham/SanPhamChiTiet/@it.Masp">
-                    <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
-                </a>
-                    <div class="product-details">
-                        <h6>@it.Tensp</h6>
-                        <div class="price">
+                <img class="img-fluid" src="/Content/img/product/p1.jpg" alt="">
+                <div class="product-details">
+                    <h6>@it.Tensp</h6>
+                    <div class="price">
 
-                            @{
-                                CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
-                                string gia = it.Gia.ToString("#,###", cul.NumberFormat);
-                            }
-                            <h6>Giá: @gia đ</h6>
+                        @{
+                            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                            string gia = it.Gia.ToString("#,###", cul.NumberFormat);
+                        }
+                        <h6>Giá: @gia VND</h6>
 
-                            <h6>Đánh giá: @it.TbSao <i style="color: #ffce3d" class="fa fa-star"></i></h6>
-                            <br />
-                            <h6>Hãng: @it.TenNSX</h6>
-                        </div>
-                        <div class="prd-bottom">                      
-                               
-            </div>
+                        <h6>Đánh giá: @it.TbSao <i style="color: #ffce3d" class="fa fa-star"></i></h6>
+                        <br />
+                        <h6>Hãng: @it.TenNSX</h6>
+                    </div>
+                    <div class="prd-bottom">
+
+                        <a href="#" class="social-info add-to-cart" id="@it.Masp">
+                            <span class="ti-bag"></span>
+                            <p class="hover-text">Thêm vào</p>
+                        </a>
+
+                        <a href="/SanPham/SanPhamChiTiet/@it.Masp" class="social-info">
+                            <span class="lnr lnr-move"></span>
+                            <p class="hover-text">xem chi tiết</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
