@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+</head>
+<body>
+ 
+
+    <div>
+
+        @using (Html.BeginForm("Test", "Test", FormMethod.Post, new
+        {
+            @name = "form",
+            @id = "idform"
+
+        }))
+
+        {
+
+
+
+            SelectList Nguon = (SelectList)ViewBag.TinhThanh;
+
+            @Html.DropDownList("name(name)", Nguon, new { id = "id2" });
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+    </div>
+   
+
+
+</body>
+</html>
