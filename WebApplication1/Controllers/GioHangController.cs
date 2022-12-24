@@ -12,6 +12,7 @@ using System.Threading;
 using System.IO;
 using WebApplication1.App_Start;
 using WebApplication1.code;
+using System.Data;
 
 namespace WebApplication1.Controllers
 {
@@ -266,9 +267,37 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public List<DonMua> LayDsDonMua()
+        {
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            string sql = "LayDonMua @makh";
+            DataTable dt = new DataTable();
+            dt = Dataprovider.ExecuteQuery(sql, new object[] { makh });
+
+            List<DonMua> DsDonMua = new List<DonMua>();
+            DonMua MotDonMua;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                MotDonMua = new DonMua();
+                /*MotDonMua.MaKh = Convert.ToInt32(dt.Rows[i]["MaKh"].ToString());*/
+                MotDonMua.MaDH=Convert.ToInt32(dt.Rows[i]["MaDH"].ToString());
+                MotDonMua.AnhChinh = dt.Rows[i]["AnhChinh"].ToString();
+                MotDonMua.TenSP = dt.Rows[i]["TenSP"].ToString();
+                MotDonMua.DonGia = Convert.ToInt32(dt.Rows[i]["DonGia"].ToString());
+                MotDonMua.SoLuong=Convert.ToInt32(dt.Rows[i]["SoLuong"].ToString());
+                MotDonMua.TongTien=Convert.ToInt32(dt.Rows[i]["TongTien"].ToString());
+                MotDonMua.TinhTrang=dt.Rows[i]["TinhTrang"].ToString();
+                DsDonMua.Add(MotDonMua);
+            }
+            return DsDonMua;
+        }
+
         public ActionResult DonMua()
         {
-            return View();
+            List<DonMua> DsDonMua = LayDsDonMua();
+            return View(DsDonMua);
         }
         [HttpGet]
         public ActionResult ThemDonHang(DONHANG dh)
@@ -277,7 +306,21 @@ namespace WebApplication1.Controllers
         }
         public ActionResult LichSuMuaHang()
         {
-            return View();
+            List<DonMua> DsDonMua = LayDsDonMua();
+            return View(DsDonMua);
+        }
+
+        public ActionResult CapNhatDonMua(int id)
+        {
+            var db = new KarmaDBContext();
+
+            var DonHangCanSua = db.DONHANGs.Find(id);
+
+            DonHangCanSua.TinhTrang = "Hủy";
+            db.SaveChanges();
+
+            return RedirectToAction("DonMua");
+
         }
 
         [HttpPost]
