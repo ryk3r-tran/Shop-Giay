@@ -1578,6 +1578,9 @@
     <Content Include="Views\SanPham\DsSanPhamTheoTieuChi.cshtml" />
     <Content Include="Views\SanPham\TimKiem.cshtml" />
     <Content Include="Views\GioHang\ThemDonHang123.cshtml" />
+    <Content Include="Views\SanPham\DsBinhLuan.cshtml" />
+    <Content Include="Views\SanPham\ThemBinhLuan.cshtml" />
+    <Content Include="Views\SanPham\HienThiDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

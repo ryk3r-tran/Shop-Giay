@@ -21,24 +21,24 @@ namespace WebApplication1.Controllers
     {
         // GET: GioHang
 
-        
+
         public ActionResult GioHang()
         {
             Cart cart = Session["UserCart"] as Cart;
             return View(cart);
         }
-        
+
         public ActionResult ThemVaoGioHang(string id, int? size, int? mau)
         {
 
             var idsp = Int32.Parse(id);
-            if(size == null)
+            if (size == null)
             {
                 size = 1;
             }
 
-             var db = new KarmaDBContext();
-            if(mau == null)  // chưa chọn màu
+            var db = new KarmaDBContext();
+            if (mau == null)  // chưa chọn màu
             {
                 return Json(new { status = "chua chon mau" });
             }
@@ -97,10 +97,10 @@ namespace WebApplication1.Controllers
             }
 
 
-            
+
         }
 
-        
+
 
         public ActionResult CapNhatGioHang(int id, int soluong)
         {
@@ -117,7 +117,7 @@ namespace WebApplication1.Controllers
                 quanity = quanity,
                 thanhtien = thanhtien,
                 tongtien = tongtien,
-            }) ;
+            });
         }
         public ActionResult XoaSanPham(int id)
         {
@@ -138,10 +138,10 @@ namespace WebApplication1.Controllers
                 return Json(new
                 {
                     status = 1,
-                    empty=0,
+                    empty = 0,
                 });
             }
-            
+
         }
         public ActionResult ThanhToan()
         {
@@ -155,12 +155,12 @@ namespace WebApplication1.Controllers
         public ActionResult Payment(int madh, string tinh, string huyen, string xa, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
         {
 
-            string diachi = tinh.Split('+')[1] + ", " + huyen + ", " + xa;
+            string diachi = tinh.Split('+')[1] + ", " + huyen + " , " + xa;
             if (phuongthuc == 1)
             {
-                ThemDonHang123(madh,diachi, tongtien, phuongthuc, hoten, email, sdt);
+                // ThemDonHang123(madh,diachi, tongtien, phuongthuc, hoten, email, sdt);
                 ViewBag.OrderSuccessful = "Đặt hàng thành công";
-                
+
                 string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/newOrder.html"));
                 content = content.Replace("{{idOrder}}", madh.ToString());
                 content = content.Replace("{{customerName}}", hoten);
@@ -168,12 +168,12 @@ namespace WebApplication1.Controllers
                 content = content.Replace("{{Email}}", email);
                 content = content.Replace("{{Address}}", diachi);
                 content = content.Replace("{{Total}}", tongtien.ToString());
-                
+
                 //var toEmailAddress = ConfigurationManager.AppSettings["toEmailAdress"].ToString();
                 new MailHelper().SendMail(email, "Test send email ohhh yeahhhhhh", content);
                 return RedirectToAction("DonMua", "GioHang");
             }
-            else if(phuongthuc == 2)
+            else if (phuongthuc == 2)
             {
                 string url = ConfigurationManager.AppSettings["Url"];
                 string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
@@ -203,7 +203,7 @@ namespace WebApplication1.Controllers
                 ViewBag.Message = "Bạn chưa chọn phương thức thanh toán";
                 return RedirectToAction("ThanhToan", "GioHang");
             }
-            
+
         }
 
 
@@ -233,13 +233,13 @@ namespace WebApplication1.Controllers
                 {
                     if (vnp_ResponseCode == "00")
                     {
-                        
+
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
                         Session.Remove("UserCart");
                         return View();
                     }
-                    else if(vnp_ResponseCode == "24")
+                    else if (vnp_ResponseCode == "24")
                     {
                         //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
                         //ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
@@ -254,7 +254,7 @@ namespace WebApplication1.Controllers
             }
             return View("ThanhToan", "GioHang");
         }
-        
+
         public ActionResult XacNhanDonHang()
         {
             return View();
@@ -331,7 +331,7 @@ namespace WebApplication1.Controllers
                     tenhuyen = element.TenHuyen,
                 };
                 huyen.Add(a);
-            }               
+            }
             return Json(huyen);
         }
 
@@ -353,7 +353,8 @@ namespace WebApplication1.Controllers
             }
             return Json(xa);
         }
-        public void ThemDonHang123(int madh, string diachi, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
+        [HttpGet]
+        public void ThemDonHangDungForm(int madh, decimal tongtien, int phuongthuc, string hoten, string email, string sdt, string Tinh, string Huyen, string Xa)
         {
             //var KH = Session["UserLogin"] as KHACHHANG;
             //int makh = KH.MaKH;
@@ -361,17 +362,18 @@ namespace WebApplication1.Controllers
             DateTime NgayDatHang = DateTime.Now;
             var db = new KarmaDBContext();
             DONHANG dh = new DONHANG();
-            
+
+
             dh.MaKH = makh;
             dh.NgayDat = DateTime.Now;
-            dh.DCGiao = diachi;
+            //dh.DCGiao = diachi;
             dh.TongTien = tongtien;
             dh.TinhTrang = "Chưa Xác Nhận";
             if (phuongthuc == 1)
             {
                 dh.ThanhToan = "Tiền mặt";
             }
-            else if(phuongthuc == 2)
+            else if (phuongthuc == 2)
             {
                 dh.ThanhToan = "Thẻ ngân hàng";
             }
@@ -379,7 +381,7 @@ namespace WebApplication1.Controllers
             {
                 dh.ThanhToan = "0";
             }
-            
+
             dh.HoTen = hoten;
             dh.Email = email;
             dh.MaDH = madh;
@@ -402,6 +404,58 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
             }
         }
+
+    
+    //public void ThemDonHang123(int madh, string diachi, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
+    //{
+    //    //var KH = Session["UserLogin"] as KHACHHANG;
+    //    //int makh = KH.MaKH;
+    //    int makh = 4;
+    //    DateTime NgayDatHang = DateTime.Now;
+    //    var db = new KarmaDBContext();
+    //    DONHANG dh = new DONHANG();
+
+    //    dh.MaKH = makh;
+    //    dh.NgayDat = DateTime.Now;
+    //    dh.DCGiao = diachi;
+    //    dh.TongTien = tongtien;
+    //    dh.TinhTrang = "Chưa Xác Nhận";
+    //    if (phuongthuc == 1)
+    //    {
+    //        dh.ThanhToan = "Tiền mặt";
+    //    }
+    //    else if (phuongthuc == 2)
+    //    {
+    //        dh.ThanhToan = "Thẻ ngân hàng";
+    //    }
+    //    else
+    //    {
+    //        dh.ThanhToan = "0";
+    //    }
+
+    //    dh.HoTen = hoten;
+    //    dh.Email = email;
+    //    dh.MaDH = madh;
+    //    dh.Sdt = sdt;
+    //    db.DONHANGs.Add(dh);
+    //    db.SaveChanges();
+
+    //    Cart cart = Session["UserCart"] as Cart;
+    //    int MaCtsp;
+    //    int SoLuong;
+    //    foreach (var item in cart.ListCartItem)
+    //    {
+    //        CHITIETDH ctdh = new CHITIETDH();
+    //        MaCtsp = item.ctsp.MaChiTietSP;
+    //        SoLuong = item.quantity;
+    //        ctdh.MaDH = madh;
+    //        ctdh.SoLuong = SoLuong;
+    //        ctdh.MaChiTietSP = MaCtsp;
+    //        db.CHITIETDHs.Add(ctdh);
+    //        db.SaveChanges();
+    //    }
+    //}
+
 
 
     }
