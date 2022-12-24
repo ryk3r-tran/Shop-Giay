@@ -5,7 +5,7 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <div class="comment_list">
 
-    
+
     @foreach (var it in Model)
     {
         <div class="review_item">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="media-body">
                     <h4>@it.TenKH</h4>
-                    <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
+                   <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
                     @for (int i = 1; i <= @it.Sao; i++)
                     {
                         <i class="fa fa-star"></i>
@@ -62,8 +62,6 @@
                 LoadDsBinhLuan(ChiSoTrang, MaSanPham);
             })
         })
-
-
     </script>
     <style>
         .pageIndexs {
@@ -83,4 +81,3 @@
 
 </div>
 
-@*@Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))*@

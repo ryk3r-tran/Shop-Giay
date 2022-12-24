@@ -8,6 +8,7 @@
     ViewBag.Title = "SanPhamChiTiet";
     Layout = "~/Views/Layout/MyLayout.cshtml";
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
@@ -67,9 +68,11 @@
                         <li><a href="#"><span>Tình Trạng</span> : @TinhTrang</a></li>
 
                         @*lấy size*@
+
+
                         <li>
 
-                            Size:  <select>
+                          <select>
 
 
                                 @foreach (var item in db.SIZEs.ToList())
@@ -80,8 +83,9 @@
                             </select>
                         </li>
 
+
                         <br />
-                        <h5>Chọn màu :</h5>
+                        <h5 style="margin-top:30px">Chọn màu :</h5>
                         @foreach (var item in db.MAUSACs.ToList())
                         {
                             <li class="Color"><span class="Mau" style="background-color:@item.MaHeXan" data-id="@item.MaMau"></span></li>
@@ -216,13 +220,13 @@
                                 </td>
                             </tr>
                             @*<tr>
-                                <td>
-                                    <h5>Chiều cao cổ giày</h5>
-                                </td>
-                                <td>
-                                    <h5>Cổ thấp</h5>
-                                </td>
-                            </tr>*@
+                            <td>
+                                <h5>Chiều cao cổ giày</h5>
+                            </td>
+                            <td>
+                                <h5>Cổ thấp</h5>
+                            </td>
+                        </tr>*@
                             <tr>
                                 <td>
                                     <h5>Kiểm Tra Trước</h5>
@@ -232,34 +236,34 @@
                                 </td>
                             </tr>
                             @*<tr>
-                                <td>
-                                    <h5>Kho Hàng</h5>
-                                </td>
-                                <td>
-                                    <h5>1997</h5>
-                                </td>
-                            </tr>*@
+                            <td>
+                                <h5>Kho Hàng</h5>
+                            </td>
+                            <td>
+                                <h5>1997</h5>
+                            </td>
+                        </tr>*@
                             @*<tr>
-                                <td>
-                                    <h5>Gửi Từ</h5>
-                                </td>
-                                <td>
-                                    <h5>Hà Nội</h5>
-                                </td>
-                            </tr>*@
+                            <td>
+                                <h5>Gửi Từ</h5>
+                            </td>
+                            <td>
+                                <h5>Hà Nội</h5>
+                            </td>
+                        </tr>*@
                             <!-- <tr>
-                            <td>
-                                <h5>Each Box contains</h5>
-                            </td>
-                            <td>
-                                <h5>60pcs</h5>
-                            </td>
-                        </tr> -->
+                        <td>
+                            <h5>Each Box contains</h5>
+                        </td>
+                        <td>
+                            <h5>60pcs</h5>
+                        </td>
+                    </tr> -->
                         </tbody>
                     </table>
                 </div>
             </div>
-            @*// đây là phân bình luận*@
+
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="row">
 
@@ -275,8 +279,9 @@
                                     var TbSao = db.BINHLUANSPs.Where(s => s.MaSP == Model.MaSP);
                                     if (TbSao.Any())
                                     {
-                                        TbSoSao = TbSao.Average(t => t.Sao);
-                                        
+                                        TbSoSao = TbSao.Average(t => t.Sao);  // hàm làm tròn trung bình sao đến 1 chữ số
+                                        TbSoSao = Math.Round(TbSoSao, 1);
+
                                     }
 
 
@@ -347,51 +352,60 @@
 
 
                     </div>
+                </div>
+            </div>
 
+             @*bắt đầu phần đánh giá*@
+            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                <div class="row">
 
-                    <script>
+                    <div class="col-lg-2">
+                    </div>
 
-                        function LoadDsBinhLuan(ChiSoTrang, MaSP) {
+                    <div class="col-lg-8">
+                        <div class="review_box">
+                            <h4>Thêm Đánh Giá</h4>
 
-                            $.ajax({
-                                type: "GET",// kiểu get/post mà action cần truy cập đến
-                                data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
-                                {
-                                    pageIndex: ChiSoTrang,
-                                    id: MaSP
+                         
 
+                            <form class="row contact_form" action="/SanPham/ThemBinhLuan" method="get" id="contactForm" novalidate="novalidate">
+                                <div class="common-filter">
 
-                                },
+                                    <ul style="margin-left :20px;margin-bottom : 20px">
+                                        <li class="filter-list"><input class="SoSao" value="5" type="radio" name="Sao" checked="checked"> <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i></li>
+                                        <li class="filter-list"><input class="SoSao" value="4" type="radio" name="Sao"> <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i></li>
+                                        <li class="filter-list"><input class="SoSao" value="3" type="radio" name="Sao"> <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i></li>
+                                        <li class="filter-list"><input class="SoSao" value="2" type="radio" name="Sao"> <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i></li>
+                                        <li class="filter-list"><input class="SoSao" value="1" type="radio" name="Sao"> <i style="color: #ffce3d" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i><i style="color: #9d8f8f" class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                               
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <h4>Bình luận của bạn</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="NoiDung" id="message" rows="1" placeholder="Đánh Giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đánh Giá'"></textarea></textarea>
+                                    </div>
+                                </div>
+                                <input type="text" name="MaSp" value="@Model.MaSP" hidden />
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" value="submit" class="primary-btn">Gửi</button>
+                                </div>
 
+                            </form>
+                        </div>
+                    </div>
 
-                                url: '/SanPham/DsBinhLuan',// ‘/Controller/action’
-
-                                dataType: 'html',
-                                success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
-                                    $('#TraVe').html(KetQuaTraVeHam);
-
-
-                                }
-
-                            });
-                        }
-                        var MaSanPham = $('.MaSP').data('id');
-                        LoadDsBinhLuan(null, MaSanPham);
-
-                        $('.Mau').click(function () {
-
-                            $('.Mau').removeClass('Them');
-                            $(this).addClass('Them');
-                        })
-
-                    </script>
+                    <div class="col-lg-2">
+                    </div>
 
                 </div>
             </div>
 
-
-
-
+            @*kết thúc phần đánh giá*@
 
 
 
@@ -400,17 +414,46 @@
     </div>
 </section>
 <script>
+    function LoadDsBinhLuan(ChiSoTrang, MaSP) {
+        $.ajax({
+            type: "GET",// kiểu get/post mà action cần truy cập đến
+            data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
+            {
+                pageIndex: ChiSoTrang,
+                id: MaSP
+            },
+            url: '/SanPham/DsBinhLuan',// ‘/Controller/action’
+            dataType: 'html',
+            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
+                $('#TraVe').html(KetQuaTraVeHam);
+            }
+        });
+    }
+
+    var MaSanPham = $('.MaSP').data('id');
+    LoadDsBinhLuan(null, MaSanPham);
+
+    $('.Mau').click(function () {
+        $('.Mau').removeClass('Them');
+        $(this).addClass('Them');
+    })
+
 
     //var size = "";
     //var mau ="";
 
     var size = "";
     var mau = "";
-    $('select').change(function () {
-        var MaSize = $(this).val();
-        size = MaSize.toString();
-        alert(size);
+
+    $(document).ready(function () {
+        $('select').change(function () {
+          
+            var MaSize = $(this).val();
+            size = MaSize.toString();
+            alert(size);
+        })
     })
+   
 
     $('.Mau').click(function () {
 
