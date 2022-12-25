@@ -247,6 +247,7 @@
     <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SPCT.cs" />
+    <Compile Include="Models\TinhThanh.cs" />
     <Compile Include="Models\TK_View_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1582,11 +1583,11 @@
     <Content Include="Views\SanPham\DsBinhLuan.cshtml" />
     <Content Include="Views\SanPham\ThemBinhLuan.cshtml" />
     <Content Include="Views\SanPham\HienThiDonHang.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DonHang\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

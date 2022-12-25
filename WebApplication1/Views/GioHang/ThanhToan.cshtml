@@ -25,7 +25,7 @@
 <section class="checkout_area section_gap">
     <div class="container">
         <div class="billing_details">
-            <form class="row contact_form" action="/GioHang/ThemDonHangDungForm" method="get" novalidate="novalidate">
+            <form class="row contact_form" action="/GioHang/Payment" method="post" novalidate="novalidate">
                 <div class="row">
 
                     <div class="col-lg-8">
@@ -69,7 +69,9 @@
                                     </div>
                                     <div>Quận / Huyện</div>
                                     <div class="col-md-12 form-group p_star" id="select-district-wrap" style="padding:0;">
-
+                                        <select class="district" id="districts">
+                                            <option>--- Chọn Huyện ---</option>
+                                        </select>
                                     </div>
                                     <div>Xã / Phường</div>
                                     <div class="col-md-12 form-group p_star" id="select-ward-wrap" style="padding:0;">
@@ -213,17 +215,12 @@
  
 
     $(document).ready(function () {
-       
-
-       
-
-
         // get district
-        $("#select-district-wrap").append(
-            '<select class="district" id="districts" name="Huyen">' +
-            '<option>--- Chọn Huyện ---</option>' +
-            '</select>'
-        )
+        //$("#select-district-wrap").append(
+        //    '<select class="district" id="districts" name="Huyen">' +
+        //    '<option>--- Chọn Huyện ---</option>' +
+        //    '</select>'
+        //)
         $("#provinces").on('change', function () {
             $(".distric").empty();
             $(".distric").append(
@@ -240,7 +237,7 @@
                 success: function (data) {
                     console.log(data);
                     $("#select-district-wrap").empty().append(
-                        '<select class="district" id="districts">' +
+                        '<select class="district" id="districts" name="Huyen">' +
                         '<option>--- Chọn Huyện ---</option>' +
                         '</select>'
                     )

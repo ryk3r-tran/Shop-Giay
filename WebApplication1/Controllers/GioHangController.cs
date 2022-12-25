@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
     public class GioHangController : Controller
     {
         // GET: GioHang
-
+        KarmaDBContext _context = new KarmaDBContext();
 
         public ActionResult GioHang()
         {
@@ -37,14 +37,14 @@ namespace WebApplication1.Controllers
                 size = 1;
             }
 
-            var db = new KarmaDBContext();
+            //var db = new KarmaDBContext();
             if (mau == null)  // chưa chọn màu
             {
                 return Json(new { status = "chua chon mau" });
             }
             else  // đã chọn size và màu
             {
-                var dem = db.CHITIETSPs.Count(s => s.MaSP == idsp && s.MaSize == size && s.MaMau == mau);
+                var dem = _context.CHITIETSPs.Count(s => s.MaSP == idsp && s.MaSize == size && s.MaMau == mau);
                 if (dem == 1)  // có sản phẩm ứng với size và màu đó
                 {
                     IRepository<SANPHAM> sp = new Repository<SANPHAM>();
@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
                     Cart cart = Session["UserCart"] as Cart;
                     //lấy id chi tiết sản phần dựa vào id, size, màu
 
-                    var idctsp = db.CHITIETSPs.SingleOrDefault(s => s.MaSP == idsp && s.MaMau == mau && s.MaSize == size).MaChiTietSP;
+                    var idctsp = _context.CHITIETSPs.SingleOrDefault(s => s.MaSP == idsp && s.MaMau == mau && s.MaSize == size).MaChiTietSP;
 
                     // check product was in cart
                     if (cart.ListCartItem.SingleOrDefault(p => p.ctsp.MaChiTietSP == idctsp) == null)
@@ -152,10 +152,16 @@ namespace WebApplication1.Controllers
             return View(cart);
         }
 
-        public ActionResult Payment(int madh, string tinh, string huyen, string xa, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
+        public ActionResult Payment(int madh, decimal tongtien, int phuongthuc, string hoten, string email, string sdt, string Tinh, string Huyen, string Xa)
         {
+            int matinh = Int32.Parse(Tinh);
+            int mahuyen = Int32.Parse(Huyen);
+            int maxa = Int32.Parse(Xa);
+            var tinh = _context.Tinhs.SingleOrDefault(t => t.MaTinh == matinh).TenTinh;
+            var huyen = _context.Huyens.SingleOrDefault(t => t.MaHuyen == mahuyen).TenHuyen;
+            var xa = _context.Xas.SingleOrDefault(t => t.MaXa == maxa).TenXa;
 
-            string diachi = tinh.Split('+')[1] + ", " + huyen + " , " + xa;
+            string diachi = tinh + ", " + huyen + ", " + xa;
             if (phuongthuc == 1)
             {
                 // ThemDonHang123(madh,diachi, tongtien, phuongthuc, hoten, email, sdt);
@@ -182,7 +188,7 @@ namespace WebApplication1.Controllers
 
                 PayLib pay = new PayLib();
 
-                pay.AddRequestData("vnp_Amount", "1000000"); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+                pay.AddRequestData("vnp_Amount", tongtien.ToString()+ "00"); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
                 pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
                 pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
                 pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
@@ -205,11 +211,7 @@ namespace WebApplication1.Controllers
             }
 
         }
-
-
-
-
-        public ActionResult XacNhanThanhToan()
+        public ActionResult xntt()
         {
             if (Request.QueryString.Count > 0)
             {
@@ -237,7 +239,7 @@ namespace WebApplication1.Controllers
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
                         Session.Remove("UserCart");
-                        return View();
+                        return RedirectToAction("XacNhanThanhToan","GioHang");
                     }
                     else if (vnp_ResponseCode == "24")
                     {
@@ -252,7 +254,12 @@ namespace WebApplication1.Controllers
                     return View("ThanhToan", "GioHang");
                 }
             }
-            return View("ThanhToan", "GioHang");
+            return RedirectToAction("ThanhToan","GioHang");
+        }
+
+        public ActionResult XacNhanThanhToan()
+        {
+            return View();
         }
 
         public ActionResult XacNhanDonHang()
@@ -320,7 +327,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetHuyen(string idtinh)
         {
             int matinh = Int32.Parse(idtinh);
-            KarmaDBContext _context = new KarmaDBContext();
+            //KarmaDBContext _context = new KarmaDBContext();
             var dsHuyen = _context.Huyens.Where(h => h.MaTinh == matinh).ToList();
             List<object> huyen = new List<object> { };
             foreach (var element in dsHuyen)
@@ -339,7 +346,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetXa(string idhuyen)
         {
             int mahuyen = Int32.Parse(idhuyen);
-            KarmaDBContext _context = new KarmaDBContext();
+            //KarmaDBContext _context = new KarmaDBContext();
             var dsXa = _context.Xas.Where(h => h.MaHuyen == mahuyen).ToList();
             List<object> xa = new List<object> { };
             foreach (var element in dsXa)
@@ -353,7 +360,7 @@ namespace WebApplication1.Controllers
             }
             return Json(xa);
         }
-        [HttpGet]
+        [HttpPost]
         public void ThemDonHangDungForm(int madh, decimal tongtien, int phuongthuc, string hoten, string email, string sdt, string Tinh, string Huyen, string Xa)
         {
             //var KH = Session["UserLogin"] as KHACHHANG;
