@@ -5,7 +5,7 @@
 
 <div class="comment_list">
 
-    
+
     @foreach (var it in Model)
     {
         <div class="review_item">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="media-body">
                     <h4>@it.TenKH</h4>
-                    <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
+                   <h5>@it.NgayBinhLuan.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</h5>
                     @for (int i = 1; i <= @it.Sao; i++)
                     {
                         <i class="fa fa-star"></i>
@@ -62,8 +62,6 @@
                 LoadDsBinhLuan(ChiSoTrang, MaSanPham);
             })
         })
-
-
     </script>
     <style>
         .pageIndexs {
@@ -83,72 +81,3 @@
 
 </div>
 
-<script>
-
-    function LoadDsSanPham(ChiSoTrang, MaDm, SapXep, MaNsx, sao) {
-
-        $.ajax({
-
-            type: "GET",// kiểu get/post mà action cần truy cập đến
-            data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
-            {
-                pageIndex: ChiSoTrang,
-                MaDanhMuc: MaDm,
-                SapXep: SapXep,
-                MaNSX: MaNsx,
-                Sao: sao
-            },
-
-
-            url: '/SanPham/DsSanPhamTheoTieuChi',// ‘/Controller/action’
-
-            dataType: 'html',
-            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
-                $('#TraVeDs').html(KetQuaTraVeHam);
-
-
-            }
-
-        });
-    }
-
-
-    function TimKiem(ChiSoTrang, TimKiem) {
-
-        $.ajax({
-            type: "GET",// kiểu get/post mà action cần truy cập đến
-            data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
-            {
-                pageIndex: ChiSoTrang,
-                TimKiem: TimKiem
-            },
-
-
-            url: '/SanPham/TimKiem',// ‘/Controller/action’
-
-            dataType: 'html',
-            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
-                $('#TraVeDs').html(KetQuaTraVeHam);
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        $('#SapXep').change(function () {
-
-            var Madm = $('.DanhMuc').data('id');
-            var SoSao = $("input[type='radio'][name='Sao']:checked").val();
-            var SapXep = $("#SapXep").val();
-            var nsx = $("input[type='radio'][name='NhanHang']:checked").val();
-            LoadDsSanPham(null, Madm, SapXep, nsx, SoSao);
-        });
-    });
-
-
-    TimKiem(null, null);
-
-
-
-</script>
-
-@*@Html.PagedListPager(BinhLuan, page => Url.Action("SanPhamChiTiet", new { page }))*@

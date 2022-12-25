@@ -1,4 +1,5 @@
 ﻿using KarmaModels.KarmaModels;
+
 using KarmaModels.Repository;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using PagedList;
+using System.Data;
 
 namespace WebApplication1.Controllers
 
@@ -22,7 +24,7 @@ namespace WebApplication1.Controllers
             var DanhMuc = db.DANHMUCSPs.ToList();
 
             ViewBag.NhaSanXuat = db.NSXes.ToList();
-
+            
             return View(DanhMuc);
         }
         [HttpPost]
@@ -206,10 +208,43 @@ namespace WebApplication1.Controllers
 
             return PartialView(DsSanPham.ToPagedList(_pageIndex, SoSanPham));
         }
-        public ActionResult TestAnh()
+        [HttpGet]
+        public string ThemBinhLuan(string NoiDung, int Sao, int MaSp)
         {
-            
-            return View();
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            string sql = "ThemBinhLuan @MaKh , @MaSp , @ND , @Sao";
+            Dataprovider.ExecuteNonQuery(sql, new object[] { makh, MaSp, NoiDung, Sao });
+            return "Bình Luận Thành Công";
+
+
         }
+        public List<DONHANG> LayDsDonHang()
+        {
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            string sql = "LayDonHang @MaKh";
+            DataTable dt = new DataTable();
+            dt = Dataprovider.ExecuteQuery(sql, new object[] { makh });
+
+            List<DONHANG> DsDonHang = new List<DONHANG>();
+            DONHANG MotDonHang;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                MotDonHang = new DONHANG();
+                MotDonHang.MaDH = Convert.ToInt32(dt.Rows[i]["MaDH"].ToString());
+                DsDonHang.Add(MotDonHang);
+            }
+            return DsDonHang;
+        }
+        public ActionResult HienThiDonHang()
+        {
+            List<DONHANG> DsDonHang = LayDsDonHang();
+            return View(DsDonHang);
+        }
+
+
     }
 }

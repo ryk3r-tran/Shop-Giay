@@ -11,37 +11,40 @@ using KarmaModels.Payment;
 using System.Threading;
 using System.IO;
 using WebApplication1.App_Start;
+using WebApplication1.code;
+using System.Data;
+
 namespace WebApplication1.Controllers
 {
     //[Authorization(Quyen = "admin,customer")]
     public class GioHangController : Controller
     {
         // GET: GioHang
+        KarmaDBContext _context = new KarmaDBContext();
 
-        
         public ActionResult GioHang()
         {
             Cart cart = Session["UserCart"] as Cart;
             return View(cart);
         }
-        
+
         public ActionResult ThemVaoGioHang(string id, int? size, int? mau)
         {
 
             var idsp = Int32.Parse(id);
-            if(size == null)
+            if (size == null)
             {
                 size = 1;
             }
 
-             var db = new KarmaDBContext();
-            if(mau == null)  // chưa chọn màu
+            //var db = new KarmaDBContext();
+            if (mau == null)  // chưa chọn màu
             {
                 return Json(new { status = "chua chon mau" });
             }
             else  // đã chọn size và màu
             {
-                var dem = db.CHITIETSPs.Count(s => s.MaSP == idsp && s.MaSize == size && s.MaMau == mau);
+                var dem = _context.CHITIETSPs.Count(s => s.MaSP == idsp && s.MaSize == size && s.MaMau == mau);
                 if (dem == 1)  // có sản phẩm ứng với size và màu đó
                 {
                     IRepository<SANPHAM> sp = new Repository<SANPHAM>();
@@ -55,7 +58,7 @@ namespace WebApplication1.Controllers
                     Cart cart = Session["UserCart"] as Cart;
                     //lấy id chi tiết sản phần dựa vào id, size, màu
 
-                    var idctsp = db.CHITIETSPs.SingleOrDefault(s => s.MaSP == idsp && s.MaMau == mau && s.MaSize == size).MaChiTietSP;
+                    var idctsp = _context.CHITIETSPs.SingleOrDefault(s => s.MaSP == idsp && s.MaMau == mau && s.MaSize == size).MaChiTietSP;
 
                     // check product was in cart
                     if (cart.ListCartItem.SingleOrDefault(p => p.ctsp.MaChiTietSP == idctsp) == null)
@@ -94,10 +97,10 @@ namespace WebApplication1.Controllers
             }
 
 
-            
+
         }
 
-        
+
 
         public ActionResult CapNhatGioHang(int id, int soluong)
         {
@@ -114,7 +117,7 @@ namespace WebApplication1.Controllers
                 quanity = quanity,
                 thanhtien = thanhtien,
                 tongtien = tongtien,
-            }) ;
+            });
         }
         public ActionResult XoaSanPham(int id)
         {
@@ -135,10 +138,10 @@ namespace WebApplication1.Controllers
                 return Json(new
                 {
                     status = 1,
-                    empty=0,
+                    empty = 0,
                 });
             }
-            
+
         }
         public ActionResult ThanhToan()
         {
@@ -149,15 +152,34 @@ namespace WebApplication1.Controllers
             return View(cart);
         }
 
-        public ActionResult Payment(string id)
+        public ActionResult Payment(int madh, decimal tongtien, int phuongthuc, string hoten, string email, string sdt, string Tinh, string Huyen, string Xa)
         {
-            if (id == "1")
+            int matinh = Int32.Parse(Tinh);
+            int mahuyen = Int32.Parse(Huyen);
+            int maxa = Int32.Parse(Xa);
+            var tinh = _context.Tinhs.SingleOrDefault(t => t.MaTinh == matinh).TenTinh;
+            var huyen = _context.Huyens.SingleOrDefault(t => t.MaHuyen == mahuyen).TenHuyen;
+            var xa = _context.Xas.SingleOrDefault(t => t.MaXa == maxa).TenXa;
+
+            string diachi = tinh + ", " + huyen + ", " + xa;
+            if (phuongthuc == 1)
             {
+                // ThemDonHang123(madh,diachi, tongtien, phuongthuc, hoten, email, sdt);
                 ViewBag.OrderSuccessful = "Đặt hàng thành công";
 
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/newOrder.html"));
+                content = content.Replace("{{idOrder}}", madh.ToString());
+                content = content.Replace("{{customerName}}", hoten);
+                content = content.Replace("{{Phone}}", sdt);
+                content = content.Replace("{{Email}}", email);
+                content = content.Replace("{{Address}}", diachi);
+                content = content.Replace("{{Total}}", tongtien.ToString());
+
+                //var toEmailAddress = ConfigurationManager.AppSettings["toEmailAdress"].ToString();
+                new MailHelper().SendMail(email, "Test send email ohhh yeahhhhhh", content);
                 return RedirectToAction("DonMua", "GioHang");
             }
-            else if(id == "2")
+            else if (phuongthuc == 2)
             {
                 string url = ConfigurationManager.AppSettings["Url"];
                 string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
@@ -166,7 +188,7 @@ namespace WebApplication1.Controllers
 
                 PayLib pay = new PayLib();
 
-                pay.AddRequestData("vnp_Amount", "1000000"); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
+                pay.AddRequestData("vnp_Amount", tongtien.ToString()+ "00"); //số tiền cần thanh toán, công thức: số tiền * 100 - ví dụ 10.000 (mười nghìn đồng) --> 1000000
                 pay.AddRequestData("vnp_BankCode", ""); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
                 pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
                 pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
@@ -187,13 +209,9 @@ namespace WebApplication1.Controllers
                 ViewBag.Message = "Bạn chưa chọn phương thức thanh toán";
                 return RedirectToAction("ThanhToan", "GioHang");
             }
-            
+
         }
-
-
-
-
-        public ActionResult XacNhanThanhToan()
+        public ActionResult xntt()
         {
             if (Request.QueryString.Count > 0)
             {
@@ -217,12 +235,13 @@ namespace WebApplication1.Controllers
                 {
                     if (vnp_ResponseCode == "00")
                     {
+
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
                         Session.Remove("UserCart");
-                        return View();
+                        return RedirectToAction("XacNhanThanhToan","GioHang");
                     }
-                    else if(vnp_ResponseCode == "24")
+                    else if (vnp_ResponseCode == "24")
                     {
                         //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
                         //ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
@@ -235,17 +254,50 @@ namespace WebApplication1.Controllers
                     return View("ThanhToan", "GioHang");
                 }
             }
-            return View("ThanhToan", "GioHang");
+            return RedirectToAction("ThanhToan","GioHang");
         }
-        
+
+        public ActionResult XacNhanThanhToan()
+        {
+            return View();
+        }
+
         public ActionResult XacNhanDonHang()
         {
             return View();
         }
 
+        public List<DonMua> LayDsDonMua()
+        {
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            string sql = "LayDonMua @makh";
+            DataTable dt = new DataTable();
+            dt = Dataprovider.ExecuteQuery(sql, new object[] { makh });
+
+            List<DonMua> DsDonMua = new List<DonMua>();
+            DonMua MotDonMua;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                MotDonMua = new DonMua();
+                /*MotDonMua.MaKh = Convert.ToInt32(dt.Rows[i]["MaKh"].ToString());*/
+                MotDonMua.MaDH=Convert.ToInt32(dt.Rows[i]["MaDH"].ToString());
+                MotDonMua.AnhChinh = dt.Rows[i]["AnhChinh"].ToString();
+                MotDonMua.TenSP = dt.Rows[i]["TenSP"].ToString();
+                MotDonMua.DonGia = Convert.ToInt32(dt.Rows[i]["DonGia"].ToString());
+                MotDonMua.SoLuong=Convert.ToInt32(dt.Rows[i]["SoLuong"].ToString());
+                MotDonMua.TongTien=Convert.ToInt32(dt.Rows[i]["TongTien"].ToString());
+                MotDonMua.TinhTrang=dt.Rows[i]["TinhTrang"].ToString();
+                DsDonMua.Add(MotDonMua);
+            }
+            return DsDonMua;
+        }
+
         public ActionResult DonMua()
         {
-            return View();
+            List<DonMua> DsDonMua = LayDsDonMua();
+            return View(DsDonMua);
         }
         [HttpGet]
         public ActionResult ThemDonHang(DONHANG dh)
@@ -254,14 +306,28 @@ namespace WebApplication1.Controllers
         }
         public ActionResult LichSuMuaHang()
         {
-            return View();
+            List<DonMua> DsDonMua = LayDsDonMua();
+            return View(DsDonMua);
+        }
+
+        public ActionResult CapNhatDonMua(int id)
+        {
+            var db = new KarmaDBContext();
+
+            var DonHangCanSua = db.DONHANGs.Find(id);
+
+            DonHangCanSua.TinhTrang = "Hủy";
+            db.SaveChanges();
+
+            return RedirectToAction("DonMua");
+
         }
 
         [HttpPost]
         public ActionResult GetHuyen(string idtinh)
         {
             int matinh = Int32.Parse(idtinh);
-            KarmaDBContext _context = new KarmaDBContext();
+            //KarmaDBContext _context = new KarmaDBContext();
             var dsHuyen = _context.Huyens.Where(h => h.MaTinh == matinh).ToList();
             List<object> huyen = new List<object> { };
             foreach (var element in dsHuyen)
@@ -272,7 +338,7 @@ namespace WebApplication1.Controllers
                     tenhuyen = element.TenHuyen,
                 };
                 huyen.Add(a);
-            }               
+            }
             return Json(huyen);
         }
 
@@ -280,7 +346,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetXa(string idhuyen)
         {
             int mahuyen = Int32.Parse(idhuyen);
-            KarmaDBContext _context = new KarmaDBContext();
+            //KarmaDBContext _context = new KarmaDBContext();
             var dsXa = _context.Xas.Where(h => h.MaHuyen == mahuyen).ToList();
             List<object> xa = new List<object> { };
             foreach (var element in dsXa)
@@ -294,5 +360,110 @@ namespace WebApplication1.Controllers
             }
             return Json(xa);
         }
+        [HttpPost]
+        public void ThemDonHangDungForm(int madh, decimal tongtien, int phuongthuc, string hoten, string email, string sdt, string Tinh, string Huyen, string Xa)
+        {
+            //var KH = Session["UserLogin"] as KHACHHANG;
+            //int makh = KH.MaKH;
+            int makh = 4;
+            DateTime NgayDatHang = DateTime.Now;
+            var db = new KarmaDBContext();
+            DONHANG dh = new DONHANG();
+
+
+            dh.MaKH = makh;
+            dh.NgayDat = DateTime.Now;
+            //dh.DCGiao = diachi;
+            dh.TongTien = tongtien;
+            dh.TinhTrang = "Chưa Xác Nhận";
+            if (phuongthuc == 1)
+            {
+                dh.ThanhToan = "Tiền mặt";
+            }
+            else if (phuongthuc == 2)
+            {
+                dh.ThanhToan = "Thẻ ngân hàng";
+            }
+            else
+            {
+                dh.ThanhToan = "0";
+            }
+
+            dh.HoTen = hoten;
+            dh.Email = email;
+            dh.MaDH = madh;
+            dh.Sdt = sdt;
+            db.DONHANGs.Add(dh);
+            db.SaveChanges();
+
+            Cart cart = Session["UserCart"] as Cart;
+            int MaCtsp;
+            int SoLuong;
+            foreach (var item in cart.ListCartItem)
+            {
+                CHITIETDH ctdh = new CHITIETDH();
+                MaCtsp = item.ctsp.MaChiTietSP;
+                SoLuong = item.quantity;
+                ctdh.MaDH = madh;
+                ctdh.SoLuong = SoLuong;
+                ctdh.MaChiTietSP = MaCtsp;
+                db.CHITIETDHs.Add(ctdh);
+                db.SaveChanges();
+            }
+        }
+
+    
+    //public void ThemDonHang123(int madh, string diachi, decimal tongtien, int phuongthuc, string hoten, string email, string sdt)
+    //{
+    //    //var KH = Session["UserLogin"] as KHACHHANG;
+    //    //int makh = KH.MaKH;
+    //    int makh = 4;
+    //    DateTime NgayDatHang = DateTime.Now;
+    //    var db = new KarmaDBContext();
+    //    DONHANG dh = new DONHANG();
+
+    //    dh.MaKH = makh;
+    //    dh.NgayDat = DateTime.Now;
+    //    dh.DCGiao = diachi;
+    //    dh.TongTien = tongtien;
+    //    dh.TinhTrang = "Chưa Xác Nhận";
+    //    if (phuongthuc == 1)
+    //    {
+    //        dh.ThanhToan = "Tiền mặt";
+    //    }
+    //    else if (phuongthuc == 2)
+    //    {
+    //        dh.ThanhToan = "Thẻ ngân hàng";
+    //    }
+    //    else
+    //    {
+    //        dh.ThanhToan = "0";
+    //    }
+
+    //    dh.HoTen = hoten;
+    //    dh.Email = email;
+    //    dh.MaDH = madh;
+    //    dh.Sdt = sdt;
+    //    db.DONHANGs.Add(dh);
+    //    db.SaveChanges();
+
+    //    Cart cart = Session["UserCart"] as Cart;
+    //    int MaCtsp;
+    //    int SoLuong;
+    //    foreach (var item in cart.ListCartItem)
+    //    {
+    //        CHITIETDH ctdh = new CHITIETDH();
+    //        MaCtsp = item.ctsp.MaChiTietSP;
+    //        SoLuong = item.quantity;
+    //        ctdh.MaDH = madh;
+    //        ctdh.SoLuong = SoLuong;
+    //        ctdh.MaChiTietSP = MaCtsp;
+    //        db.CHITIETDHs.Add(ctdh);
+    //        db.SaveChanges();
+    //    }
+    //}
+
+
+
     }
 }

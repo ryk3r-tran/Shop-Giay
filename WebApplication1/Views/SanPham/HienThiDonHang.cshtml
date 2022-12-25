@@ -1,0 +1,23 @@
+﻿@using KarmaModels.KarmaModels
+@model List<DONHANG>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HienThiDonHang</title>
+</head>
+<body>
+    <p></p>
+    <div>
+        @foreach (var item in Model)
+        {
+            <p>@item.MaDH</p>
+        }
+    </div>
+</body>
+</html>

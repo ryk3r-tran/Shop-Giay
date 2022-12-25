@@ -19,7 +19,7 @@ namespace WebApplication1.Models
         public string MoTa { get; set; }
 
         
-        public DateTime? NgayCapNhat { get; set; }
+        public DateTime NgayCapNhat { get; set; }
 
         public int MaNSX { get; set; }
 
@@ -48,7 +48,7 @@ namespace WebApplication1.Models
 
         public DateTime NgayBinhLuan { get; set; }
 
-        public double Sao { get; set; }
+        public double? Sao { get; set; }
 
        
     }

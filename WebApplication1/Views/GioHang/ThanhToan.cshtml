@@ -25,65 +25,73 @@
 <section class="checkout_area section_gap">
     <div class="container">
         <div class="billing_details">
-            <form class="row contact_form" action="/GioHang/ThemDonHang" method="get" novalidate="novalidate">
+            <form class="row contact_form" action="/GioHang/Payment" method="post" novalidate="novalidate">
                 <div class="row">
 
                     <div class="col-lg-8">
 
                         <h3>CHI TIẾT THANH TOÁN</h3>
 
+                     
+                            <div class="col-md-12 form-group p_star">
+                                <input placeholder="Họ Và Tên" type="text" class="form-control" name="HoTen" id="Hoten" value="">
+                                @*<span placeholder="Họ Và Tên" class="placeholder"></span>*@
+                            </div>
 
-                        <div class="col-md-12 form-group p_star">
-                            <input placeholder="Họ Và Tên" type="text" class="form-control" name="HoTen" value="">
-                            @*<span placeholder="Họ Và Tên" class="placeholder"></span>*@
-                        </div>
-
-                        <div class="col-md-6 form-group p_star">
-                            <input placeholder="Số Điện Thoại" type="number" class="form-control" name="Sdt" value="">
-                            @*<span class="placeholder" data-placeholder="Số điện thoại"></span>*@
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" placeholder="Nhập Email" name="Email" value="">
-                            @*<span class="placeholder" data-placeholder="Địa chỉ email"></span>*@
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <h3>THÔNG TIN VẬN CHUYỂN</h3>
-                                <!--<div class="col-md-12 form-group p_star" style="padding:0;">
-    <input type="text" class="form-control" placeholder="Địa Chỉ Nhận" name="DCGiao" value="">-->
-                                @*<span class="placeholder" data-placeholder="Địa chỉ"></span>*@
-                                <!--</div>-->
-                                <div>Tỉnh</div>
-                                <div class="col-md-12 form-group p_star" style="padding:0;">
-                                    <select class="province" id="provinces">
-                                        <option>--- Chọn Tỉnh ---</option>
-                                        @{
-                                            var dsTinh = ViewBag.Tinh as List<Tinh>;
-                                        }
-                                        @foreach (var tinh in dsTinh)
-                                        {
-                                            <option value=@tinh.MaTinh> + @tinh.TenTinh + </option>
-                                            ;
-                                        }
-                                    </select>
-                                </div>
-                                <div>Quận / Huyện</div>
-                                <div class="col-md-12 form-group p_star" id="select-district-wrap" style="padding:0;">
-
-                                </div>
-                                <div>Xã / Phường</div>
-                                <div class="col-md-12 form-group p_star" id="select-ward-wrap" style="padding:0;">
-                                    <select class="ward" id="wards">
-                                        <option>--- Chọn Xã ---</option>
-                                    </select>
+                            <div class="col-md-6 form-group p_star">
+                                <input placeholder="Số Điện Thoại" type="number" class="form-control" name="sdt" id="Sdt" value="">
+                                @*<span class="placeholder" data-placeholder="Số điện thoại"></span>*@
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" placeholder="Nhập Email" name="email" id="Email" value="">
+                                @*<span class="placeholder" data-placeholder="Địa chỉ email"></span>*@
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <h3>THÔNG TIN VẬN CHUYỂN</h3>
+                                    <!--<div class="col-md-12 form-group p_star" style="padding:0;">
+                            <input type="text" class="form-control" placeholder="Địa Chỉ Nhận" name="DCGiao" value="">-->
+                                    @*<span class="placeholder" data-placeholder="Địa chỉ"></span>*@
+                                    <!--</div>-->
+                                    <div>Tỉnh</div>
+                                    <div class="col-md-12 form-group p_star" style="padding:0;">
+                                        <select class="province" id="provinces" name="Tinh">
+                                            <option>--- Chọn Tỉnh ---</option>
+                                            @{
+                                                var dsTinh = ViewBag.Tinh as List<Tinh>;
+                                            }
+                                            @foreach (var tinh in dsTinh)
+                                            {
+                                                <option value=@tinh.MaTinh> + @tinh.TenTinh + </option>
+                                                ;
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>Quận / Huyện</div>
+                                    <div class="col-md-12 form-group p_star" id="select-district-wrap" style="padding:0;">
+                                        <select class="district" id="districts">
+                                            <option>--- Chọn Huyện ---</option>
+                                        </select>
+                                    </div>
+                                    <div>Xã / Phường</div>
+                                    <div class="col-md-12 form-group p_star" id="select-ward-wrap" style="padding:0;">
+                                        <select class="ward" id="wards">
+                                            <option>--- Chọn Xã ---</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                     </div>
                     <div class="col-lg-4">
                         <div class="order_box">
                             <h2>Đơn hàng</h2>
+                            @{
+                                var db = new KarmaModels.KarmaModels.KarmaDBContext();
+                                var madh = db.DONHANGs.Max(s => s.MaDH) + 1;
+                            }
+                            <input type="type" hidden id="madh" name="madh" value="@madh" />
+                            <span></span>
                             @if (Model != null)
                             {
                                 <ul class="list">
@@ -91,14 +99,17 @@
                                     @foreach (var item in Model.ListCartItem)
                                     {
                                         <li><a href="#">@item.tensp<span class="middle">x @item.quantity</span> <span class="last">@item.thanhtien</span></a></li>
+
+
                                     }
                                 </ul>
                                 <ul class="list list_2">
                                     <li><a href="#">Tổng tiền<span>@Model.TongTien</span></a></li>
-                                    <input type="text" name="TongTien" value="@Model.TongTien" disabled />
+                                    @*<input type="text" id="TongTien" name="tongtien" value="@Model.TongTien" disabled hidden />*@
+                                    <input type="text" name="tongtien" value="@Model.TongTien" hidden />
 
                                     @*<li><a href="#">Phí vận chuyển <span>25.000</span></a></li>
-                                <li><a href="#">Tổng tiền <span></span></a></li>*@
+        <li><a href="#">Tổng tiền <span></span></a></li>*@
                                 </ul>
                             }
                             else
@@ -109,7 +120,7 @@
                         </div>
                         <div class="payment_item">
                             <div class="radion_btn">
-                                <input type="radio" class="payment_method" id="p-option1" name="selector" value="1">
+                                <input type="radio" class="payment_method" id="p-option1" name="phuongthuc" value="1">
                                 <label for="p-option1">Thanh toán khi nhận hàng</label>
                                 <div class="check"></div>
                             </div>
@@ -117,7 +128,7 @@
                         </div>
                         <div class="payment_item active">
                             <div class="radion_btn">
-                                <input type="radio" class="payment_method" id="p-option2" name="selector" value="2">
+                                <input type="radio" class="payment_method" id="p-option2" name="phuongthuc" value="2">
                                 <label for="p-option2">Thẻ tín dụng</label>
                                 <img src="/Content/img/product/card.jpg" alt="">
                                 <div class="check"></div>
@@ -132,16 +143,64 @@
 
                         <div class="d-flex justify-content-end" style="margin-top:58px;">
                             <a class="primary-btn disabled_btn" href="" id="btn-thanhtoan">thanh toán</a>
-                        </div>
-                    </div>
-                </div>
-                </form>
+                            <button id="btnThanhToan">Thanh Toán</button>
+          
+
+            </div>
+            </div>
+            </div>
+                <input type="submit" name="name" value="Nhấn Vào Đây Để SubMit" />
+            </form>
         </div>
         </div>
     </div>
 </section>
 <!--================End Checkout Area =================-->
 <script>
+    // băt đầu hàm thêm đơn hàng
+    function ThemDonHang( madh, tinh, huyen, xa, tongtien, phuongthuc, hoten, email, sdt) {
+
+        $.ajax({
+            url: '/GioHang/Payment',// ‘/Controller/action’
+            type: "POST",
+            data:
+            {
+                madh: madh,
+                tinh: tinh,
+                huyen: huyen,
+                xa: xa,
+                tongtien: tongtien,
+                phuongthuc: phuongthuc,
+                hoten: hoten,
+                email: email,
+                sdt: sdt
+            },
+            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
+            }
+        });
+    }
+    // kết thúc hàm thêm đơn hàng
+    // sự kiện khi click vào nút thanh toán
+    $(document).ready(function () {
+        $('#btnThanhToan').click(function () {
+            var madh = $('#madh').val();
+            var Tinh = $('#provinces option:selected').text();
+            var Huyen = $('#districts option:selected').text();
+            var Xa = $('#wards option:selected').text();
+            var phuongthuc = $('input[name="selector"]:checked').val();
+            var TongTien = $('#TongTien').val();
+            var Hoten = $('#Hoten').val();
+            var Sdt = $('#Sdt').val();
+            var Email = $('#Email').val();
+
+            ThemDonHang(madh, Tinh, Huyen, Xa, TongTien, phuongthuc, Hoten, Email, Sdt);
+
+        })
+    });
+
+
+
+    // kết thúc sự kiện click vào nút thanh toán
     var payment_method = ""
     url_payment = "/GioHang/Payment/"
     $(".payment_method").change(function () {
@@ -149,14 +208,19 @@
         $("#btn-thanhtoan").removeClass("disabled_btn").attr("href", url_payment + payment_method);
         console.log($("#btn-thanhtoan").attr("href"));
     })
-    $(document).ready(function () {
 
+    
+  
+ 
+ 
+
+    $(document).ready(function () {
         // get district
-        $("#select-district-wrap").append(
-            '<select class="district" id="districts">' +
-            '<option>--- Chọn Huyện ---</option>' +
-            '</select>'
-        )
+        //$("#select-district-wrap").append(
+        //    '<select class="district" id="districts" name="Huyen">' +
+        //    '<option>--- Chọn Huyện ---</option>' +
+        //    '</select>'
+        //)
         $("#provinces").on('change', function () {
             $(".distric").empty();
             $(".distric").append(
@@ -173,7 +237,7 @@
                 success: function (data) {
                     console.log(data);
                     $("#select-district-wrap").empty().append(
-                        '<select class="district" id="districts">' +
+                        '<select class="district" id="districts" name="Huyen">' +
                         '<option>--- Chọn Huyện ---</option>' +
                         '</select>'
                     )
@@ -203,7 +267,7 @@
                         success: function (data) {
                             console.log(data);
                             $("#select-ward-wrap").empty().append(
-                                '<select class="ward" id="wards">' +
+                                '<select class="ward" id="wards" name="Xa">' +
                                 '<option>--- Chọn Xã / Phường ---</option>' +
                                 '</select>'
                             )
