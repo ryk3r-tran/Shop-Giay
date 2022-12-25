@@ -33,6 +33,8 @@
                         <tr>
                             <th scope="col">Mã đơn hàng</th>
                             <th scope="col">Sản phẩm</th>
+                            <th scope="col">Màu</th>
+                            <th scope="col">Size</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tổng</th>
@@ -52,7 +54,7 @@
                                     <td>
                                         <div class="media">
                                             <div class="d-flex">
-                                                <img src="@item.AnhChinh" alt="">
+                                                <img src="@item.AnhChinh" alt="" style="height:50px;width:50px">
                                             </div>
                                             <div class="media-body">
                                                 <p>@item.TenSP</p>
@@ -60,7 +62,20 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>@item.DonGia</h5>
+                                        <h5>@item.Color</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.Size</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @{
+                                                CultureInfo cul1 = CultureInfo.GetCultureInfo("vi-VN");
+                                                string dg = item.DonGia.ToString("#,###", cul1.NumberFormat);
+                                            }
+
+                                            @dg
+                                        </h5>
                                     </td>
                                     <td>
                                         <h5>@item.SoLuong</h5>

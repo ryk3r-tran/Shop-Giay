@@ -10,6 +10,8 @@ namespace WebApplication1.Models
         public int MaDH { get; set; }
         public string AnhChinh { get; set; }
         public string TenSP { get; set; }
+        public string Color { get; set; }
+        public int Size { get; set; }
         public int DonGia { get; set; }
         public int SoLuong { get; set; }
         public int TongTien { get; set; }
