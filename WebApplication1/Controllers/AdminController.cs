@@ -553,17 +553,17 @@ namespace WebApplication1.Controllers
                                SoLuong = ctDH.SoLuong
                            }).OrderBy(s => s.MaDH).ToList();
 
-            var TinhTrang = (from dh in _context.DONHANGs
-                           
-                           select new 
-                           {
-                               
-                               TinhTrang = dh.TinhTrang
-                               
-                           }).ToList().Distinct();
+            List<string> TinhTrang1 = new List<string>() { };
+            int i = 0;
+            foreach(var data in DonHang)
+            {
+                TinhTrang1.Add(data.TinhTrang);
+                i++;
+            }
+            TinhTrang1= TinhTrang1.Distinct().ToArray();
             var d = _context.DANHMUCSPs.ToList();
-            ViewBag.DanhMuc = d;
-            ViewBag.TT = TinhTrang;
+
+            ViewBag.TT = TinhTrang1;
             return View(DonHang);
         }
     }
