@@ -1,5 +1,6 @@
 ﻿@using KarmaModels.KarmaModels
 @model List<WebApplication1.Models.DonMua>
+@using System.Globalization;
 @{
     ViewBag.Title = "DonMua";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -37,50 +38,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model)
+                        @foreach (var item in Model)
                         {
-                            if(item.TinhTrang=="Đang vận chuyển" || item.TinhTrang=="Chưa Xác Nhận")
+                            var tich = item.DonGia * item.SoLuong;
+                            if (item.TinhTrang == "Đang vận chuyển" || item.TinhTrang == "Chưa Xác Nhận")
                             {
-                            <tr>
-                                <td>
-                                    <h5>@item.MaDH</h5>
-                                </td>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="@item.AnhChinh" alt="">
+                                <tr>
+                                    <td>
+                                        <h5>@item.MaDH</h5>
+                                    </td>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="@item.AnhChinh" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <p>@item.TenSP</p>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <p>@item.TenSP</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>@item.DonGia</h5>
-                                </td>
-                                <td>
-                                    <h5>1</h5>
-                                </td>
-                                <td>
-                                    <h5>@item.TongTien</h5>
-                                </td>
-                                <td>
-                                    <h5>@item.TinhTrang</h5>
-                                </td>
-                                <td>
-                                    @if(item.TinhTrang!="Đang vận chuyển")
+                                    </td>
+                                    <td>
+                                        <h5>@item.DonGia</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.SoLuong</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @{
+                                                CultureInfo cul2 = CultureInfo.GetCultureInfo("vi-VN");
+                                                string tongtien = tich.ToString("#,###", cul2.NumberFormat);
+                                            }
+                                            @tongtien
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.TinhTrang</h5>
+                                    </td>
+                                    <td>
+                                        @if (item.TinhTrang != "Đang vận chuyển")
                                         {
-                                        
+
                                             <a href="/GioHang/CapNhatDonMua/@item.MaDH"><button data-id="" class="btn-sm btn-danger btn-delete">Hủy</button></a>
-                                        
+
                                         }
-                                    
-                                </td>
-                            </tr>
+
+                                    </td>
+                                </tr>
                             }
                         }
 
-                        
+
 
 
                     </tbody>

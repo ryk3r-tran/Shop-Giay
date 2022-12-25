@@ -1,5 +1,6 @@
 ﻿@using KarmaModels.KarmaModels
 @model List<WebApplication1.Models.DonMua>
+@using System.Globalization;
 @{
     ViewBag.Title = "LichSuMuaHang";
     Layout = "~/Views/Layout/MyLayout.cshtml";
@@ -30,50 +31,59 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Mã đơn hàng</th>
                             <th scope="col">Sản phẩm</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tổng</th>
                             <th scope="col">Trạng thái</th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach (var item in Model)
+                        @foreach (var item in Model)
+                        {
+                            var tich = item.DonGia * item.SoLuong;
+                            if (item.TinhTrang == "Hủy" || item.TinhTrang == "Giao hàng thành công")
                             {
-                                if (item.TinhTrang == "Hủy" || item.TinhTrang == "Giao hàng thành công")
-                                {
-                                    <tr>
-                                        <td>
-                                            <h5>@item.MaDH</h5>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <div class="d-flex">
-                                                    <img src="@item.AnhChinh" alt="">
-                                                </div>
-                                                <div class="media-body">
-                                                    <p>@item.TenSP</p>
-                                                </div>
+                                <tr>
+                                    <td>
+                                        <h5>@item.MaDH</h5>
+                                    </td>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="@item.AnhChinh" alt="">
                                             </div>
-                                        </td>
-                                        <td>
-                                            <h5>@item.DonGia</h5>
-                                        </td>
-                                        <td>
-                                            <h5>1</h5>
-                                        </td>
-                                        <td>
-                                            <h5>@item.TongTien</h5>
-                                        </td>
-                                        <td>
-                                            <h5>@item.TinhTrang</h5>
-                                        </td>
-                                        
-                                    </tr>
-                                }
+                                            <div class="media-body">
+                                                <p>@item.TenSP</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>@item.DonGia</h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.SoLuong</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            @{
+                                                CultureInfo cul2 = CultureInfo.GetCultureInfo("vi-VN");
+                                                string tongtien = tich.ToString("#,###", cul2.NumberFormat);
+
+                                            }
+                                            @tongtien
+
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>@item.TinhTrang</h5>
+                                    </td>
+
+                                </tr>
                             }
                         }
+
                     </tbody>
                 </table>
             </div>
