@@ -285,6 +285,8 @@ namespace WebApplication1.Controllers
                 MotDonMua.MaDH=Convert.ToInt32(dt.Rows[i]["MaDH"].ToString());
                 MotDonMua.AnhChinh = dt.Rows[i]["AnhChinh"].ToString();
                 MotDonMua.TenSP = dt.Rows[i]["TenSP"].ToString();
+                MotDonMua.Color = dt.Rows[i]["Color"].ToString();
+                MotDonMua.Size = Convert.ToInt32(dt.Rows[i]["Size"].ToString());
                 MotDonMua.DonGia = Convert.ToInt32(dt.Rows[i]["DonGia"].ToString());
                 MotDonMua.SoLuong=Convert.ToInt32(dt.Rows[i]["SoLuong"].ToString());
                 MotDonMua.TongTien=Convert.ToInt32(dt.Rows[i]["TongTien"].ToString());
