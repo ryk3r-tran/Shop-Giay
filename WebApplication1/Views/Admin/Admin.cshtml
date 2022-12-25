@@ -47,7 +47,7 @@
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>145</h6>
+                                        <h6>@ViewBag.SoDH</h6>
                                         <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">tăng</span>
 
                                     </div>
@@ -150,56 +150,56 @@
                                 <div id="reportsChart"></div>
 
                                 <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Đơn hàng',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Doanh thu',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Khách hàng',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#reportsChart"), {
+                                            series: [{
+                                                name: 'Đơn hàng',
+                                                data: [31, 40, 28, 51, 42, 82, 56],
+                                            }, {
+                                                name: 'Doanh thu',
+                                                data: [11, 32, 45, 32, 34, 52, 41]
+                                            }, {
+                                                name: 'Khách hàng',
+                                                data: [15, 11, 32, 18, 9, 24, 11]
+                                            }],
+                                            chart: {
+                                                height: 350,
+                                                type: 'area',
+                                                toolbar: {
+                                                    show: false
+                                                },
+                                            },
+                                            markers: {
+                                                size: 4
+                                            },
+                                            colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                            fill: {
+                                                type: "gradient",
+                                                gradient: {
+                                                    shadeIntensity: 1,
+                                                    opacityFrom: 0.3,
+                                                    opacityTo: 0.4,
+                                                    stops: [0, 90, 100]
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            stroke: {
+                                                curve: 'smooth',
+                                                width: 2
+                                            },
+                                            xaxis: {
+                                                type: 'datetime',
+                                                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                            },
+                                            tooltip: {
+                                                x: {
+                                                    format: 'dd/MM/yy HH:mm'
+                                                },
+                                            }
+                                        }).render();
+                                    });
                                 </script>
                                 <!-- End Line Chart -->
 
@@ -224,57 +224,10 @@
                                 </ul>
                             </div>
 
-                            <div class="card-body">
-                                <h5 class="card-title">Đơn hàng <span>| Hôm nay</span></h5>
+                            <div class="card-body" id="TraVe">
 
-                                <table class="table table-borderless datatable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Khách hàng</th>
-                                            <th scope="col">Sản phẩm</th>
-                                            <th scope="col">Giá trị</th>
-                                            <th scope="col">Tình trạng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><a href="#">#2457</a></th>
-                                            <td>Brandon Jacob</td>
-                                            <td><a href="#" class="text-primary">Nike Air</a></td>
-                                            <td>1.100.000</td>
-                                            <td><span class="badge bg-success">Đã duyệt</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#">#2147</a></th>
-                                            <td>Bridie Kessler</td>
-                                            <td><a href="#" class="text-primary">Nike Air</a></td>
-                                            <td>1.100.000</td>
-                                            <td><span class="badge bg-warning">Chờ</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#">#2049</a></th>
-                                            <td>Ashleigh Langosh</td>
-                                            <td><a href="#" class="text-primary">Nike Air</a></td>
-                                            <td>1.100.000</td>
-                                            <td><span class="badge bg-success">Đã duyệt</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#">#2644</a></th>
-                                            <td>Angus Grady</td>
-                                            <td><a href="#" class="text-primary">Nike Air</a></td>
-                                            <td>1.100.000</td>
-                                            <td><span class="badge bg-danger">Hủy</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#">#2644</a></th>
-                                            <td>Raheem Lehner</td>
-                                            <td><a href="#" class="text-primary">Nike Air</a></td>
-                                            <td>1.100.000</td>
-                                            <td><span class="badge bg-success">Đã duyệt</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+
 
                             </div>
 
@@ -360,3 +313,33 @@
     </section>
 
 </main><!-- End #main -->
+<script>
+
+    function LoadDsDH(ChiSoTrang) {
+
+        $.ajax({
+
+            type: "GET",// kiểu get/post mà action cần truy cập đến
+            data://dữ liệu truyền vào cho action,tên biến cần trùng với tên biến trong action
+            {
+                pageIndex: ChiSoTrang
+
+            },
+
+
+            url: '/Admin/DsDonHang',// ‘/Controller/action’
+
+            dataType: 'html',
+            success: function (KetQuaTraVeHam) { // return của hàm sẽ truyền vào cho biến trong hàm này
+                $('#TraVe').html(KetQuaTraVeHam);
+
+
+            }
+
+        });
+    }
+
+
+    LoadDsDH(null)
+
+</script>

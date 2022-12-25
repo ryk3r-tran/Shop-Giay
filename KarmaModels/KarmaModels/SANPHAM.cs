@@ -49,6 +49,5 @@ namespace KarmaModels.KarmaModels
         public virtual DANHMUCSP DANHMUCSP { get; set; }
 
         public virtual NSX NSX { get; set; }
-        
     }
 }

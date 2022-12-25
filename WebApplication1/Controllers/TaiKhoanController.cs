@@ -82,9 +82,6 @@ namespace WebApplication1.Controllers
 
         }
         
-        public ActionResult DangKy()
-        {
-            return View();
-        }
+        
     }
 }

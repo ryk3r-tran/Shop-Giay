@@ -63,9 +63,9 @@
     <Compile Include="KarmaModels\DANHMUCSP.cs" />
     <Compile Include="KarmaModels\DONHANG.cs" />
     <Compile Include="KarmaModels\Huyen.cs" />
-    <Compile Include="KarmaModels\KarmaDBContext.cs" />
     <Compile Include="KarmaModels\KHACHHANG.cs" />
     <Compile Include="KarmaModels\MAUSAC.cs" />
+    <Compile Include="KarmaModels\KarmaDBContext.cs" />
     <Compile Include="KarmaModels\NSX.cs" />
     <Compile Include="KarmaModels\SANPHAM.cs" />
     <Compile Include="KarmaModels\SIZE.cs" />

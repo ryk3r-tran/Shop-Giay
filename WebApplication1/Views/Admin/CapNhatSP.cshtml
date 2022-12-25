@@ -1,0 +1,140 @@
+﻿@using KarmaModels.KarmaModels
+@using WebApplication1.Models
+@model TT_SP
+@{
+    ViewBag.Title = "CapNhatSP";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item" aria-current="page">Quản lý sản phẩm</li>
+                <li class="breadcrumb-item active" aria-current="page">Cập nhật sản phẩm</li>
+            </ol>
+        </nav>
+
+    </div><!-- End Page Title -->
+    <section class="section">
+        <form action="CapNhatSP" method="post" enctype="multipart/form-data" class="inf-basic-form">
+            <div class="row inf-basic-wrap">
+                <div class="inf-basic">Thông tin cơ bản</div>
+                <input type="hidden" name="MaSP" id="" value="@Model.MaSP"/>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Tên sản phẩm</div>
+                    <input type="text" name="TenSP" id="" value=@Model.TenSP />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Danh mục</div>
+                    <select name="TenDM" id="" value=@Model.TenDM>
+                        @foreach (var d in ViewBag.DanhMuc)
+                        {
+                            if (Model.TenDM == d.TenDM)
+                            {
+                                <option value="@d.MaDM" selected>@d.TenDM</option>
+                            }
+                            <option value="@d.MaDM">@d.TenDM</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Số lượng</div>
+                    <input type="text" name="SoLuongTong" id="" value=@Model.SoLuongTong />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Đơn giá</div>
+                    <input type="text" name="DonGia" id="" value=@Model.DonGia />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Mô tả</div>
+                    <textarea name="MoTa" id="" cols="32" rows="3" value=@Model.MoTa>@Model.MoTa</textarea>
+                </div>
+
+            </div>
+            
+
+            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                <div class="inf-basic">Thông tin chi tiết</div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <input type="text" name="MaChiTietSP" id="" value="@Model.MaChiTietSP" hidden />
+                    <div class="col-2">Màu sắc</div>
+                    <select name="MaMau" id="" value=@Model.MaHeXan>
+                        @foreach (var d in ViewBag.Mau)
+                        {
+                            if (Model.MaHeXan == d.MaHeXan)
+                            {
+                                <option value="@d.MaMau" style="background: @d.MaHeXan" selected>@d.Color</option>
+                            }
+                            <option value="@d.MaMau" style="background: @d.MaHeXan">@d.Color</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Size</div>
+                    <select name="MaSize" id="" value=@Model.Size1>
+                        @foreach (var d in ViewBag.Size)
+                        {
+                            if (Model.Size1 == d.Size1)
+                            {
+                                <option value="@d.MaSize" selected >@d.Size1</option>
+                            }
+                            <option value="@d.MaSize">@d.Size1</option>
+
+                        }
+
+                    </select>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Chất liệu</div>
+                    <input type="text" name="ChatLieu1" id="" value="@Model.ChatLieu1" />
+                </div>
+
+            </div>
+
+
+            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                <div class="inf-basic">Thông tin Nhà sản xuất</div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Tên nhà SX</div>
+                    <input type="text" name="TenNSX" id="" value="@Model.TenNSX" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                    <div class="col-2">Địa chỉ</div>
+                    <input type="text" name="DiaChi" id="" value="@Model.DiaChi" />
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">Email</div>
+                    <input type="email" name="Email" id="" value="@Model.Email"/>
+                </div>
+                <div class="d-flex name_prod-wrap align-items-center">
+                    <div class="col-2">SĐT</div>
+                    <input type="number" name="Sdt" id="" value="@Model.Sdt" />
+                </div>
+
+            </div>
+            <div class="btn-sx-wrap d-flex justify-content-end">
+                <div class="d-flex justify-content-between btn-wrap">
+                    <button class="btn btn-sm btn-secondary btn-exit">Thoát</button>
+                    <button class="btn btn-sm btn-primary btn-save">Lưu</button>
+                </div>
+            </div>
+
+        </form>
+    </section>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#file-img-prod').on('change', function () {
+                var filePath = $(this).val();
+                console.log(filePath);
+            });
+        });
+
+    </script>
+
+</main><!-- End #main -->

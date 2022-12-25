@@ -231,6 +231,7 @@
     <Compile Include="Controllers\KiemTraDonHangController.cs" />
     <Compile Include="Controllers\LienHeController.cs" />
     <Compile Include="Models\Dataprovider.cs" />
+    <Compile Include="Models\DonHangAD.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SPCT.cs" />
     <Compile Include="Models\TK_View_Model.cs" />
+    <Compile Include="Models\TT_SP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1560,7 +1562,6 @@
     <Content Include="Views\LienHe\LienHe.cshtml" />
     <Content Include="Views\Layout\AdminLayout.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
-    <Content Include="Views\Admin\TatCaTaiKhoan.cshtml" />
     <Content Include="Views\Admin\ThemTaiKhoan.cshtml" />
     <Content Include="Views\Admin\ThongKe.cshtml" />
     <Content Include="Views\Admin\TatCaSanPham.cshtml" />
@@ -1570,6 +1571,10 @@
     <Content Include="Views\GioHang\LichSuMuaHang.cshtml" />
     <Content Include="Views\Customer\Profile.cshtml" />
     <Content Include="Views\TaiKhoan\DangKy.cshtml" />
+    <Content Include="Views\Admin\CapNhatSP.cshtml" />
+    <Content Include="Views\SanPham\TestAnh.cshtml" />
+    <Content Include="Views\Admin\DsDonHang.cshtml" />
+    <Content Include="Views\Admin\QLDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

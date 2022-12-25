@@ -206,9 +206,9 @@ namespace WebApplication1.Controllers
 
             return PartialView(DsSanPham.ToPagedList(_pageIndex, SoSanPham));
         }
-        public ActionResult TestCauLenh()
+        public ActionResult TestAnh()
         {
-            ViewBag.NamSao = ThongKeSoSao(5);
+            
             return View();
         }
     }

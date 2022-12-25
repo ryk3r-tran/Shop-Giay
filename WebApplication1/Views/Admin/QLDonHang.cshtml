@@ -1,0 +1,292 @@
+﻿@using KarmaModels.KarmaModels
+@using WebApplication1.Models
+@model List<DonHangAD>
+@{
+    ViewBag.Title = "QLDonHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<head>
+    <title>Tất cả sản phẩm - Admin</title>
+</head>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item" aria-current="page">Quản lý sản phẩm</li>
+                <li class="breadcrumb-item active" aria-current="page">Tất cả sản phẩm</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container-fluid" style="padding: 0;">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="arrange-prod" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Lọc
+                            </a>
+                            <ul class="dropdown-menu arrangre-prod-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Giá</a></li>
+                                <li><a class="dropdown-item" href="#">Tên</a></li>
+                                <li><a class="dropdown-item" href="#">Số lượng</a></li>
+                                <li><a class="dropdown-item" href="#">Số lượng</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                   
+                </div>
+            </div>
+        </nav>
+        <div class="table-resposive-lg">
+            <table class="table table-list-prod">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Tên khách hàng</th>
+                        
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <td>Chọn</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model)
+                    {
+                    <tr>
+                        
+                        <td>@data.MaDH</td>
+                        <td>@data.TenSP</td>
+                        <td>@data.TenKH</td>
+
+                        <td>@data.SoLuong</td>
+                        <td>@data.TongTien</td>
+                        <td>@data.TinhTrang</td>
+                        
+                        
+                        <td><input class="form-check-input" type="checkbox" id="gridCheck1" onchange="checkDH(event, @data.MaDH)" value="@data.MaDH"></td>
+                        <td class="text-end">
+                            <a href="" data-id="@data.MaDH" class="btn btn-outline-info btn-rounded btn-edit-tk" data-bs-toggle="modal" data-bs-target="#edit_prod_modal"><i class="fas fa-pen"></i></a>
+                            
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+            <div class="page-control d-flex align-items-center justify-content-end">
+                <ul class="d-flex align-items-center list-page">
+                    <li><a href="" class="pag-link page-active">1</a></li>
+                    <li><a href="" class="pag-link">2</a></li>
+                    <li><a href="" class="pag-link">3</a></li>
+                    <li><a href="" class="pag-link">...</a></li>
+                    <li><a href="" class="pag-link">12</a></li>
+                    <li><a href="" class="pag-link">Trang tiếp ></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="edit_prod_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="edit_prod_modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_prod_modalLabel">SỬA SẢN PHẨM</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="section">
+                        <form action="ThemSP" method="post" enctype="multipart/form-data" class="inf-basic-form">
+                            <div class="row inf-basic-wrap">
+                                <div class="inf-basic">Thông tin cơ bản</div>
+
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Tên sản phẩm</div>
+                                    <input type="text" name="TenSP" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Danh mục</div>
+                                    <select name="TenDM" id="">
+                                        @foreach (var d in ViewBag.TT)
+                                        {
+                                            <option value="@d.TinhTrang">@d.TinhTrang</option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Số lượng</div>
+                                    <input type="text" name="SoLuongTong" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Đơn giá</div>
+                                    <input type="text" name="DonGia" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Mô tả</div>
+                                    <textarea name="MoTa" id="" cols="32" rows="3"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                                <div class="inf-basic">Ảnh</div>
+                                <div class="img-prod">
+                                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                                        <div class="col-2" style="width:50%">
+                                            Hình ảnh chính
+                                        </div>
+                                        <div class="up-file-wrap">
+                                            <label for="file-img-prod0" class="lb_up_imgprod">Chọn ảnh</label>
+                                            <input type="file" name="Anhs" id="file-img-prod0" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="preview-img-wrap">
+                                        <img src="" alt="preview" class="preview-img-prod" hidden>
+                                    </div>
+
+                                </div>
+                                <div class="img-prod">
+                                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                                        <div class="col-2" style="width:50%">
+                                            Hình ảnh 1
+                                        </div>
+                                        <div class="up-file-wrap">
+                                            <label for="file-img-prod1" class="lb_up_imgprod">Chọn ảnh</label>
+                                            <input type="file" name="Anhs" id="file-img-prod1" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="preview-img-wrap">
+                                        <img src="" alt="preview" class="preview-img-prod" hidden>
+                                    </div>
+                                </div>
+                                <div class="img-prod">
+                                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                                        <div class="col-2" style="width:50%">
+                                            Hình ảnh 2
+                                        </div>
+                                        <div class="up-file-wrap">
+                                            <label for="file-img-prod2" class="lb_up_imgprod">Chọn ảnh</label>
+                                            <input type="file" name="Anhs" id="file-img-prod2" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="preview-img-wrap">
+                                        <img src="" alt="preview" class="preview-img-prod" hidden>
+                                    </div>
+                                </div>
+                                <div class="img-prod">
+                                    <div class="d-flex align-items-center justify-content-between" style="width: 25%">
+                                        <div class="col-2" style="width:50%">
+                                            Hình ảnh 3
+                                        </div>
+                                        <div class="up-file-wrap">
+                                            <label for="file-img-prod3" class="lb_up_imgprod">Chọn ảnh</label>
+                                            <input type="file" name="Anhs" id="file-img-prod3" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="preview-img-wrap">
+                                        <img src="" alt="preview" class="preview-img-prod" hidden>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                                <div class="inf-basic">Thông tin chi tiết</div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Màu</div>
+                                    <input type="color" name="Color" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Size</div>
+                                    <input type="text" name="Size1" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Chất liệu</div>
+                                    <input type="text" name="ChatLieu1" id="" />
+                                </div>
+
+                            </div>
+
+
+                            <div class="row inf-basic-wrap" style="margin-top: 10px;">
+                                <div class="inf-basic">Thông tin Nhà sản xuất</div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Tên nhà SX</div>
+                                    <input type="text" name="TenNSX" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center" style="border-bottom: 1px solid #aab7cf;">
+                                    <div class="col-2">Địa chỉ</div>
+                                    <input type="text" name="DiaChi" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">Email</div>
+                                    <input type="email" name="Email" id="" />
+                                </div>
+                                <div class="d-flex name_prod-wrap align-items-center">
+                                    <div class="col-2">SĐT</div>
+                                    <input type="number" name="Sdt" id="" />
+                                </div>
+
+                            </div>
+                            <div class="btn-sx-wrap d-flex justify-content-end">
+                                <div class="d-flex justify-content-between btn-wrap">
+                                    <button class="btn btn-sm btn-secondary btn-exit">Thoát</button>
+                                    <button class="btn btn-sm btn-primary btn-save">Lưu</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main><!-- End #main -->
+
+<script>
+    $(".btn-delete-prod").click(function () {
+        console.log("a")
+        var id_tk = $(this).data('id');
+        console.log($(this).data('id'))
+        const url = "/Admin/DeleteSP/";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                id: id_tk
+            },
+
+
+        })
+    })
+    var listID = []
+    function checkDH(e, id) {
+        console.log(e.target.checked, id)
+        if (e.target.checked) {
+            listID.push(id)
+        }
+        else {
+            listID = listID.filter(item => item != id)
+        }
+        console.log(listID)
+    }
+
+    
+
+
+
+</script>
+
+

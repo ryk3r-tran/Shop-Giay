@@ -26,15 +26,23 @@
                         <!-- Line Chart -->
                         <canvas id="lineChart" style="max-height: 400px;"></canvas>
                         <script>
-                        
+                            var lable_c1 = [];
+                            var value_c1 = [];
+                            const data = @Html.Raw(Json.Encode(ViewBag.tkDT));
+                            
+                            for (var key in data) {
+                                var value = data[key];
+                                lable_c1.push("Tháng"+ key);
+                                value_c1.push(value );
+                            }
                 document.addEventListener("DOMContentLoaded", () => {
                   new Chart(document.querySelector('#lineChart'), {
                     type: 'line',
-                    data: {
-                      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+                      data: {
+                          labels: lable_c1,
                       datasets: [{
                           label: 'Doanh thu',
-                          data: [0,0,0,0,0,0,0,0,0,0,0,0],
+                          data: value_c1,
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
                         tension: 0.1
@@ -64,14 +72,23 @@
                         <!-- Bar Chart -->
                         <canvas id="barChart" style="max-height: 400px;"></canvas>
                         <script>
+                            var lable_c2 = [];
+                            var value_c2 = [];
+                            
+                            const dataSLDH = @Html.Raw(Json.Encode(ViewBag.tkSLDH));
+                            for (var key in dataSLDH) {
+                                var value = dataSLDH[key];
+                                lable_c2.push("Tháng"+ key);
+                                value_c2.push(value );
+                            }
                 document.addEventListener("DOMContentLoaded", () => {
                   new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+                        labels: lable_c2,
                       datasets: [{
                         label: '',
-                        data: [65, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56],
+                          data: value_c2,
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(255, 159, 64, 0.2)',
@@ -117,18 +134,25 @@
                         <!-- Pie Chart -->
                         <canvas id="pieChart" style="max-height: 400px;"></canvas>
                         <script>
+                         var lable_c3 = [];
+                         var value_c3 = [];
+
+                            const dataTT = @Html.Raw(Json.Encode(ViewBag.tkTT));
+                            for (var key in dataTT) {
+                                var value = dataTT[key];
+                                lable_c3.push(key);
+                                console.log(key);
+                                value_c3.push(value);
+                                console.log(value);
+                            }
                 document.addEventListener("DOMContentLoaded", () => {
                   new Chart(document.querySelector('#pieChart'), {
                     type: 'pie',
-                    data: {
-                      labels: [
-                        'Tiếp nhận',
-                        'Chờ',
-                        'Hủy'
-                      ],
+                      data: {
+                          labels: lable_c3,
                       datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
+                          label: 'Tình trạng đơn',
+                          data: value_c3,
                         backgroundColor: [
                           'rgb(255, 99, 132)',
                           'rgb(54, 162, 235)',
